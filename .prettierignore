@@ -1,0 +1,5 @@
+dist
+dev-dist
+raw
+public/texts
+package-lock.json
