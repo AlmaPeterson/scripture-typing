@@ -24,7 +24,7 @@ EXPECTED_BOOKS = {
     "old-testament": 39,
     "new-testament": 27,
     "book-of-mormon": 15,
-    "doctrine-and-covenants": 2,  # sections 1-138, Official Declaration 1
+    "doctrine-and-covenants": 1,  # sections 1-138
     "pearl-of-great-price": 5,
     "lectures-on-faith": 1,
     "jst-old-testament": 38,  # the Inspired Version has no Song of Solomon
@@ -38,7 +38,7 @@ KJV_CHAPTERS = [
 ]
 EXPECTED_CHAPTERS = {
     "book-of-mormon": [22, 33, 7, 1, 1, 1, 1, 29, 63, 16, 30, 1, 9, 15, 10],
-    "doctrine-and-covenants": [138, 1],
+    "doctrine-and-covenants": [138],
     "pearl-of-great-price": [8, 5, 1, 1, 1],
     "lectures-on-faith": [7],
 }
@@ -68,7 +68,7 @@ BAD_PATTERNS = {
     "control character": re.compile(r"[\x00-\x08\x0b-\x1f\x7f]"),
 }
 # Digits legitimately appear in a few texts (dates in D&C and the Pearl of
-# Great Price, the year in Official Declaration 1, "Buck's ... page 582").
+# Great Price, "Buck's ... page 582" in the Lectures on Faith).
 DIGITS_ALLOWED = {"doctrine-and-covenants", "pearl-of-great-price", "lectures-on-faith"}
 
 
@@ -78,8 +78,8 @@ def main() -> int:
     index = json.loads((TEXTS / "index.json").read_text(encoding="utf-8"))
     listed = set()
 
-    print(f"{'volume':26} {'books':>5}  chapters per book")
-    for vol in index["volumes"]:
+    print(f"{'course':26} {'books':>5}  chapters per book")
+    for vol in index["courses"]:
         vid = vol["id"]
         draft_volume = vid.startswith("jst-")
         books = vol["books"]

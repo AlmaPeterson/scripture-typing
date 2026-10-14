@@ -341,6 +341,7 @@ class Verse:
     # (where a leaked chapter summary would sit).
     ocr_prefix: int = 0
     ocr_suffix: int = 0
+    kjv_words: int = 0  # words that matched the reference
 
 
 @dataclass
@@ -410,7 +411,7 @@ def map_words(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> dict[int, ob
                     ratio = difflib.SequenceMatcher(None, on, rn).ratio()
                     garbled = on not in fixer.vocab or re.search(r"[^A-Za-z'’,.;:?!()\"—-]", toks[idx[i1 + k]].text)
                     one_off = len(on) == len(rn) and sum(x != y for x, y in zip(on, rn)) <= 1
-                    if garbled and (ratio >= 0.6 or one_off):
+                    if garbled and (ratio >= 0.5 or one_off):
                         mapping[idx[i1 + k]] = j1 + k  # OCR garble of the reference word
     return mapping
 
@@ -638,6 +639,7 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
                 r = ref[items[p].ref]
                 v.ref_start = (r.source, r.chapter, r.verse)
             span = items[p:q]
+            v.kjv_words = sum(1 for it in span if it.ref is not None)
             v.ocr_prefix = next((k for k, it in enumerate(span) if it.ref is not None), len(span))
             v.ocr_suffix = next((k for k, it in enumerate(reversed(span)) if it.ref is not None), len(span))
             verses.append(v)

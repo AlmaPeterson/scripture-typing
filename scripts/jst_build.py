@@ -345,7 +345,10 @@ def combine_verses(x: J.BuiltChapter, y: J.BuiltChapter, fixer: J.Fixer) -> J.Bu
     use the other scan to confirm words the vocabulary could not."""
     verses = []
     for vx, vy in zip(x.verses, y.verses):
-        best, other = (vx, vy) if len(vx.unverified) <= len(vy.unverified) else (vy, vx)
+        # Fewer unverified words wins; on a tie, the reading that matches the
+        # KJV in more places (a misread real word, "game" for "same", is
+        # still verified by the vocabulary).
+        best, other = (vx, vy) if (len(vx.unverified), -vx.kjv_words) <= (len(vy.unverified), -vy.kjv_words) else (vy, vx)
         words = list(best.words)
         unverified = list(best.unverified)
         if unverified:
@@ -361,7 +364,7 @@ def combine_verses(x: J.BuiltChapter, y: J.BuiltChapter, fixer: J.Fixer) -> J.Bu
                         if w in unverified and o not in other.unverified:
                             words[i1 + k] = o
                             unverified.remove(w)
-        verses.append(J.Verse(best.number, words, unverified, best.ref_start, best.ocr_prefix, best.ocr_suffix))
+        verses.append(J.Verse(vx.number, words, unverified, best.ref_start, best.ocr_prefix, best.ocr_suffix, best.kjv_words))
     return J.BuiltChapter(verses, x.ref_chapter)
 
 

@@ -11,15 +11,14 @@ included. Nothing is taken from churchofjesuschrist.org.
 
 ## Sources
 
-| Text                                        | Source                                                                                                                                                                                                                                                                                  | Edition                                                                                                                                                                  | Licence                                                                                                                                                                     |
-| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------ | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| Old Testament, New Testament (KJV)          | Mormon Documentation Project, [`lds-scriptures`](https://github.com/mormon-documentation-project/lds-scriptures) SQLite export, commit [`eee6934`](https://github.com/mormon-documentation-project/lds-scriptures/tree/eee69342b7290361c65311c89ba281759db6c09c) (2018-11-19)           | King James Version as printed in the Latter-day Saint edition of the Bible (spelling and punctuation of the 1769 Oxford text)                                            | [The Unlicense](https://github.com/mormon-documentation-project/lds-scriptures/blob/master/LICENSE) (public-domain dedication); the KJV text is public domain in the US     |
-| Book of Mormon                              | same dataset                                                                                                                                                                                                                                                                            | 1981 edition text with the 2013 corrections                                                                                                                              | The Unlicense; the text is public domain                                                                                                                                    |
-| Doctrine and Covenants, sections 1–138      | same dataset                                                                                                                                                                                                                                                                            | 1981 edition text with the 2013 corrections                                                                                                                              | The Unlicense; the text of sections 1–138 (published 1833–1919) is public domain                                                                                            |
-| Pearl of Great Price                        | same dataset                                                                                                                                                                                                                                                                            | 1981 edition text with the 2013 corrections                                                                                                                              | The Unlicense; the text (published 1842–1902) is public domain                                                                                                              |
-| Official Declaration 1                      | Wikisource, [The Doctrine and Covenants (unsourced)/Official Declaration 1](<https://en.wikisource.org/w/index.php?title=The_Doctrine_and_Covenants_(unsourced)/Official_Declaration_1&oldid=15344235>), revision 15344235                                                              | Text as printed in the D&C since 1908; compared with the 1890 printing [President Woodruff's Manifesto](https://en.wikisource.org/wiki/President_Woodruff%27s_Manifesto) | Public domain (published 1890)                                                                                                                                              |
-| Lectures on Faith                           | [Project Gutenberg eBook #56684](https://www.gutenberg.org/ebooks/56684), produced by the Mormon Texts Project                                                                                                                                                                          | 1835 Doctrine and Covenants text                                                                                                                                         | Public domain in the USA. The Project Gutenberg header, footer and licence are removed, as the Gutenberg licence allows for public-domain texts with the trademark stripped |
-| Joseph Smith Translation (Inspired Version) | Internet Archive scans of the 1867 first edition: [`holyscripturestr00smituoft`](https://archive.org/details/holyscripturestr00smituoft) (University of Toronto copy) and [`holyscriptures00smit`](https://archive.org/details/holyscriptures00smit) (BYU copy), OCR text (`_djvu.txt`) | _The Holy Scriptures, Translated and Corrected by the Spirit of Revelation_, Plano, Illinois, 1867                                                                       | Public domain (published 1867). Later editions (1944 "New Corrected Edition" onward) are under copyright and are **not** used                                               |
+| Text                                        | Source                                                                                                                                                                                                                                                                                  | Edition                                                                                                                       | Licence                                                                                                                                                                     |
+| ------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | ----------------------------------------------------------------------------------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| Old Testament, New Testament (KJV)          | Mormon Documentation Project, [`lds-scriptures`](https://github.com/mormon-documentation-project/lds-scriptures) SQLite export, commit [`eee6934`](https://github.com/mormon-documentation-project/lds-scriptures/tree/eee69342b7290361c65311c89ba281759db6c09c) (2018-11-19)           | King James Version as printed in the Latter-day Saint edition of the Bible (spelling and punctuation of the 1769 Oxford text) | [The Unlicense](https://github.com/mormon-documentation-project/lds-scriptures/blob/master/LICENSE) (public-domain dedication); the KJV text is public domain in the US     |
+| Book of Mormon                              | same dataset                                                                                                                                                                                                                                                                            | 1981 edition text with the 2013 corrections                                                                                   | The Unlicense; the text is public domain                                                                                                                                    |
+| Doctrine and Covenants, sections 1–138      | same dataset                                                                                                                                                                                                                                                                            | 1981 edition text with the 2013 corrections                                                                                   | The Unlicense; the text of sections 1–138 (published 1833–1919) is public domain                                                                                            |
+| Pearl of Great Price                        | same dataset                                                                                                                                                                                                                                                                            | 1981 edition text with the 2013 corrections                                                                                   | The Unlicense; the text (published 1842–1902) is public domain                                                                                                              |
+| Lectures on Faith                           | [Project Gutenberg eBook #56684](https://www.gutenberg.org/ebooks/56684), produced by the Mormon Texts Project                                                                                                                                                                          | 1835 Doctrine and Covenants text                                                                                              | Public domain in the USA. The Project Gutenberg header, footer and licence are removed, as the Gutenberg licence allows for public-domain texts with the trademark stripped |
+| Joseph Smith Translation (Inspired Version) | Internet Archive scans of the 1867 first edition: [`holyscripturestr00smituoft`](https://archive.org/details/holyscripturestr00smituoft) (University of Toronto copy) and [`holyscriptures00smit`](https://archive.org/details/holyscriptures00smit) (BYU copy), OCR text (`_djvu.txt`) | _The Holy Scriptures, Translated and Corrected by the Spirit of Revelation_, Plano, Illinois, 1867                            | Public domain (published 1867). Later editions (1944 "New Corrected Edition" onward) are under copyright and are **not** used                                               |
 
 The Mormon Documentation Project states: "The Scriptures are part of the
 public domain, and so are all original works included in this package." The
@@ -44,15 +43,9 @@ dataset contains verse text only (no headings, footnotes or study helps).
 
 ## Decisions
 
-- **Official Declaration 2 is left out.** It dates from 1978 and is under
-  copyright.
-- **Official Declaration 1** includes the 1890 Manifesto, President Lorenzo
-  Snow's motion, the vote and the dateline. The italic introduction and the
-  "Excerpts from three addresses by President Wilford Woodruff regarding the
-  Manifesto" are left out: the introduction is modern (1981/2013) and
-  copyrighted, and the excerpts were selected and edited for the 1981 edition.
-  The underlying 1890–1891 addresses are public domain and could be added
-  later from the original newspaper printings.
+- **Official Declarations 1 and 2 are left out.** Official Declaration 2
+  dates from 1978 and is under copyright. Official Declaration 1 is left out
+  by choice: the Doctrine and Covenants course is sections 1–138 only.
 - **Abraham facsimiles and their explanations are left out.** The facsimile
   explanations were first printed in 1842 and are probably public domain, but
   they are explanatory notes attached to images rather than verse text, and
@@ -143,11 +136,13 @@ Other rules applied to the JST text:
 
 ## Data format
 
-`public/texts/index.json` lists volumes and books in canonical order:
+The library is organised into **courses**, one per volume of scripture,
+each holding one or more books. `public/texts/index.json` lists the courses
+and their books in canonical order:
 
 ```json
 {
-  "volumes": [
+  "courses": [
     {
       "id": "book-of-mormon",
       "title": "Book of Mormon",
@@ -165,7 +160,10 @@ Other rules applied to the JST text:
 }
 ```
 
-Each book is `public/texts/<volume>/<book-id>.json`:
+Each book is `public/texts/<course>/<book-id>.json`. Its `volume` field is
+the id of the course it belongs to. Book ids are unique within a course, not
+across courses (`genesis` is in both `old-testament` and
+`jst-old-testament`), so the app identifies a book by course id + book id.
 
 ```json
 {
@@ -177,9 +175,9 @@ Each book is `public/texts/<volume>/<book-id>.json`:
 }
 ```
 
-`unitLabel` is `Chapter`, `Section` (D&C), `Declaration` (Official
-Declaration 1) or `Lecture` (Lectures on Faith). Lectures on Faith paragraphs
-are stored as `verses`.
+`unitLabel` is `Chapter`, `Section` (D&C) or `Lecture` (Lectures on Faith). Lectures on Faith paragraphs
+are stored as `verses`. JST books that still need proofreading also have
+`"draft": true` in `index.json`.
 
 ## Rebuilding
 

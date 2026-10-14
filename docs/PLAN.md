@@ -35,22 +35,51 @@ later without touching the UI.
 
 - The app shell and `texts/index.json` are precached by the service worker.
 - Book files are cached the first time they are opened (stale-while-revalidate),
-  and also fetched once when a book is added to Home, so every book on Home
-  works offline.
+  and all of a course's books are fetched once when the course is added to
+  Home, so every course on Home works offline.
+
+## Courses
+
+The library is organised into **courses**, one per volume of scripture. A
+course holds one or more books:
+
+| Course                                  | Books                         |
+| --------------------------------------- | ----------------------------- |
+| Old Testament                           | 39 (Genesis … Malachi)        |
+| New Testament                           | 27 (Matthew … Revelation)     |
+| Book of Mormon                          | 15 (1 Nephi … Moroni)         |
+| Doctrine and Covenants                  | 1 (sections 1–138)            |
+| Pearl of Great Price                    | 5 (Moses … Articles of Faith) |
+| Lectures on Faith                       | 1 (7 lectures)                |
+| Joseph Smith Translation: Old Testament | 38                            |
+| Joseph Smith Translation: New Testament | 27                            |
+
+Whole courses are added to Home, not single books. A course with several
+books opens a **Course** screen listing its books; a course with one book
+(D&C, Lectures on Faith) goes straight to that book's chapter grid.
 
 ## Screens
 
 ### Home
 
-- My added books, each with a progress bar and a **Continue** button.
-- A **+** button opens the Library to add more books.
-- Completed books stay on Home until I delete them.
+- My added courses, each with an overall progress bar and a **Continue**
+  button.
+- A **+** button opens the Library to add more courses.
+- Completed courses stay on Home until I delete them.
 
 ### Library
 
-- All available books, grouped by volume in canonical order (from
-  `texts/index.json`).
-- Tap a book to add it to Home.
+- All available courses in canonical order (from `texts/index.json`), with
+  the number of books in each.
+- Tap a course to add it to Home.
+- Courses with books still being proofread (the JST drafts) show which books
+  are drafts.
+
+### Course
+
+- The books of a multi-book course in canonical order, each with its own
+  progress bar and a **Continue** button.
+- Tap a book to open its chapter grid.
 
 ### Chapter grid
 
@@ -74,13 +103,15 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
 
 ### Settings
 
-- Per book: **reset progress every January 1** (notes are kept).
+- Per course: **reset progress every January 1** (notes are kept).
 - Scroll style.
 - **Export / Import** a backup of all data as one JSON file.
 
 ## Behaviour
 
-- **Continue** goes to the last completed verse / paragraph of the book.
+- **Continue** on a course goes to where I left off in that course: the verse
+  / paragraph after the last one I completed, in whichever book that was.
+  **Continue** on a book in the Course screen does the same within that book.
 - **Mistakes:** a wrong letter shows red. I can keep typing or use Backspace
   to fix it. Every mistake counts against accuracy, even if fixed.
 - **Completion:** a chapter counts as completed when it is finished. There is
@@ -98,14 +129,15 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
   | Non-breaking space       | normal space |
 
 - **Notes** are private and attached to a specific verse / paragraph
-  (volume, book, chapter, verse). They survive yearly resets.
-- **Yearly reset:** if enabled for a book, on the first open on or after
-  January 1, that book's completion progress is cleared. Stats history and
+  (course, book, chapter, verse). They survive yearly resets.
+- **Yearly reset:** if enabled for a course, on the first open on or after
+  January 1, that course's completion progress is cleared. Stats history and
   notes are kept.
 
 ## Stats to record
 
-- **WPM and accuracy** per verse / paragraph, per chapter, and per book.
+- **WPM and accuracy** per verse / paragraph, per chapter, per book and per
+  course.
 - **Word speed** for every word with 5+ letters, to show my slowest and
   fastest words.
 - **Letter speed:** fastest / slowest single letters and two-letter
@@ -146,30 +178,31 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
 Stored in IndexedDB. Every record carries `updatedAt` so a future sync can
 merge changes.
 
-| Store        | Key                                    | Holds                                                               |
-| ------------ | -------------------------------------- | ------------------------------------------------------------------- |
-| `shelf`      | `bookId`                               | Books on Home, order, added date, yearly-reset flag                 |
-| `progress`   | `[bookId, chapter]`                    | Completed verses, completed flag, last position                     |
-| `notes`      | `id`                                   | `bookId`, chapter, verse, text, dates                               |
-| `sessions`   | `id`                                   | One typing session: book, chapter, verse range, time, WPM, accuracy |
-| `verseStats` | `[bookId, chapter, verse, sessionId]`  | WPM and accuracy for one verse in one session                       |
-| `keyStats`   | `[kind, key]` (letter / bigram / word) | Running count, total time, errors                                   |
-| `daily`      | `date`                                 | Totals per day for the history chart                                |
-| `settings`   | `key`                                  | Scroll style and other preferences                                  |
+| Store        | Key                                             | Holds                                                                       |
+| ------------ | ----------------------------------------------- | --------------------------------------------------------------------------- |
+| `shelf`      | `courseId`                                      | Courses on Home, order, added date, yearly-reset flag, last position        |
+| `progress`   | `[courseId, bookId, chapter]`                   | Completed verses, completed flag, last position                             |
+| `notes`      | `id`                                            | `courseId`, `bookId`, chapter, verse, text, dates                           |
+| `sessions`   | `id`                                            | One typing session: course, book, chapter, verse range, time, WPM, accuracy |
+| `verseStats` | `[courseId, bookId, chapter, verse, sessionId]` | WPM and accuracy for one verse in one session                               |
+| `keyStats`   | `[kind, key]` (letter / bigram / word)          | Running count, total time, errors                                           |
+| `daily`      | `date`                                          | Totals per day for the history chart                                        |
+| `settings`   | `key`                                           | Scroll style and other preferences                                          |
 
-Book progress and per-book stats are derived from `progress` and
-`verseStats`. Export writes every store into one JSON file with a format
+Keys include the course because book ids repeat across courses (`genesis`
+is in both the Old Testament and the JST Old Testament). Course and book
+progress and stats are derived from `progress` and `verseStats`. Export writes every store into one JSON file with a format
 version; Import validates and replaces.
 
 ## Texts
 
 See [TEXTS.md](TEXTS.md) for sources, licences and the data format. The
-library contains:
+library's courses are:
 
 - Old Testament (KJV, 39 books)
 - New Testament (KJV, 27 books)
 - Book of Mormon
-- Doctrine and Covenants (sections 1–138, Official Declaration 1)
+- Doctrine and Covenants (sections 1–138)
 - Pearl of Great Price (Moses, Abraham, Joseph Smith—Matthew, Joseph
   Smith—History, Articles of Faith)
 - Lectures on Faith (7 lectures, by numbered paragraph)

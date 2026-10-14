@@ -1,5 +1,5 @@
 {
-  "volumes": [
+  "courses": [
     {
       "id": "old-testament",
       "title": "Old Testament",
@@ -595,13 +595,6 @@
           "unitLabel": "Section",
           "chapters": 138,
           "path": "texts/doctrine-and-covenants/doctrine-and-covenants.json"
-        },
-        {
-          "id": "official-declaration-1",
-          "title": "Official Declaration 1",
-          "unitLabel": "Declaration",
-          "chapters": 1,
-          "path": "texts/doctrine-and-covenants/official-declaration-1.json"
         }
       ]
     },
@@ -942,8 +935,7 @@
           "title": "Zechariah",
           "unitLabel": "Chapter",
           "chapters": 14,
-          "path": "texts/jst-old-testament/zechariah.json",
-          "draft": true
+          "path": "texts/jst-old-testament/zechariah.json"
         },
         {
           "id": "malachi",

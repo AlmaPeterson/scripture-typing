@@ -26,14 +26,6 @@ SOURCES = {
         "ABOUT.txt": "https://raw.githubusercontent.com/mormon-documentation-project/"
         f"lds-scriptures/{LDS_SCRIPTURES_COMMIT}/ABOUT.txt",
     },
-    # Official Declaration 1 (the 1890 Manifesto), Wikisource, pinned revision.
-    # The text is public domain (1890); checked against the 1890 printing
-    # "President Woodruff's Manifesto" (also on Wikisource, scanned).
-    "wikisource-od1": {
-        "official-declaration-1.wikitext": "https://en.wikisource.org/w/index.php?"
-        "title=The_Doctrine_and_Covenants_(unsourced)/Official_Declaration_1"
-        "&oldid=15344235&action=raw",
-    },
     # Project Gutenberg eBook #56684, The Lectures on Faith (public domain in the USA).
     "gutenberg-56684": {
         "pg56684.txt": "https://www.gutenberg.org/cache/epub/56684/pg56684.txt",

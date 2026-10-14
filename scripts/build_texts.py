@@ -28,7 +28,9 @@ OUT = ROOT / "public" / "texts"
 # Library layout
 # --------------------------------------------------------------------------
 
-VOLUMES = [
+# Courses in the library, in canonical order. Each volume of scripture is a
+# course; a course holds one or more books.
+COURSES = [
     ("old-testament", "Old Testament"),
     ("new-testament", "New Testament"),
     ("book-of-mormon", "Book of Mormon"),
@@ -127,38 +129,6 @@ def load_lds_scriptures() -> dict[str, list[dict]]:
 
 
 # --------------------------------------------------------------------------
-# Official Declaration 1
-# --------------------------------------------------------------------------
-
-
-def load_official_declaration_1() -> dict:
-    """The 1890 Manifesto and the sustaining vote, as printed in the Doctrine
-    and Covenants since 1908. The 1981 'Excerpts from three addresses' and the
-    modern introduction are not included (see docs/TEXTS.md)."""
-    raw = (RAW / "wikisource-od1" / "official-declaration-1.wikitext").read_text(encoding="utf-8")
-    body = raw.split("}}", 1)[1]  # drop the {{Header ...}} template
-    body = body.split("EXCERPTS FROM THREE ADDRESSES")[0]
-    body = re.sub(r"\{\{Center\|[^}]*$", "", body.strip())
-    # {{Right|{{Small-caps|Wilford Woodruff}}|offset=10em}} -> Wilford Woodruff
-    body = re.sub(r"\{\{Small-caps\|([^}]*)\}\}", r"\1", body)
-    body = re.sub(r"\{\{Right\|([^|}]*)(\|[^}]*)?\}\}", r"\1", body)
-    body = body.replace("''", "")
-    if "{{" in body or "<" in body:
-        raise ValueError("unexpected markup left in Official Declaration 1")
-    paragraphs = [tidy(p) for p in re.split(r"\n\s*\n", body) if tidy(p)]
-    # The signature is printed on two lines: "Wilford Woodruff" / "President of ...".
-    merged = [re.sub(r"^Wilford Woodruff (?=President)", "Wilford Woodruff, ", p) for p in paragraphs]
-    verses = [{"number": i + 1, "text": t} for i, t in enumerate(merged)]
-    return book_file(
-        "doctrine-and-covenants",
-        "official-declaration-1",
-        "Official Declaration 1",
-        "Declaration",
-        [{"number": 1, "verses": verses}],
-    )
-
-
-# --------------------------------------------------------------------------
 # Lectures on Faith
 # --------------------------------------------------------------------------
 
@@ -217,8 +187,8 @@ def load_jst(lds: dict[str, list[dict]]) -> dict[str, list[dict]]:
 def write(volumes: dict[str, list[dict]]) -> None:
     if OUT.exists():
         shutil.rmtree(OUT)
-    index = {"volumes": []}
-    for vid, vtitle in VOLUMES:
+    index = {"courses": []}
+    for vid, vtitle in COURSES:
         books = volumes.get(vid, [])
         if not books:
             continue
@@ -237,13 +207,12 @@ def write(volumes: dict[str, list[dict]]) -> None:
             if book.get("draft"):
                 entry["draft"] = True
             entries.append(entry)
-        index["volumes"].append({"id": vid, "title": vtitle, "books": entries})
+        index["courses"].append({"id": vid, "title": vtitle, "books": entries})
     (OUT / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
 
 
 def main() -> int:
     volumes = load_lds_scriptures()
-    volumes["doctrine-and-covenants"].append(load_official_declaration_1())
     volumes["lectures-on-faith"] = [load_lectures_on_faith()]
     if "--no-jst" not in sys.argv and (Path(__file__).parent / "jst_build.py").exists():
         volumes.update(load_jst(volumes))

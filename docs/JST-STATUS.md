@@ -14,7 +14,7 @@ against the scans.
 | OT | Genesis | 50 | 1792 | draft | 10 | 7 |
 | OT | Exodus | 40 | 1206 | draft | 0 | 0 |
 | OT | Leviticus | 27 | 859 | draft | 1 | 1 |
-| OT | Numbers | 36 | 1288 | draft | 2 | 2 |
+| OT | Numbers | 36 | 1288 | draft | 2 | 1 |
 | OT | Deuteronomy | 34 | 959 | draft | 2 | 3 |
 | OT | Joshua | 24 | 658 | draft | 0 | 1 |
 | OT | Judges | 21 | 618 | draft | 0 | 2 |
@@ -23,21 +23,21 @@ against the scans.
 | OT | 2 Samuel | 24 | 695 | ready | 0 | 0 |
 | OT | 1 Kings | 22 | 818 | ready | 0 | 0 |
 | OT | 2 Kings | 25 | 719 | ready | 0 | 0 |
-| OT | 1 Chronicles | 29 | 942 | draft | 0 | 4 |
-| OT | 2 Chronicles | 35 | 810 | draft | 0 | 1 |
+| OT | 1 Chronicles | 29 | 942 | draft | 0 | 1 |
+| OT | 2 Chronicles | 35 | 810 | draft | 0 | 2 |
 | OT | Ezra | 10 | 211 | draft | 1 | 0 |
 | OT | Nehemiah | 13 | 406 | draft | 0 | 1 |
 | OT | Esther | 10 | 167 | ready | 0 | 0 |
-| OT | Job | 42 | 1069 | draft | 0 | 1 |
+| OT | Job | 42 | 1069 | draft | 0 | 0 |
 | OT | Psalms | 150 | 2465 | draft | 3 | 5 |
-| OT | Proverbs | 31 | 915 | draft | 0 | 2 |
+| OT | Proverbs | 31 | 915 | draft | 0 | 1 |
 | OT | Ecclesiastes | 11 | 210 | draft | 0 | 3 |
-| OT | Isaiah | 66 | 1306 | draft | 4 | 16 |
+| OT | Isaiah | 66 | 1306 | draft | 4 | 12 |
 | OT | Jeremiah | 52 | 1365 | draft | 1 | 3 |
 | OT | Lamentations | 5 | 154 | ready | 0 | 0 |
 | OT | Ezekiel | 48 | 1273 | draft | 1 | 2 |
 | OT | Daniel | 12 | 357 | draft | 0 | 1 |
-| OT | Hosea | 14 | 197 | draft | 0 | 3 |
+| OT | Hosea | 14 | 197 | draft | 0 | 2 |
 | OT | Joel | 3 | 73 | draft | 0 | 1 |
 | OT | Amos | 9 | 146 | ready | 0 | 0 |
 | OT | Obadiah | 1 | 21 | ready | 0 | 0 |
@@ -47,14 +47,14 @@ against the scans.
 | OT | Habakkuk | 3 | 56 | ready | 0 | 0 |
 | OT | Zephaniah | 3 | 53 | ready | 0 | 0 |
 | OT | Haggai | 2 | 38 | ready | 0 | 0 |
-| OT | Zechariah | 14 | 209 | draft | 0 | 0 |
+| OT | Zechariah | 14 | 209 | ready | 0 | 0 |
 | OT | Malachi | 4 | 55 | ready | 0 | 0 |
-| NT | Matthew | 29 | 1155 | draft | 6 | 10 |
-| NT | Mark | 16 | 758 | draft | 2 | 8 |
+| NT | Matthew | 29 | 1155 | draft | 6 | 9 |
+| NT | Mark | 16 | 758 | draft | 2 | 7 |
 | NT | Luke | 25 | 1194 | draft | 3 | 1 |
-| NT | John | 21 | 886 | draft | 2 | 5 |
-| NT | Acts | 28 | 1009 | draft | 0 | 5 |
-| NT | Romans | 17 | 438 | draft | 1 | 2 |
+| NT | John | 21 | 886 | draft | 2 | 4 |
+| NT | Acts | 28 | 1009 | draft | 0 | 3 |
+| NT | Romans | 17 | 438 | draft | 1 | 1 |
 | NT | 1 Corinthians | 16 | 440 | ready | 0 | 0 |
 | NT | 2 Corinthians | 13 | 257 | draft | 0 | 3 |
 | NT | Galatians | 6 | 149 | ready | 0 | 0 |
@@ -77,7 +77,7 @@ against the scans.
 | NT | Jude | 1 | 25 | draft | 0 | 1 |
 | NT | Revelation | 23 | 380 | draft | 11 | 5 |
 
-**26 of 65 books ready.**
+**27 of 65 books ready.**
 
 ## Details for draft books
 
@@ -86,13 +86,12 @@ against the scans.
 - scans disagree on chapter division near chapter 11
 - scans disagree on chapter division near chapter 25
 - scans disagree on chapter division near chapter 36
-- unexpected characters in 7:33, 15:2
+- unexpected characters in 7:33
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
 
 ### Exodus
 
-- verse numbering skips at 22:18 (a verse number was lost)
 - unexpected characters in 22:31
 
 ### Leviticus
@@ -104,9 +103,8 @@ against the scans.
 ### Numbers
 
 - verse numbering skips at 3:6 (a verse number was lost)
-- unexpected characters in 4:13
 - 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `11:10 displ`, `18:2 tceo,`
+- unverified words: `11:10 displ`
 
 ### Deuteronomy
 
@@ -125,20 +123,18 @@ against the scans.
 
 ### 1 Samuel
 
-- unexpected characters in 9:27
+- probably merged verses: 10:27
 - unverified words: `11:2 Amu.`, `20:12 soufivicJ`, `26:23 tiand`
 
 ### 1 Chronicles
 
-- unexpected characters in 12:24
-- unverified words: `1:54 iwre`, `2:42 Zi))i;`, `21:6 tbam;`, `27:1 Jai`
+- unverified words: `27:1 Jai`
 
 ### 2 Chronicles
 
 - chapter 14 not found in either scan
-- unexpected characters in 24:5
 - probably merged verses: 13:22
-- unverified words: `13:22 overtttroweth`
+- unverified words: `13:22 overtttroweth`, `21:7 XXiri.`
 
 ### Ezra
 
@@ -151,17 +147,17 @@ against the scans.
 ### Job
 
 - verse numbering skips at 9:3 (a verse number was lost)
-- unverified words: `19:29 vrrnth`
 
 ### Psalms
 
 - unexpected characters in 3:8, 12:1
 - 3 chapter(s) where the two scans do not agree on the verse division
+- probably merged verses: 4:8
 - unverified words: `88:3 gva`, `88:17 Theycam`, `88:18 uu`, `110:1 conquest`, `119:120 adginents.`
 
 ### Proverbs
 
-- unverified words: `4:15 iut`, `7:20 dajr`
+- unverified words: `4:15 iut`
 
 ### Ecclesiastes
 
@@ -175,7 +171,8 @@ against the scans.
 - check 42:27 ends with text not in the KJV: 'God promises to Israel.'
 - unexpected characters in 48:19
 - 4 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `1:5 Jen`, `1:9 iiio`, `1:9 orrali.`, `1:10 Ky`, `1:11 JiOxA`, `1:11 im`, `1:11 bul'oci`, `1:12 haiiK`, `1:14 apj`, `3:9 uiit.`, `43:24 le`, `44:15 makciD`, `48:8 tinoo`, `48:19 deBtro3`, `49:19 ttiy`, `53:11 Boui,`
+- probably merged verses: 3:27, 13:6
+- unverified words: `1:5 Jen`, `1:9 iiio`, `1:9 orrali.`, `1:10 Ky`, `1:11 JiOxA`, `1:11 im`, `1:11 bul'oci`, `1:12 haiiK`, `1:14 apj`, `43:24 le`, `48:8 tinoo`, `48:19 deBtro3`
 
 ### Jeremiah
 
@@ -185,9 +182,8 @@ against the scans.
 
 ### Ezekiel
 
-- verse numbering skips at 14:11 (a verse number was lost)
 - 1 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `43:9 frcai`, `44:15 thatept`
+- unverified words: `43:9 frcin`, `44:15 thatept`
 
 ### Daniel
 
@@ -195,15 +191,11 @@ against the scans.
 
 ### Hosea
 
-- unverified words: `6:3 en`, `6:7 trani`, `7:7 tiinra`
+- unverified words: `6:3 en`, `6:7 trani`
 
 ### Joel
 
 - unverified words: `3:1 bvircj`
-
-### Zechariah
-
-- verse numbering skips at 4:12 (a verse number was lost)
 
 ### Matthew
 
@@ -211,17 +203,18 @@ against the scans.
 - scans disagree on chapter division near chapter 24
 - check 3:1 starts with text not in the KJV: 'JESUS.'
 - check 3:46 ends with text not in the KJV: 'Hear ye him.'
+- check 4:25 ends with text not in the KJV: "The commencement of Christ's teaching on the Mount."
 - verse numbering skips at 7:3 (a verse number was lost)
-- unexpected characters in 3:4, 3:39, 3:40, 9:1
+- unexpected characters in 3:4, 3:39, 3:40
 - 6 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `3:39 hi§`, `17:11 xJone`, `23:6 Ptablai,`, `23:15 S"VFea`, `23:24 arejike`, `23:27 hi`, `23:41 foretelUth`, `23:41 JerwsaUm,`, `24:56 bve.`, `27:49 juvi`
+- unverified words: `3:39 hi§`, `17:11 xJone`, `23:6 Ptablai,`, `23:15 S"VFea`, `23:24 arejike`, `23:41 foretelUth`, `23:41 JerwsaUm,`, `24:56 bve.`, `27:49 juvi`
 
 ### Mark
 
 - verse numbering skips at 14:60 (a verse number was lost)
 - unexpected characters in 12:28, 13:27
 - 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `3:30 niherit`, `8:22 ketsful`, `9:3 .hey`, `13:8 ftO`, `13:52 ffrindincr`, `13:59 eth`, `13:60 ci-ppoint`, `14:57 sembled`
+- unverified words: `3:30 niherit`, `9:3 .hey`, `13:8 ftO`, `13:52 ffrindincr`, `13:59 eth`, `13:60 ci-ppoint`, `14:57 sembled`
 
 ### Luke
 
@@ -235,18 +228,18 @@ against the scans.
 - scans disagree on chapter division near chapter 16
 - unexpected characters in 7:39
 - 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`, `13:24 be(kom?l`
+- unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`
 
 ### Acts
 
-- unverified words: `1:1 TlpHE`, `4:35 rty`, `12:1 jyi`, `13:9 fris`, `16:1 tra;`
+- unverified words: `1:1 TlpHE`, `12:1 jyi`, `16:1 tra;`
 
 ### Romans
 
 - scans disagree on chapter division near chapter 5
 - scans disagree on chapter division near chapter 9
 - 1 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `2:24 pherncd`, `9:37 arfr`
+- unverified words: `2:24 pherncd`
 
 ### 2 Corinthians
 
