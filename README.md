@@ -1,32 +1,59 @@
-# React + TypeScript + Vite
+# Scripture Typer
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+_Working name._ A typing game where you type the scriptures instead of just
+reading them, so you improve your typing and learn the scriptures at the same
+time. It tracks your progress; it is not a race.
 
-Currently, two official plugins are available:
+The first version has no accounts or backend. It runs in the browser, keeps
+all your data on your device (IndexedDB), works offline, and can be installed
+as an app from Chrome or Edge on Windows and Linux.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+- Plan and app design: [docs/PLAN.md](docs/PLAN.md)
+- Scripture sources, licences and data format: [docs/TEXTS.md](docs/TEXTS.md)
 
-## React Compiler
+> Status: project setup. The app screens are not built yet.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Run it locally
 
-## Expanding the Oxlint configuration
+Needs Node.js 20.19+ (or 22.12+) and npm.
 
-If you are developing a production application, we recommend enabling type-aware lint rules by installing `oxlint-tsgolint` and editing `.oxlintrc.json`:
-
-```json
-{
-  "$schema": "./node_modules/oxlint/configuration_schema.json",
-  "plugins": ["react", "typescript", "oxc"],
-  "options": {
-    "typeAware": true
-  },
-  "rules": {
-    "react/rules-of-hooks": "error",
-    "react/only-export-components": ["warn", { "allowConstantExport": true }]
-  }
-}
+```sh
+npm install
+npm run dev        # dev server at http://localhost:5173/scripture-typing/
 ```
 
-See the [Oxlint rules documentation](https://oxc.rs/docs/guide/usage/linter/rules) for the full list of rules and categories.
+Other scripts:
+
+```sh
+npm run build      # type-check and build to dist/
+npm run preview    # serve the production build locally
+npm run lint       # ESLint
+npm run format     # Prettier (write); format:check to verify
+```
+
+### Rebuilding the scripture data
+
+The generated JSON in `public/texts/` is committed, so you only need this if
+you change the conversion scripts. Needs Python 3.10+.
+
+```sh
+npm run texts:download   # download sources into raw/ (git-ignored)
+npm run texts:build      # write public/texts/
+npm run texts:check      # validate book/chapter counts, empty verses, markup
+```
+
+## Deployment
+
+The site is hosted on GitHub Pages at
+`https://<owner>.github.io/scripture-typing/`.
+
+Every push to `main` runs [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml),
+which installs dependencies, lints, builds, and publishes `dist/` to Pages.
+It can also be run by hand from the Actions tab.
+
+Vite's `base` is set to `/scripture-typing/` in `vite.config.ts` so asset
+URLs, the web manifest and the service worker scope work under the Pages
+sub-path. If the repository is renamed, update `base` to match.
+
+The repository's Pages setting must use **GitHub Actions** as the source
+(Settings → Pages → Build and deployment).
