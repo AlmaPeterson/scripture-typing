@@ -1,0 +1,663 @@
+{
+  "volumes": [
+    {
+      "id": "old-testament",
+      "title": "Old Testament",
+      "books": [
+        {
+          "id": "genesis",
+          "title": "Genesis",
+          "unitLabel": "Chapter",
+          "chapters": 50,
+          "path": "texts/old-testament/genesis.json"
+        },
+        {
+          "id": "exodus",
+          "title": "Exodus",
+          "unitLabel": "Chapter",
+          "chapters": 40,
+          "path": "texts/old-testament/exodus.json"
+        },
+        {
+          "id": "leviticus",
+          "title": "Leviticus",
+          "unitLabel": "Chapter",
+          "chapters": 27,
+          "path": "texts/old-testament/leviticus.json"
+        },
+        {
+          "id": "numbers",
+          "title": "Numbers",
+          "unitLabel": "Chapter",
+          "chapters": 36,
+          "path": "texts/old-testament/numbers.json"
+        },
+        {
+          "id": "deuteronomy",
+          "title": "Deuteronomy",
+          "unitLabel": "Chapter",
+          "chapters": 34,
+          "path": "texts/old-testament/deuteronomy.json"
+        },
+        {
+          "id": "joshua",
+          "title": "Joshua",
+          "unitLabel": "Chapter",
+          "chapters": 24,
+          "path": "texts/old-testament/joshua.json"
+        },
+        {
+          "id": "judges",
+          "title": "Judges",
+          "unitLabel": "Chapter",
+          "chapters": 21,
+          "path": "texts/old-testament/judges.json"
+        },
+        {
+          "id": "ruth",
+          "title": "Ruth",
+          "unitLabel": "Chapter",
+          "chapters": 4,
+          "path": "texts/old-testament/ruth.json"
+        },
+        {
+          "id": "1-samuel",
+          "title": "1 Samuel",
+          "unitLabel": "Chapter",
+          "chapters": 31,
+          "path": "texts/old-testament/1-samuel.json"
+        },
+        {
+          "id": "2-samuel",
+          "title": "2 Samuel",
+          "unitLabel": "Chapter",
+          "chapters": 24,
+          "path": "texts/old-testament/2-samuel.json"
+        },
+        {
+          "id": "1-kings",
+          "title": "1 Kings",
+          "unitLabel": "Chapter",
+          "chapters": 22,
+          "path": "texts/old-testament/1-kings.json"
+        },
+        {
+          "id": "2-kings",
+          "title": "2 Kings",
+          "unitLabel": "Chapter",
+          "chapters": 25,
+          "path": "texts/old-testament/2-kings.json"
+        },
+        {
+          "id": "1-chronicles",
+          "title": "1 Chronicles",
+          "unitLabel": "Chapter",
+          "chapters": 29,
+          "path": "texts/old-testament/1-chronicles.json"
+        },
+        {
+          "id": "2-chronicles",
+          "title": "2 Chronicles",
+          "unitLabel": "Chapter",
+          "chapters": 36,
+          "path": "texts/old-testament/2-chronicles.json"
+        },
+        {
+          "id": "ezra",
+          "title": "Ezra",
+          "unitLabel": "Chapter",
+          "chapters": 10,
+          "path": "texts/old-testament/ezra.json"
+        },
+        {
+          "id": "nehemiah",
+          "title": "Nehemiah",
+          "unitLabel": "Chapter",
+          "chapters": 13,
+          "path": "texts/old-testament/nehemiah.json"
+        },
+        {
+          "id": "esther",
+          "title": "Esther",
+          "unitLabel": "Chapter",
+          "chapters": 10,
+          "path": "texts/old-testament/esther.json"
+        },
+        {
+          "id": "job",
+          "title": "Job",
+          "unitLabel": "Chapter",
+          "chapters": 42,
+          "path": "texts/old-testament/job.json"
+        },
+        {
+          "id": "psalms",
+          "title": "Psalms",
+          "unitLabel": "Chapter",
+          "chapters": 150,
+          "path": "texts/old-testament/psalms.json"
+        },
+        {
+          "id": "proverbs",
+          "title": "Proverbs",
+          "unitLabel": "Chapter",
+          "chapters": 31,
+          "path": "texts/old-testament/proverbs.json"
+        },
+        {
+          "id": "ecclesiastes",
+          "title": "Ecclesiastes",
+          "unitLabel": "Chapter",
+          "chapters": 12,
+          "path": "texts/old-testament/ecclesiastes.json"
+        },
+        {
+          "id": "song-of-solomon",
+          "title": "Song of Solomon",
+          "unitLabel": "Chapter",
+          "chapters": 8,
+          "path": "texts/old-testament/song-of-solomon.json"
+        },
+        {
+          "id": "isaiah",
+          "title": "Isaiah",
+          "unitLabel": "Chapter",
+          "chapters": 66,
+          "path": "texts/old-testament/isaiah.json"
+        },
+        {
+          "id": "jeremiah",
+          "title": "Jeremiah",
+          "unitLabel": "Chapter",
+          "chapters": 52,
+          "path": "texts/old-testament/jeremiah.json"
+        },
+        {
+          "id": "lamentations",
+          "title": "Lamentations",
+          "unitLabel": "Chapter",
+          "chapters": 5,
+          "path": "texts/old-testament/lamentations.json"
+        },
+        {
+          "id": "ezekiel",
+          "title": "Ezekiel",
+          "unitLabel": "Chapter",
+          "chapters": 48,
+          "path": "texts/old-testament/ezekiel.json"
+        },
+        {
+          "id": "daniel",
+          "title": "Daniel",
+          "unitLabel": "Chapter",
+          "chapters": 12,
+          "path": "texts/old-testament/daniel.json"
+        },
+        {
+          "id": "hosea",
+          "title": "Hosea",
+          "unitLabel": "Chapter",
+          "chapters": 14,
+          "path": "texts/old-testament/hosea.json"
+        },
+        {
+          "id": "joel",
+          "title": "Joel",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/old-testament/joel.json"
+        },
+        {
+          "id": "amos",
+          "title": "Amos",
+          "unitLabel": "Chapter",
+          "chapters": 9,
+          "path": "texts/old-testament/amos.json"
+        },
+        {
+          "id": "obadiah",
+          "title": "Obadiah",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/old-testament/obadiah.json"
+        },
+        {
+          "id": "jonah",
+          "title": "Jonah",
+          "unitLabel": "Chapter",
+          "chapters": 4,
+          "path": "texts/old-testament/jonah.json"
+        },
+        {
+          "id": "micah",
+          "title": "Micah",
+          "unitLabel": "Chapter",
+          "chapters": 7,
+          "path": "texts/old-testament/micah.json"
+        },
+        {
+          "id": "nahum",
+          "title": "Nahum",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/old-testament/nahum.json"
+        },
+        {
+          "id": "habakkuk",
+          "title": "Habakkuk",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/old-testament/habakkuk.json"
+        },
+        {
+          "id": "zephaniah",
+          "title": "Zephaniah",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/old-testament/zephaniah.json"
+        },
+        {
+          "id": "haggai",
+          "title": "Haggai",
+          "unitLabel": "Chapter",
+          "chapters": 2,
+          "path": "texts/old-testament/haggai.json"
+        },
+        {
+          "id": "zechariah",
+          "title": "Zechariah",
+          "unitLabel": "Chapter",
+          "chapters": 14,
+          "path": "texts/old-testament/zechariah.json"
+        },
+        {
+          "id": "malachi",
+          "title": "Malachi",
+          "unitLabel": "Chapter",
+          "chapters": 4,
+          "path": "texts/old-testament/malachi.json"
+        }
+      ]
+    },
+    {
+      "id": "new-testament",
+      "title": "New Testament",
+      "books": [
+        {
+          "id": "matthew",
+          "title": "Matthew",
+          "unitLabel": "Chapter",
+          "chapters": 28,
+          "path": "texts/new-testament/matthew.json"
+        },
+        {
+          "id": "mark",
+          "title": "Mark",
+          "unitLabel": "Chapter",
+          "chapters": 16,
+          "path": "texts/new-testament/mark.json"
+        },
+        {
+          "id": "luke",
+          "title": "Luke",
+          "unitLabel": "Chapter",
+          "chapters": 24,
+          "path": "texts/new-testament/luke.json"
+        },
+        {
+          "id": "john",
+          "title": "John",
+          "unitLabel": "Chapter",
+          "chapters": 21,
+          "path": "texts/new-testament/john.json"
+        },
+        {
+          "id": "acts",
+          "title": "Acts",
+          "unitLabel": "Chapter",
+          "chapters": 28,
+          "path": "texts/new-testament/acts.json"
+        },
+        {
+          "id": "romans",
+          "title": "Romans",
+          "unitLabel": "Chapter",
+          "chapters": 16,
+          "path": "texts/new-testament/romans.json"
+        },
+        {
+          "id": "1-corinthians",
+          "title": "1 Corinthians",
+          "unitLabel": "Chapter",
+          "chapters": 16,
+          "path": "texts/new-testament/1-corinthians.json"
+        },
+        {
+          "id": "2-corinthians",
+          "title": "2 Corinthians",
+          "unitLabel": "Chapter",
+          "chapters": 13,
+          "path": "texts/new-testament/2-corinthians.json"
+        },
+        {
+          "id": "galatians",
+          "title": "Galatians",
+          "unitLabel": "Chapter",
+          "chapters": 6,
+          "path": "texts/new-testament/galatians.json"
+        },
+        {
+          "id": "ephesians",
+          "title": "Ephesians",
+          "unitLabel": "Chapter",
+          "chapters": 6,
+          "path": "texts/new-testament/ephesians.json"
+        },
+        {
+          "id": "philippians",
+          "title": "Philippians",
+          "unitLabel": "Chapter",
+          "chapters": 4,
+          "path": "texts/new-testament/philippians.json"
+        },
+        {
+          "id": "colossians",
+          "title": "Colossians",
+          "unitLabel": "Chapter",
+          "chapters": 4,
+          "path": "texts/new-testament/colossians.json"
+        },
+        {
+          "id": "1-thessalonians",
+          "title": "1 Thessalonians",
+          "unitLabel": "Chapter",
+          "chapters": 5,
+          "path": "texts/new-testament/1-thessalonians.json"
+        },
+        {
+          "id": "2-thessalonians",
+          "title": "2 Thessalonians",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/new-testament/2-thessalonians.json"
+        },
+        {
+          "id": "1-timothy",
+          "title": "1 Timothy",
+          "unitLabel": "Chapter",
+          "chapters": 6,
+          "path": "texts/new-testament/1-timothy.json"
+        },
+        {
+          "id": "2-timothy",
+          "title": "2 Timothy",
+          "unitLabel": "Chapter",
+          "chapters": 4,
+          "path": "texts/new-testament/2-timothy.json"
+        },
+        {
+          "id": "titus",
+          "title": "Titus",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/new-testament/titus.json"
+        },
+        {
+          "id": "philemon",
+          "title": "Philemon",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/new-testament/philemon.json"
+        },
+        {
+          "id": "hebrews",
+          "title": "Hebrews",
+          "unitLabel": "Chapter",
+          "chapters": 13,
+          "path": "texts/new-testament/hebrews.json"
+        },
+        {
+          "id": "james",
+          "title": "James",
+          "unitLabel": "Chapter",
+          "chapters": 5,
+          "path": "texts/new-testament/james.json"
+        },
+        {
+          "id": "1-peter",
+          "title": "1 Peter",
+          "unitLabel": "Chapter",
+          "chapters": 5,
+          "path": "texts/new-testament/1-peter.json"
+        },
+        {
+          "id": "2-peter",
+          "title": "2 Peter",
+          "unitLabel": "Chapter",
+          "chapters": 3,
+          "path": "texts/new-testament/2-peter.json"
+        },
+        {
+          "id": "1-john",
+          "title": "1 John",
+          "unitLabel": "Chapter",
+          "chapters": 5,
+          "path": "texts/new-testament/1-john.json"
+        },
+        {
+          "id": "2-john",
+          "title": "2 John",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/new-testament/2-john.json"
+        },
+        {
+          "id": "3-john",
+          "title": "3 John",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/new-testament/3-john.json"
+        },
+        {
+          "id": "jude",
+          "title": "Jude",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/new-testament/jude.json"
+        },
+        {
+          "id": "revelation",
+          "title": "Revelation",
+          "unitLabel": "Chapter",
+          "chapters": 22,
+          "path": "texts/new-testament/revelation.json"
+        }
+      ]
+    },
+    {
+      "id": "book-of-mormon",
+      "title": "Book of Mormon",
+      "books": [
+        {
+          "id": "1-nephi",
+          "title": "1 Nephi",
+          "unitLabel": "Chapter",
+          "chapters": 22,
+          "path": "texts/book-of-mormon/1-nephi.json"
+        },
+        {
+          "id": "2-nephi",
+          "title": "2 Nephi",
+          "unitLabel": "Chapter",
+          "chapters": 33,
+          "path": "texts/book-of-mormon/2-nephi.json"
+        },
+        {
+          "id": "jacob",
+          "title": "Jacob",
+          "unitLabel": "Chapter",
+          "chapters": 7,
+          "path": "texts/book-of-mormon/jacob.json"
+        },
+        {
+          "id": "enos",
+          "title": "Enos",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/book-of-mormon/enos.json"
+        },
+        {
+          "id": "jarom",
+          "title": "Jarom",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/book-of-mormon/jarom.json"
+        },
+        {
+          "id": "omni",
+          "title": "Omni",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/book-of-mormon/omni.json"
+        },
+        {
+          "id": "words-of-mormon",
+          "title": "Words of Mormon",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/book-of-mormon/words-of-mormon.json"
+        },
+        {
+          "id": "mosiah",
+          "title": "Mosiah",
+          "unitLabel": "Chapter",
+          "chapters": 29,
+          "path": "texts/book-of-mormon/mosiah.json"
+        },
+        {
+          "id": "alma",
+          "title": "Alma",
+          "unitLabel": "Chapter",
+          "chapters": 63,
+          "path": "texts/book-of-mormon/alma.json"
+        },
+        {
+          "id": "helaman",
+          "title": "Helaman",
+          "unitLabel": "Chapter",
+          "chapters": 16,
+          "path": "texts/book-of-mormon/helaman.json"
+        },
+        {
+          "id": "3-nephi",
+          "title": "3 Nephi",
+          "unitLabel": "Chapter",
+          "chapters": 30,
+          "path": "texts/book-of-mormon/3-nephi.json"
+        },
+        {
+          "id": "4-nephi",
+          "title": "4 Nephi",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/book-of-mormon/4-nephi.json"
+        },
+        {
+          "id": "mormon",
+          "title": "Mormon",
+          "unitLabel": "Chapter",
+          "chapters": 9,
+          "path": "texts/book-of-mormon/mormon.json"
+        },
+        {
+          "id": "ether",
+          "title": "Ether",
+          "unitLabel": "Chapter",
+          "chapters": 15,
+          "path": "texts/book-of-mormon/ether.json"
+        },
+        {
+          "id": "moroni",
+          "title": "Moroni",
+          "unitLabel": "Chapter",
+          "chapters": 10,
+          "path": "texts/book-of-mormon/moroni.json"
+        }
+      ]
+    },
+    {
+      "id": "doctrine-and-covenants",
+      "title": "Doctrine and Covenants",
+      "books": [
+        {
+          "id": "doctrine-and-covenants",
+          "title": "Doctrine and Covenants",
+          "unitLabel": "Section",
+          "chapters": 138,
+          "path": "texts/doctrine-and-covenants/doctrine-and-covenants.json"
+        },
+        {
+          "id": "official-declaration-1",
+          "title": "Official Declaration 1",
+          "unitLabel": "Declaration",
+          "chapters": 1,
+          "path": "texts/doctrine-and-covenants/official-declaration-1.json"
+        }
+      ]
+    },
+    {
+      "id": "pearl-of-great-price",
+      "title": "Pearl of Great Price",
+      "books": [
+        {
+          "id": "moses",
+          "title": "Moses",
+          "unitLabel": "Chapter",
+          "chapters": 8,
+          "path": "texts/pearl-of-great-price/moses.json"
+        },
+        {
+          "id": "abraham",
+          "title": "Abraham",
+          "unitLabel": "Chapter",
+          "chapters": 5,
+          "path": "texts/pearl-of-great-price/abraham.json"
+        },
+        {
+          "id": "joseph-smith-matthew",
+          "title": "Joseph Smith—Matthew",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/pearl-of-great-price/joseph-smith-matthew.json"
+        },
+        {
+          "id": "joseph-smith-history",
+          "title": "Joseph Smith—History",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/pearl-of-great-price/joseph-smith-history.json"
+        },
+        {
+          "id": "articles-of-faith",
+          "title": "Articles of Faith",
+          "unitLabel": "Chapter",
+          "chapters": 1,
+          "path": "texts/pearl-of-great-price/articles-of-faith.json"
+        }
+      ]
+    },
+    {
+      "id": "lectures-on-faith",
+      "title": "Lectures on Faith",
+      "books": [
+        {
+          "id": "lectures-on-faith",
+          "title": "Lectures on Faith",
+          "unitLabel": "Lecture",
+          "chapters": 7,
+          "path": "texts/lectures-on-faith/lectures-on-faith.json"
+        }
+      ]
+    }
+  ]
+}

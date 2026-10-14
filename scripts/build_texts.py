@@ -1,0 +1,257 @@
+"""Build public/texts/ from the raw downloads in raw/.
+
+    npm run texts:download   # once, fetches the sources into raw/
+    npm run texts:build      # writes public/texts/**.json
+    npm run texts:check      # validates the output
+
+Sources, editions and licenses are documented in docs/TEXTS.md.
+
+Only the scripture text itself is written: no chapter headings or summaries,
+section introductions, footnotes, cross-references or other study helps.
+"""
+
+from __future__ import annotations
+
+import json
+import re
+import shutil
+import sqlite3
+import sys
+import urllib.parse
+from pathlib import Path
+
+ROOT = Path(__file__).resolve().parent.parent
+RAW = ROOT / "raw"
+OUT = ROOT / "public" / "texts"
+
+# --------------------------------------------------------------------------
+# Library layout
+# --------------------------------------------------------------------------
+
+VOLUMES = [
+    ("old-testament", "Old Testament"),
+    ("new-testament", "New Testament"),
+    ("book-of-mormon", "Book of Mormon"),
+    ("doctrine-and-covenants", "Doctrine and Covenants"),
+    ("pearl-of-great-price", "Pearl of Great Price"),
+    ("lectures-on-faith", "Lectures on Faith"),
+    ("jst-old-testament", "Joseph Smith Translation: Old Testament"),
+    ("jst-new-testament", "Joseph Smith Translation: New Testament"),
+]
+
+# Titles that differ from the source database, or need a cleaner id.
+TITLE_OVERRIDES = {
+    "Joseph Smith--Matthew": "Joseph Smith—Matthew",
+    "Joseph Smith--History": "Joseph Smith—History",
+    "Solomon's Song": "Song of Solomon",
+}
+LDS_VOLUME_IDS = {
+    1: "old-testament",
+    2: "new-testament",
+    3: "book-of-mormon",
+    4: "doctrine-and-covenants",
+    5: "pearl-of-great-price",
+}
+
+# Words printed in capitals at the start of a chapter only as typography
+# ("IN the beginning"). LORD in capitals is the KJV rendering of the divine
+# name and is kept.
+KEEP_CAPS = {"LORD", "GOD", "I", "O", "A"}
+
+
+def slug(title: str) -> str:
+    s = title.lower().replace("—", "-").replace("--", "-").replace("'", "")
+    s = re.sub(r"[^a-z0-9]+", "-", s)
+    return s.strip("-")
+
+
+def tidy(text: str) -> str:
+    """Normalise whitespace and the double-hyphen dash used by the sources.
+
+    Stored text keeps typographic characters (em dashes etc.); the app converts
+    them to plain keyboard characters at typing time."""
+    text = text.replace("--", "—")
+    text = re.sub(r"\s+", " ", text).strip()
+    return text
+
+
+def opening_caps(text: str) -> str:
+    """'IN the beginning' -> 'In the beginning' (chapter-opening small caps)."""
+    m = re.match(r"^([A-Z][A-Z']+)\b", text)
+    if m and m.group(1) not in KEEP_CAPS and len(m.group(1)) > 1:
+        word = m.group(1)
+        return word[0] + word[1:].lower() + text[len(word):]
+    return text
+
+
+def book_file(volume: str, book_id: str, title: str, unit_label: str, chapters: list[dict]) -> dict:
+    return {
+        "id": book_id,
+        "title": title,
+        "volume": volume,
+        "unitLabel": unit_label,
+        "chapters": chapters,
+    }
+
+
+# --------------------------------------------------------------------------
+# KJV, Book of Mormon, D&C, Pearl of Great Price
+# --------------------------------------------------------------------------
+
+
+def load_lds_scriptures() -> dict[str, list[dict]]:
+    db_path = RAW / "lds-scriptures" / "lds-scriptures-sqlite3.db"
+    db = sqlite3.connect(f"file:{urllib.parse.quote(str(db_path))}?mode=ro", uri=True)
+    rows = db.execute(
+        "SELECT volume_id, book_id, book_title, chapter_number, verse_number, scripture_text "
+        "FROM scriptures ORDER BY volume_id, book_id, chapter_number, verse_number"
+    ).fetchall()
+    volumes: dict[str, list[dict]] = {}
+    books: dict[int, dict] = {}
+    for vol_id, book_id, title, ch, vn, text in rows:
+        volume = LDS_VOLUME_IDS[vol_id]
+        if book_id not in books:
+            title = TITLE_OVERRIDES.get(title, title)
+            unit = "Section" if volume == "doctrine-and-covenants" else "Chapter"
+            bid = "doctrine-and-covenants" if volume == "doctrine-and-covenants" else slug(title)
+            books[book_id] = book_file(volume, bid, title, unit, [])
+            volumes.setdefault(volume, []).append(books[book_id])
+        chapters = books[book_id]["chapters"]
+        if not chapters or chapters[-1]["number"] != ch:
+            chapters.append({"number": ch, "verses": []})
+        text = tidy(text)
+        if vn == 1:
+            text = opening_caps(text)
+        chapters[-1]["verses"].append({"number": vn, "text": text})
+    return volumes
+
+
+# --------------------------------------------------------------------------
+# Official Declaration 1
+# --------------------------------------------------------------------------
+
+
+def load_official_declaration_1() -> dict:
+    """The 1890 Manifesto and the sustaining vote, as printed in the Doctrine
+    and Covenants since 1908. The 1981 'Excerpts from three addresses' and the
+    modern introduction are not included (see docs/TEXTS.md)."""
+    raw = (RAW / "wikisource-od1" / "official-declaration-1.wikitext").read_text(encoding="utf-8")
+    body = raw.split("}}", 1)[1]  # drop the {{Header ...}} template
+    body = body.split("EXCERPTS FROM THREE ADDRESSES")[0]
+    body = re.sub(r"\{\{Center\|[^}]*$", "", body.strip())
+    # {{Right|{{Small-caps|Wilford Woodruff}}|offset=10em}} -> Wilford Woodruff
+    body = re.sub(r"\{\{Small-caps\|([^}]*)\}\}", r"\1", body)
+    body = re.sub(r"\{\{Right\|([^|}]*)(\|[^}]*)?\}\}", r"\1", body)
+    body = body.replace("''", "")
+    if "{{" in body or "<" in body:
+        raise ValueError("unexpected markup left in Official Declaration 1")
+    paragraphs = [tidy(p) for p in re.split(r"\n\s*\n", body) if tidy(p)]
+    # The signature is printed on two lines: "Wilford Woodruff" / "President of ...".
+    merged = [re.sub(r"^Wilford Woodruff (?=President)", "Wilford Woodruff, ", p) for p in paragraphs]
+    verses = [{"number": i + 1, "text": t} for i, t in enumerate(merged)]
+    return book_file(
+        "doctrine-and-covenants",
+        "official-declaration-1",
+        "Official Declaration 1",
+        "Declaration",
+        [{"number": 1, "verses": verses}],
+    )
+
+
+# --------------------------------------------------------------------------
+# Lectures on Faith
+# --------------------------------------------------------------------------
+
+ORDINALS = ["FIRST", "SECOND", "THIRD", "FOURTH", "FIFTH", "SIXTH", "SEVENTH"]
+
+
+def unitalic(text: str) -> str:
+    """Project Gutenberg marks italics as _word_; drop the markers."""
+    return re.sub(r"(?<![A-Za-z0-9])_([^_]+)_(?![A-Za-z0-9])", r"\1", text)
+
+
+def load_lectures_on_faith() -> dict:
+    """Numbered paragraphs of the seven lectures (Project Gutenberg #56684).
+
+    The question-and-answer review sections that follow some lectures are not
+    numbered paragraphs and are left out (see docs/TEXTS.md)."""
+    text = (RAW / "gutenberg-56684" / "pg56684.txt").read_text(encoding="utf-8")
+    text = text.replace("\r\n", "\n")
+    start = text.index("*** START OF THE PROJECT GUTENBERG EBOOK")
+    end = text.index("*** END OF THE PROJECT GUTENBERG EBOOK")
+    body = text[start:end].split("\n", 1)[1]
+    parts = re.split(r"^LECTURE (" + "|".join(ORDINALS) + r")\.?\s*$", body, flags=re.M)
+    lectures = []
+    for i in range(1, len(parts), 2):
+        number = ORDINALS.index(parts[i]) + 1
+        blocks = [b.strip() for b in re.split(r"\n\s*\n", parts[i + 1]) if b.strip()]
+        paragraphs: list[dict] = []
+        for block in blocks:
+            m = re.match(r"^(\d+)\.\s+(.*)$", block, flags=re.S)
+            if m and int(m.group(1)) == len(paragraphs) + 1:
+                paragraphs.append({"number": int(m.group(1)), "text": unitalic(tidy(m.group(2)))})
+            elif block.startswith(("Q.", "A.", "_Question_", "OF THEOLOGY", "Transcriber's Note")):
+                break  # the review questions (or end notes) start; the lecture text is over
+            elif paragraphs and not re.match(r"^(Section|SECTION|Of Faith|On the Doctrine|Latter Day)", block):
+                # A quotation or continuation that belongs to the paragraph.
+                paragraphs[-1]["text"] += " " + unitalic(tidy(block))
+        lectures.append({"number": number, "verses": paragraphs})
+    return book_file("lectures-on-faith", "lectures-on-faith", "Lectures on Faith", "Lecture", lectures)
+
+
+# --------------------------------------------------------------------------
+# Joseph Smith Translation (1867 Inspired Version)
+# --------------------------------------------------------------------------
+
+
+def load_jst(lds: dict[str, list[dict]]) -> dict[str, list[dict]]:
+    sys.path.insert(0, str(Path(__file__).resolve().parent))
+    import jst_build  # noqa: E402  (kept separate; it is large)
+
+    return jst_build.build(lds, RAW, opening_caps, tidy, book_file, slug)
+
+
+# --------------------------------------------------------------------------
+
+
+def write(volumes: dict[str, list[dict]]) -> None:
+    if OUT.exists():
+        shutil.rmtree(OUT)
+    index = {"volumes": []}
+    for vid, vtitle in VOLUMES:
+        books = volumes.get(vid, [])
+        if not books:
+            continue
+        (OUT / vid).mkdir(parents=True, exist_ok=True)
+        entries = []
+        for book in books:
+            path = OUT / vid / f"{book['id']}.json"
+            path.write_text(json.dumps(book, ensure_ascii=False, separators=(",", ":")) + "\n", encoding="utf-8")
+            entry = {
+                "id": book["id"],
+                "title": book["title"],
+                "unitLabel": book["unitLabel"],
+                "chapters": len(book["chapters"]),
+                "path": f"texts/{vid}/{book['id']}.json",
+            }
+            if book.get("draft"):
+                entry["draft"] = True
+            entries.append(entry)
+        index["volumes"].append({"id": vid, "title": vtitle, "books": entries})
+    (OUT / "index.json").write_text(json.dumps(index, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+
+def main() -> int:
+    volumes = load_lds_scriptures()
+    volumes["doctrine-and-covenants"].append(load_official_declaration_1())
+    volumes["lectures-on-faith"] = [load_lectures_on_faith()]
+    if "--no-jst" not in sys.argv and (Path(__file__).parent / "jst_build.py").exists():
+        volumes.update(load_jst(volumes))
+    write(volumes)
+    total = sum(len(b) for b in volumes.values())
+    print(f"wrote {total} books to {OUT.relative_to(ROOT)}")
+    return 0
+
+
+if __name__ == "__main__":
+    sys.exit(main())
