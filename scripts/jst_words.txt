@@ -1,0 +1,3 @@
+# Words in the 1867 Inspired Version that appear in no other scripture text
+# in this project, checked by hand against the scans. One per line.
+imposture

@@ -118,7 +118,28 @@ See [JST status](#jst-status) below.
 
 ### JST status
 
-_Filled in by the build; see the last build summary._
+[JST-STATUS.md](JST-STATUS.md) is regenerated on every build. It lists each
+book as **ready** or **draft** and, for drafts, exactly what to proofread
+(chapters where the two scans disagree on verse division, verse numbers the
+OCR lost, and words that could not be verified).
+
+A book is ready only when every chapter is confirmed (both scans agree, or the
+verse breaks match the KJV exactly), every word is verified (it matches the
+KJV, is a known scripture word, or both scans read it the same way), no verse
+looks like two merged verses, and the verse numbering has no gaps. Draft books
+are still included in the library, flagged `"draft": true` in `index.json`,
+so the app can label them.
+
+Other rules applied to the JST text:
+
+- The 1867 chapter summaries, psalm titles and the KJV subscriptions printed
+  after the epistles ("Written to the Romans from Corinthus...") are not verse
+  text and are removed.
+- Isolated OCR specks ("Jl", "%V") are removed. Where specks sit in place of
+  KJV words, the KJV words are used (the scan was damaged there, not the
+  text changed).
+- Words in `scripts/jst_words.txt` were checked by hand against the scans and
+  are accepted as real words.
 
 ## Data format
 

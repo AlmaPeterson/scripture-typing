@@ -27,6 +27,8 @@ EXPECTED_BOOKS = {
     "doctrine-and-covenants": 2,  # sections 1-138, Official Declaration 1
     "pearl-of-great-price": 5,
     "lectures-on-faith": 1,
+    "jst-old-testament": 38,  # the Inspired Version has no Song of Solomon
+    "jst-new-testament": 27,
 }
 
 KJV_CHAPTERS = [
@@ -81,6 +83,7 @@ def main() -> int:
         vid = vol["id"]
         draft_volume = vid.startswith("jst-")
         books = vol["books"]
+        drafts = sum(1 for b in books if b.get("draft"))
         exp = EXPECTED_BOOKS.get(vid)
         if exp is not None and len(books) != exp:
             errors.append(f"{vid}: {len(books)} books, expected {exp}")
@@ -106,7 +109,9 @@ def main() -> int:
                 expected = EXPECTED_CHAPTERS[vid][bi]
             if expected is not None and n_ch != expected:
                 errors.append(f"{where}: {n_ch} chapters, expected {expected}")
-            report = warnings if draft_volume else errors
+            # Draft JST books are known to need proofreading: report their
+            # problems as warnings. Everything else must be clean.
+            report = warnings if (draft_volume and entry.get("draft")) else errors
             for ci, ch in enumerate(book["chapters"], 1):
                 if ch["number"] != ci:
                     report.append(f"{where}: chapter {ch['number']} found where {ci} expected")
@@ -118,16 +123,18 @@ def main() -> int:
                         report.append(f"{ref}: verse number out of sequence (expected {vi})")
                     text = verse["text"]
                     if not text.strip():
-                        errors.append(f"{ref}: empty verse")
+                        report.append(f"{ref}: empty verse")
                     for name, pattern in BAD_PATTERNS.items():
                         if name == "digit in text" and vid in DIGITS_ALLOWED:
                             continue
                         if pattern.search(text):
-                            errors.append(f"{ref}: {name}: {text[:80]!r}")
+                            report.append(f"{ref}: {name}: {text[:80]!r}")
                 key = (vid, book["id"], ch["number"])
                 if key in EXPECTED_VERSE_COUNTS and len(ch["verses"]) != EXPECTED_VERSE_COUNTS[key]:
                     errors.append(f"{where} {ch['number']}: {len(ch['verses'])} verses, expected {EXPECTED_VERSE_COUNTS[key]}")
         print(f"{vid:26} {len(books):5}  " + ", ".join(counts))
+        if drafts:
+            print(f"{'':26} {'':5}  ({drafts} of {len(books)} marked draft)")
 
     on_disk = {p.resolve() for p in TEXTS.rglob("*.json") if p.name != "index.json"}
     for p in sorted(on_disk - listed):

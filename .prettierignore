@@ -3,3 +3,4 @@ dev-dist
 raw
 public/texts
 package-lock.json
+docs/JST-STATUS.md
