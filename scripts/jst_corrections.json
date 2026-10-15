@@ -11,6 +11,14 @@
    "set",
    "7:37",
    "This is the law of the burnt offering, of the meat offering, and of the sin offering, and of the trespass offering, and of the consecrations, and of the sacrifice of the peace offerings;"
+  ],
+  [
+   "renumber",
+   6
+  ],
+  [
+   "confirm",
+   6
   ]
  ],
  "numbers": [
@@ -18,6 +26,16 @@
    "set",
    "11:10",
    "Then Moses heard the people weep throughout their families, every man in the door of his tent: and the anger of the LORD was kindled greatly; Moses also was displeased."
+  ],
+  [
+   "renumber",
+   3,
+   7
+  ],
+  [
+   "confirm",
+   3,
+   7
   ]
  ],
  "deuteronomy": [
@@ -30,6 +48,16 @@
    "set",
    "24:4",
    "Her former husband, which sent her away, may not take her again to be his wife, after that she is denied; for that is abomination before the LORD: and thou shalt not cause the land to sin, which the LORD thy God giveth thee for an inheritance."
+  ],
+  [
+   "renumber",
+   1,
+   10
+  ],
+  [
+   "confirm",
+   1,
+   10
   ]
  ],
  "judges": [
@@ -306,6 +334,165 @@
    "set",
    "13:3",
    "I have commanded my sanctified ones, I have also called my mighty ones, for mine anger is not upon them that rejoice in my highness."
+  ]
+ ],
+ "daniel": [
+  [
+   "set",
+   "7:14",
+   "And there was given him dominion, and glory, and a kingdom, that all people, nations, and languages, should serve him: his dominion is an everlasting dominion, which shall not pass away, and his kingdom that which shall not be destroyed."
+  ]
+ ],
+ "hosea": [
+  [
+   "set",
+   "6:3",
+   "Then shall we know, if we follow on to know the LORD: his going forth is prepared as the morning; and he shall come unto us as the rain, as the latter and former rain unto the earth."
+  ],
+  [
+   "set",
+   "6:7",
+   "But they like men have transgressed the covenant: there have they dealt treacherously against me."
+  ]
+ ],
+ "joel": [
+  [
+   "set",
+   "3:1",
+   "For, behold, in those days, and in that time, when I shall bring again the captivity of Judah and Jerusalem,"
+  ]
+ ],
+ "jude": [
+  [
+   "set",
+   "1:11",
+   "Woe unto them! for they have gone in the way of Cain, and ran greedily after the error of Balaam for reward, and shall perish in the gainsaying of Core."
+  ]
+ ],
+ "acts": [
+  [
+   "set",
+   "1:1",
+   "The former treatise have I made, O Theophilus, of all that Jesus began both to do and teach,"
+  ],
+  [
+   "set",
+   "12:1",
+   "Now about that time Herod the king stretched forth his hands to vex certain of the church."
+  ],
+  [
+   "set",
+   "16:1",
+   "Then came he to Derbe and Lystra: and, behold, a certain disciple was there, named Timotheus, the son of a certain woman, which was a Jewess, and believed; but his father was a Greek:"
+  ],
+  [
+   "review",
+   "check 1:1"
+  ]
+ ],
+ "2-corinthians": [
+  [
+   "set",
+   "11:7",
+   "Have I committed an offence in abasing myself that ye might be exalted, because I have preached to you the gospel of God freely?"
+  ],
+  [
+   "set",
+   "12:1",
+   "It is not expedient for me doubtless to glory. I will come to visions and revelations of the Lord."
+  ]
+ ],
+ "2-john": [
+  [
+   "set",
+   "1:13",
+   "The children of thy elect sister greet thee. Amen."
+  ],
+  [
+   "review",
+   "check 1:13"
+  ]
+ ],
+ "philippians": [
+  [
+   "set",
+   "4:1",
+   "Wherefore, my brethren dearly beloved and longed for, my joy and crown, so stand fast in the Lord, Nay dearly beloved."
+  ],
+  [
+   "confirm",
+   1,
+   2,
+   3,
+   4
+  ],
+  [
+   "review",
+   "scans disagree"
+  ]
+ ],
+ "1-peter": [
+  [
+   "set",
+   "3:2",
+   "While they behold your chaste conduct coupled with fear."
+  ],
+  [
+   "set",
+   "3:3",
+   "Let your adorning be not that outward adorning of plaiting the hair, and wearing of gold, or putting on of apparel;"
+  ],
+  [
+   "confirm",
+   3
+  ]
+ ],
+ "1-john": [
+  [
+   "set",
+   "2:12",
+   "I write unto you, little children, because your sins are forgiven you for his name's sake."
+  ],
+  [
+   "set",
+   "2:13",
+   "I write unto you, fathers, because ye have known him that is from the beginning. I write unto you, young men, because ye have overcome the wicked one. I write unto you, little children, because ye have known the Father."
+  ],
+  [
+   "set",
+   "2:20",
+   "But ye have an unction from the Holy One, and ye know all things."
+  ],
+  [
+   "set",
+   "2:22",
+   "I have not written unto you because ye know not the truth, but because ye know it, and that no lie is of the truth."
+  ],
+  [
+   "delete_verse",
+   "2:21"
+  ],
+  [
+   "confirm",
+   2
+  ]
+ ],
+ "job": [
+  [
+   "insert_verse",
+   "9:0",
+   "Then Job answered and said,"
+  ],
+  [
+   "confirm",
+   9
+  ]
+ ],
+ "ezra": [
+  [
+   "kjv_chapter",
+   2,
+   2
   ]
  ]
 }

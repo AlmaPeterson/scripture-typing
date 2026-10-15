@@ -676,24 +676,21 @@
           "title": "Leviticus",
           "unitLabel": "Chapter",
           "chapters": 27,
-          "path": "texts/jst-old-testament/leviticus.json",
-          "draft": true
+          "path": "texts/jst-old-testament/leviticus.json"
         },
         {
           "id": "numbers",
           "title": "Numbers",
           "unitLabel": "Chapter",
           "chapters": 36,
-          "path": "texts/jst-old-testament/numbers.json",
-          "draft": true
+          "path": "texts/jst-old-testament/numbers.json"
         },
         {
           "id": "deuteronomy",
           "title": "Deuteronomy",
           "unitLabel": "Chapter",
           "chapters": 34,
-          "path": "texts/jst-old-testament/deuteronomy.json",
-          "draft": true
+          "path": "texts/jst-old-testament/deuteronomy.json"
         },
         {
           "id": "joshua",
@@ -763,8 +760,7 @@
           "title": "Ezra",
           "unitLabel": "Chapter",
           "chapters": 10,
-          "path": "texts/jst-old-testament/ezra.json",
-          "draft": true
+          "path": "texts/jst-old-testament/ezra.json"
         },
         {
           "id": "nehemiah",
@@ -785,8 +781,7 @@
           "title": "Job",
           "unitLabel": "Chapter",
           "chapters": 42,
-          "path": "texts/jst-old-testament/job.json",
-          "draft": true
+          "path": "texts/jst-old-testament/job.json"
         },
         {
           "id": "psalms",
@@ -845,24 +840,21 @@
           "title": "Daniel",
           "unitLabel": "Chapter",
           "chapters": 12,
-          "path": "texts/jst-old-testament/daniel.json",
-          "draft": true
+          "path": "texts/jst-old-testament/daniel.json"
         },
         {
           "id": "hosea",
           "title": "Hosea",
           "unitLabel": "Chapter",
           "chapters": 14,
-          "path": "texts/jst-old-testament/hosea.json",
-          "draft": true
+          "path": "texts/jst-old-testament/hosea.json"
         },
         {
           "id": "joel",
           "title": "Joel",
           "unitLabel": "Chapter",
           "chapters": 3,
-          "path": "texts/jst-old-testament/joel.json",
-          "draft": true
+          "path": "texts/jst-old-testament/joel.json"
         },
         {
           "id": "amos",
@@ -977,8 +969,7 @@
           "title": "Acts",
           "unitLabel": "Chapter",
           "chapters": 28,
-          "path": "texts/jst-new-testament/acts.json",
-          "draft": true
+          "path": "texts/jst-new-testament/acts.json"
         },
         {
           "id": "romans",
@@ -1000,8 +991,7 @@
           "title": "2 Corinthians",
           "unitLabel": "Chapter",
           "chapters": 13,
-          "path": "texts/jst-new-testament/2-corinthians.json",
-          "draft": true
+          "path": "texts/jst-new-testament/2-corinthians.json"
         },
         {
           "id": "galatians",
@@ -1022,8 +1012,7 @@
           "title": "Philippians",
           "unitLabel": "Chapter",
           "chapters": 4,
-          "path": "texts/jst-new-testament/philippians.json",
-          "draft": true
+          "path": "texts/jst-new-testament/philippians.json"
         },
         {
           "id": "colossians",
@@ -1096,8 +1085,7 @@
           "title": "1 Peter",
           "unitLabel": "Chapter",
           "chapters": 5,
-          "path": "texts/jst-new-testament/1-peter.json",
-          "draft": true
+          "path": "texts/jst-new-testament/1-peter.json"
         },
         {
           "id": "2-peter",
@@ -1111,16 +1099,14 @@
           "title": "1 John",
           "unitLabel": "Chapter",
           "chapters": 5,
-          "path": "texts/jst-new-testament/1-john.json",
-          "draft": true
+          "path": "texts/jst-new-testament/1-john.json"
         },
         {
           "id": "2-john",
           "title": "2 John",
           "unitLabel": "Chapter",
           "chapters": 1,
-          "path": "texts/jst-new-testament/2-john.json",
-          "draft": true
+          "path": "texts/jst-new-testament/2-john.json"
         },
         {
           "id": "3-john",
@@ -1134,8 +1120,7 @@
           "title": "Jude",
           "unitLabel": "Chapter",
           "chapters": 1,
-          "path": "texts/jst-new-testament/jude.json",
-          "draft": true
+          "path": "texts/jst-new-testament/jude.json"
         },
         {
           "id": "revelation",

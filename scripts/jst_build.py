@@ -317,6 +317,15 @@ def apply_corrections(work: list[dict], ops: list, kjv_book: dict | None = None)
             }
         elif kind == "delete_chapter":  # ["delete_chapter", c]
             work.pop(op[1] - 1)
+        elif kind == "kjv_chapter":  # ["kjv_chapter", c, kjv_c]: checked against the scan, unchanged from the KJV
+            kc = kjv_book["chapters"][op[2] - 1]
+            work[op[1] - 1] = {
+                "verses": [{"number": v["number"], "text": v["text"], "unverified": []} for v in kc["verses"]],
+                "confirmed": True,
+            }
+        elif kind == "renumber":  # ["renumber", c, ...]: number the verses 1..n (a verse number was misread)
+            for c in op[1:]:
+                renumber(work[c - 1])
         elif kind == "confirm":  # ["confirm", c, ...]: verse division checked against the scan
             for c in op[1:]:
                 work[c - 1]["confirmed"] = True

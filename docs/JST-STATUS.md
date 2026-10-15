@@ -13,9 +13,9 @@ against the scans.
 | --- | --- | ---: | ---: | --- | ---: | ---: |
 | OT | Genesis | 50 | 1792 | draft | 10 | 7 |
 | OT | Exodus | 40 | 1206 | ready | 0 | 0 |
-| OT | Leviticus | 27 | 859 | draft | 1 | 0 |
-| OT | Numbers | 36 | 1288 | draft | 2 | 0 |
-| OT | Deuteronomy | 34 | 959 | draft | 2 | 0 |
+| OT | Leviticus | 27 | 859 | ready | 0 | 0 |
+| OT | Numbers | 36 | 1288 | ready | 0 | 0 |
+| OT | Deuteronomy | 34 | 959 | ready | 0 | 0 |
 | OT | Joshua | 24 | 658 | ready | 0 | 0 |
 | OT | Judges | 21 | 618 | ready | 0 | 0 |
 | OT | Ruth | 4 | 85 | ready | 0 | 0 |
@@ -25,10 +25,10 @@ against the scans.
 | OT | 2 Kings | 25 | 719 | ready | 0 | 0 |
 | OT | 1 Chronicles | 29 | 942 | ready | 0 | 0 |
 | OT | 2 Chronicles | 36 | 822 | ready | 0 | 0 |
-| OT | Ezra | 10 | 211 | draft | 1 | 0 |
+| OT | Ezra | 10 | 280 | ready | 0 | 0 |
 | OT | Nehemiah | 13 | 406 | ready | 0 | 0 |
 | OT | Esther | 10 | 167 | ready | 0 | 0 |
-| OT | Job | 42 | 1069 | draft | 0 | 0 |
+| OT | Job | 42 | 1070 | ready | 0 | 0 |
 | OT | Psalms | 150 | 2465 | draft | 3 | 5 |
 | OT | Proverbs | 31 | 915 | ready | 0 | 0 |
 | OT | Ecclesiastes | 12 | 222 | ready | 0 | 0 |
@@ -36,9 +36,9 @@ against the scans.
 | OT | Jeremiah | 52 | 1365 | draft | 1 | 3 |
 | OT | Lamentations | 5 | 154 | ready | 0 | 0 |
 | OT | Ezekiel | 48 | 1273 | draft | 1 | 2 |
-| OT | Daniel | 12 | 357 | draft | 0 | 1 |
-| OT | Hosea | 14 | 197 | draft | 0 | 2 |
-| OT | Joel | 3 | 73 | draft | 0 | 1 |
+| OT | Daniel | 12 | 357 | ready | 0 | 0 |
+| OT | Hosea | 14 | 197 | ready | 0 | 0 |
+| OT | Joel | 3 | 73 | ready | 0 | 0 |
 | OT | Amos | 9 | 146 | ready | 0 | 0 |
 | OT | Obadiah | 1 | 21 | ready | 0 | 0 |
 | OT | Jonah | 4 | 48 | ready | 0 | 0 |
@@ -53,13 +53,13 @@ against the scans.
 | NT | Mark | 16 | 758 | draft | 2 | 7 |
 | NT | Luke | 25 | 1194 | draft | 3 | 1 |
 | NT | John | 21 | 886 | draft | 2 | 4 |
-| NT | Acts | 28 | 1009 | draft | 0 | 3 |
+| NT | Acts | 28 | 1009 | ready | 0 | 0 |
 | NT | Romans | 17 | 438 | draft | 1 | 1 |
 | NT | 1 Corinthians | 16 | 440 | ready | 0 | 0 |
-| NT | 2 Corinthians | 13 | 257 | draft | 0 | 3 |
+| NT | 2 Corinthians | 13 | 257 | ready | 0 | 0 |
 | NT | Galatians | 6 | 149 | ready | 0 | 0 |
 | NT | Ephesians | 6 | 155 | ready | 0 | 0 |
-| NT | Philippians | 4 | 104 | draft | 0 | 0 |
+| NT | Philippians | 4 | 104 | ready | 0 | 0 |
 | NT | Colossians | 4 | 92 | draft | 1 | 0 |
 | NT | 1 Thessalonians | 5 | 89 | ready | 0 | 0 |
 | NT | 2 Thessalonians | 3 | 47 | ready | 0 | 0 |
@@ -69,15 +69,15 @@ against the scans.
 | NT | Philemon | 1 | 25 | ready | 0 | 0 |
 | NT | Hebrews | 13 | 304 | draft | 1 | 0 |
 | NT | James | 5 | 107 | draft | 1 | 0 |
-| NT | 1 Peter | 5 | 105 | draft | 1 | 0 |
+| NT | 1 Peter | 5 | 105 | ready | 0 | 0 |
 | NT | 2 Peter | 3 | 61 | ready | 0 | 0 |
-| NT | 1 John | 5 | 106 | draft | 1 | 0 |
-| NT | 2 John | 1 | 13 | draft | 0 | 0 |
+| NT | 1 John | 5 | 105 | ready | 0 | 0 |
+| NT | 2 John | 1 | 13 | ready | 0 | 0 |
 | NT | 3 John | 1 | 14 | ready | 0 | 0 |
-| NT | Jude | 1 | 25 | draft | 0 | 1 |
+| NT | Jude | 1 | 25 | ready | 0 | 0 |
 | NT | Revelation | 23 | 380 | draft | 11 | 5 |
 
-**37 of 65 books ready.**
+**52 of 65 books ready.**
 
 ## Details for draft books
 
@@ -90,33 +90,6 @@ against the scans.
 - unexpected characters in 7:33
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
-
-### Leviticus
-
-- check the verse division of chapter(s) 6
-- verse numbering skips at 6:6 (a verse number was lost)
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### Numbers
-
-- check the verse division of chapter(s) 3, 7
-- verse numbering skips at 3:6 (a verse number was lost)
-- 2 chapter(s) where the two scans do not agree on the verse division
-
-### Deuteronomy
-
-- check the verse division of chapter(s) 1, 10
-- verse numbering skips at 1:6 (a verse number was lost)
-- 2 chapter(s) where the two scans do not agree on the verse division
-
-### Ezra
-
-- check the verse division of chapter(s) 2
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### Job
-
-- verse numbering skips at 9:3 (a verse number was lost)
 
 ### Psalms
 
@@ -138,18 +111,6 @@ against the scans.
 - check the verse division of chapter(s) 44
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `43:9 frcin`, `44:15 thatept`
-
-### Daniel
-
-- unverified words: `7:14 kingdorn,that`
-
-### Hosea
-
-- unverified words: `6:3 en`, `6:7 trani`
-
-### Joel
-
-- unverified words: `3:1 bvircj`
 
 ### Matthew
 
@@ -188,10 +149,6 @@ against the scans.
 - 2 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`
 
-### Acts
-
-- unverified words: `1:1 TlpHE`, `12:1 jyi`, `16:1 tra;`
-
 ### Romans
 
 - scans disagree on chapter division near chapter 5
@@ -199,14 +156,6 @@ against the scans.
 - check the verse division of chapter(s) 5
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `2:24 pherncd`
-
-### 2 Corinthians
-
-- unverified words: `11:7 ex`, `11:7 ulted,`, `12:1 Mid`
-
-### Philippians
-
-- scans disagree on chapter division near chapter 4
 
 ### Colossians
 
@@ -222,24 +171,6 @@ against the scans.
 
 - check the verse division of chapter(s) 2
 - 1 chapter(s) where the two scans do not agree on the verse division
-
-### 1 Peter
-
-- check the verse division of chapter(s) 3
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### 1 John
-
-- check the verse division of chapter(s) 2
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### 2 John
-
-- check 1:13 ends with text not in the KJV: 'He commendeth Gains.'
-
-### Jude
-
-- unverified words: `1:11 vfiiy`
 
 ### Revelation
 
