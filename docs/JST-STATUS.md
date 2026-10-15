@@ -19,7 +19,7 @@ against the scans.
 | OT | Joshua | 24 | 658 | ready | 0 | 0 |
 | OT | Judges | 21 | 618 | ready | 0 | 0 |
 | OT | Ruth | 4 | 85 | ready | 0 | 0 |
-| OT | 1 Samuel | 31 | 788 | draft | 1 | 0 |
+| OT | 1 Samuel | 31 | 810 | ready | 0 | 0 |
 | OT | 2 Samuel | 24 | 695 | ready | 0 | 0 |
 | OT | 1 Kings | 22 | 818 | ready | 0 | 0 |
 | OT | 2 Kings | 25 | 719 | ready | 0 | 0 |
@@ -28,14 +28,14 @@ against the scans.
 | OT | Ezra | 10 | 280 | ready | 0 | 0 |
 | OT | Nehemiah | 13 | 406 | ready | 0 | 0 |
 | OT | Esther | 10 | 167 | ready | 0 | 0 |
-| OT | Job | 42 | 1070 | draft | 0 | 0 |
+| OT | Job | 42 | 1070 | ready | 0 | 0 |
 | OT | Psalms | 150 | 2461 | ready | 0 | 0 |
 | OT | Proverbs | 31 | 915 | ready | 0 | 0 |
 | OT | Ecclesiastes | 12 | 222 | ready | 0 | 0 |
-| OT | Isaiah | 66 | 1301 | draft | 0 | 0 |
+| OT | Isaiah | 66 | 1301 | ready | 0 | 0 |
 | OT | Jeremiah | 52 | 1364 | ready | 0 | 0 |
 | OT | Lamentations | 5 | 154 | ready | 0 | 0 |
-| OT | Ezekiel | 48 | 1273 | draft | 0 | 0 |
+| OT | Ezekiel | 48 | 1273 | ready | 0 | 0 |
 | OT | Daniel | 12 | 357 | ready | 0 | 0 |
 | OT | Hosea | 14 | 197 | ready | 0 | 0 |
 | OT | Joel | 3 | 73 | ready | 0 | 0 |
@@ -53,9 +53,9 @@ against the scans.
 | NT | Mark | 16 | 751 | ready | 0 | 0 |
 | NT | Luke | 25 | 1187 | draft | 4 | 3 |
 | NT | John | 21 | 886 | draft | 2 | 4 |
-| NT | Acts | 28 | 1006 | draft | 1 | 0 |
-| NT | Romans | 17 | 438 | draft | 1 | 1 |
-| NT | 1 Corinthians | 16 | 439 | draft | 0 | 0 |
+| NT | Acts | 28 | 1007 | ready | 0 | 0 |
+| NT | Romans | 16 | 436 | ready | 0 | 0 |
+| NT | 1 Corinthians | 16 | 437 | ready | 0 | 0 |
 | NT | 2 Corinthians | 13 | 257 | ready | 0 | 0 |
 | NT | Galatians | 6 | 149 | ready | 0 | 0 |
 | NT | Ephesians | 6 | 155 | ready | 0 | 0 |
@@ -77,7 +77,7 @@ against the scans.
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
 | NT | Revelation | 23 | 381 | draft | 12 | 5 |
 
-**53 of 65 books ready.**
+**60 of 65 books ready.**
 
 ## Details for draft books
 
@@ -91,23 +91,6 @@ against the scans.
 - unexpected characters in 7:33
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
-
-### 1 Samuel
-
-- check the verse division of chapter(s) 13
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### Job
-
-- verse fragments (part of a neighbouring verse?) at 8:1
-
-### Isaiah
-
-- check 42:26 ends with text not in the KJV: 'God promises to Israel.'
-
-### Ezekiel
-
-- verse fragments (part of a neighbouring verse?) at 18:1
 
 ### Matthew
 
@@ -140,24 +123,6 @@ against the scans.
 - unexpected characters in 7:39
 - 2 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`
-
-### Acts
-
-- check the verse division of chapter(s) 12
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### Romans
-
-- scans disagree on chapter division near chapter 5
-- scans disagree on chapter division near chapter 9
-- check the verse division of chapter(s) 5
-- verse fragments (part of a neighbouring verse?) at 1:12
-- 1 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `2:24 pherncd`
-
-### 1 Corinthians
-
-- verse fragments (part of a neighbouring verse?) at 7:34
 
 ### Revelation
 

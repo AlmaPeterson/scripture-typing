@@ -103,6 +103,11 @@
    "set",
    "20:12",
    "And Jonathan said unto David, O LORD God of Israel, when I have sounded my father about to morrow any time, or the third day, and, behold, if there be good toward David, and I then send not unto thee, and show it thee;"
+  ],
+  [
+   "kjv_chapter",
+   13,
+   13
   ]
  ],
  "2-chronicles": [
@@ -325,6 +330,10 @@
    "set",
    "13:3",
    "I have commanded my sanctified ones, I have also called my mighty ones, for mine anger is not upon them that rejoice in my highness."
+  ],
+  [
+   "review",
+   "check 42:26"
   ]
  ],
  "daniel": [
@@ -379,6 +388,15 @@
   [
    "review",
    "check 1:1"
+  ],
+  [
+   "insert_verse",
+   "12:24",
+   "And Barnabas and Saul returned from Jerusalem, when they had fulfilled their ministry, and took with them John, whose surname was Mark."
+  ],
+  [
+   "confirm",
+   12
   ]
  ],
  "2-corinthians": [
@@ -463,6 +481,12 @@
   [
    "confirm",
    9
+  ],
+  [
+   "set",
+   "8:1",
+   "Then answered Bildad the Shuhite, and said,",
+   "force"
   ]
  ],
  "ezra": [
@@ -655,6 +679,12 @@
   [
    "confirm",
    44
+  ],
+  [
+   "set",
+   "18:1",
+   "The word of the LORD came unto me again, saying,",
+   "force"
   ]
  ],
  "mark": [
@@ -815,6 +845,87 @@
    1,
    13,
    14
+  ]
+ ],
+ "romans": [
+  [
+   "kjv_chapter",
+   5,
+   5
+  ],
+  [
+   "set",
+   "5:13",
+   "(For, before the law, sin was in the world; yet sin is not imputed to those who have no law.",
+   "force"
+  ],
+  [
+   "set",
+   "5:14",
+   "For I say that through the offence, death reigned over all from Adam to Moses, even over them that had not sinned after the similitude of Adam's transgression, who is the figure of him that was to come.",
+   "force"
+  ],
+  [
+   "set",
+   "5:15",
+   "But the offence is not as the free gift, for the gift aboundeth. For, if through the offence of one, many be dead; much more the grace of God, and the gift by grace, hath abounded by one man, Jesus Christ, unto many.",
+   "force"
+  ],
+  [
+   "set",
+   "5:16",
+   "And not as it was by one that sinned, so is the gift; for the judgment is by one to condemnation, but the free gift is of many offences unto justification."
+  ],
+  [
+   "merge_verses",
+   "1:11"
+  ],
+  [
+   "set",
+   "1:11",
+   "For I long to see you, that I may impart unto you some spiritual gift, that it may be established in you to the end;"
+  ],
+  [
+   "set",
+   "2:24",
+   "For the name of God is blasphemed among the Gentiles through you, as it is written."
+  ],
+  [
+   "confirm",
+   1,
+   5
+  ],
+  [
+   "set",
+   "5:3",
+   "And not only this, but we glory in tribulations also: knowing that tribulation worketh patience;"
+  ],
+  [
+   "delete_chapter",
+   6
+  ],
+  [
+   "review",
+   "scans disagree"
+  ]
+ ],
+ "1-corinthians": [
+  [
+   "merge_verses",
+   "7:29"
+  ],
+  [
+   "merge_verses",
+   "7:32"
+  ],
+  [
+   "set",
+   "7:32",
+   "But I would, brethren, that ye magnify your calling. I would have you without carefulness. For he who is unmarried careth for the things that belong to the Lord, how he may please the Lord; therefore he prevaileth."
+  ],
+  [
+   "confirm",
+   7
   ]
  ]
 }

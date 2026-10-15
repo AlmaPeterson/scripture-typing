@@ -718,8 +718,7 @@
           "title": "1 Samuel",
           "unitLabel": "Chapter",
           "chapters": 31,
-          "path": "texts/jst-old-testament/1-samuel.json",
-          "draft": true
+          "path": "texts/jst-old-testament/1-samuel.json"
         },
         {
           "id": "2-samuel",
@@ -782,8 +781,7 @@
           "title": "Job",
           "unitLabel": "Chapter",
           "chapters": 42,
-          "path": "texts/jst-old-testament/job.json",
-          "draft": true
+          "path": "texts/jst-old-testament/job.json"
         },
         {
           "id": "psalms",
@@ -811,8 +809,7 @@
           "title": "Isaiah",
           "unitLabel": "Chapter",
           "chapters": 66,
-          "path": "texts/jst-old-testament/isaiah.json",
-          "draft": true
+          "path": "texts/jst-old-testament/isaiah.json"
         },
         {
           "id": "jeremiah",
@@ -833,8 +830,7 @@
           "title": "Ezekiel",
           "unitLabel": "Chapter",
           "chapters": 48,
-          "path": "texts/jst-old-testament/ezekiel.json",
-          "draft": true
+          "path": "texts/jst-old-testament/ezekiel.json"
         },
         {
           "id": "daniel",
@@ -969,24 +965,21 @@
           "title": "Acts",
           "unitLabel": "Chapter",
           "chapters": 28,
-          "path": "texts/jst-new-testament/acts.json",
-          "draft": true
+          "path": "texts/jst-new-testament/acts.json"
         },
         {
           "id": "romans",
           "title": "Romans",
           "unitLabel": "Chapter",
-          "chapters": 17,
-          "path": "texts/jst-new-testament/romans.json",
-          "draft": true
+          "chapters": 16,
+          "path": "texts/jst-new-testament/romans.json"
         },
         {
           "id": "1-corinthians",
           "title": "1 Corinthians",
           "unitLabel": "Chapter",
           "chapters": 16,
-          "path": "texts/jst-new-testament/1-corinthians.json",
-          "draft": true
+          "path": "texts/jst-new-testament/1-corinthians.json"
         },
         {
           "id": "2-corinthians",
