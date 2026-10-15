@@ -275,4 +275,34 @@ describe('App', () => {
     expect(await storage.getProgress('mini')).toEqual([])
     expect(await storage.getVerseStats()).toHaveLength(1)
   })
+
+  it('shows stats after typing, with drill-down and the finger estimate', async () => {
+    const user = userEvent.setup()
+    window.location.hash = '#/stats'
+    const { unmount } = render(<App storage={storage} />)
+    expect(await screen.findByText(/No typing recorded yet/)).toBeInTheDocument()
+    unmount()
+
+    await storage.addCourse('mini')
+    window.location.hash = '#/c/mini/alpha/1'
+    render(<App storage={storage} />)
+    const input = await screen.findByLabelText('Type Alpha 1')
+    await waitFor(() => expect(input).toHaveFocus())
+    await user.keyboard('In the beginning. God said-light.')
+    expect(await screen.findByText('Alpha 1 complete')).toBeInTheDocument()
+
+    await go('#/stats')
+    expect(await screen.findByRole('heading', { name: 'History' })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'Words per minute per day' })).toBeInTheDocument()
+    expect(screen.getByRole('heading', { name: 'Fingers (estimate)' })).toBeInTheDocument()
+    expect(screen.getByText(/This is an estimate/)).toBeInTheDocument()
+    expect(screen.getByText('beginning')).toBeInTheDocument()
+
+    // Drill down: course -> book -> chapter -> verses.
+    await user.click(screen.getByRole('button', { name: 'Mini Scripture' }))
+    await user.click(screen.getByRole('button', { name: 'Alpha' }))
+    await user.click(screen.getByRole('button', { name: 'Chapter 1' }))
+    expect(screen.getByText('Verse 1')).toBeInTheDocument()
+    expect(screen.getByText('Verse 2')).toBeInTheDocument()
+  })
 })
