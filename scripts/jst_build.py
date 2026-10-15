@@ -8,6 +8,7 @@ and writes a proofreading report to docs/JST-STATUS.md.
 from __future__ import annotations
 
 import collections
+import json
 import difflib
 import re
 from pathlib import Path
@@ -18,6 +19,7 @@ SCANS = [
     ("toronto", "ia-holyscripturestr00smituoft/holyscripturestr00smituoft_djvu.txt"),
     ("byu", "ia-holyscriptures00smit/holyscriptures00smit_djvu.txt"),
 ]
+CORRECTIONS = Path(__file__).resolve().parent / "jst_corrections.json"
 REPORT = Path(__file__).resolve().parent.parent / "docs" / "JST-STATUS.md"
 LONG_VERSE_WORDS = 160  # longer than any KJV verse (Esther 8:9 has 90 words); means merged verses
 
@@ -77,37 +79,45 @@ def build(lds: dict, raw: Path, opening_caps, tidy, book_file, slug) -> dict[str
             out.append(J.build_book(toks[s:e], ref, fixer))
         results[name] = out
 
+    corrections = json.loads(CORRECTIONS.read_text(encoding="utf-8")) if CORRECTIONS.exists() else {}
     volumes: dict[str, list[dict]] = {"jst-old-testament": [], "jst-new-testament": []}
     report_rows = []
     for k, (vid, kjv_book) in enumerate(bible):
         a, b = results["toronto"][k], results["byu"][k]
         kjv_counts = {c["number"]: len(c["verses"]) for c in kjv_book["chapters"]}
         chapters, notes = merge(a, b, fixer, kjv_counts)
-        out_chapters = []
-        unverified: list[str] = []
-        unconfirmed = 0
+        # Automatic result, as editable chapters.
+        work: list[dict] = []
         for n, (ch, confirmed) in enumerate(chapters, 1):
-            if not confirmed:
-                unconfirmed += 1
             notes += strip_leaked_summaries(ch, n)
             verses = []
             for v in ch.verses:
                 words, still = join_hyphenated(v.words, v.unverified, fixer)
-                v.unverified = still
                 text = finish(" ".join(words), tidy)
                 if v.number == 1:
                     text = opening_caps(text)
-                verses.append({"number": v.number, "text": text})
-                unverified += [f"{n}:{v.number} {w}" for w in v.unverified]
-            out_chapters.append({"number": n, "verses": verses})
-        strip_book_tail(out_chapters, notes)
+                verses.append({"number": v.number, "text": text, "unverified": still})
+            work.append({"verses": verses, "confirmed": confirmed})
+        strip_book_tail(work, notes)
+        for c in work:
+            c["verses"] = [v for v in c["verses"] if v["text"].strip()]
+        # Hand proofreading (scripts/jst_corrections.json).
+        reviewed = apply_corrections(work, corrections.get(kjv_book["id"], []))
+        notes = [x for x in notes if not any(x.startswith(r) for r in reviewed)]
+
+        out_chapters = [
+            {"number": n, "verses": [{"number": v["number"], "text": v["text"]} for v in c["verses"]]}
+            for n, c in enumerate(work, 1)
+        ]
+        unconfirmed_list = [n for n, c in enumerate(work, 1) if not c["confirmed"]]
+        unconfirmed = len(unconfirmed_list)
+        if unconfirmed_list:
+            notes.append("check the verse division of chapter(s) " + ", ".join(map(str, unconfirmed_list)))
+        unverified = [f"{n}:{v['number']} {w}" for n, c in enumerate(work, 1) for v in c["verses"] for w in v["unverified"]]
         long_verses = [
             f"{c['number']}:{v['number']}" for c in out_chapters for v in c["verses"] if len(v["text"].split()) > LONG_VERSE_WORDS
         ]
-        empty = [f"{c['number']}:{v['number']}" for c in out_chapters for v in c["verses"] if not v["text"].strip()]
-        out_chapters = [
-            {"number": c["number"], "verses": [v for v in c["verses"] if v["text"].strip()]} for c in out_chapters
-        ]
+        empty: list[str] = []
         gaps = [
             f"{c['number']}:{v['number']}"
             for c in out_chapters
@@ -173,23 +183,93 @@ def strip_leaked_summaries(ch: J.BuiltChapter, n: int) -> list[str]:
 
 
 def strip_book_tail(chapters: list[dict], notes: list[str]) -> None:
-    """Drop what the 1867 edition prints after a book's last verse: the KJV
-    epistle subscriptions ("Written to the Romans from Corinthus...") and, at
-    the end of a scan, library stamps. Neither is verse text."""
+    """Drop what the 1867 edition prints after a book's last verse when it
+    survived the token-level cleanup: the KJV epistle subscriptions ("Written
+    to the Romans from Corinthus...") and library stamps."""
     if not chapters or not chapters[-1]["verses"]:
         return
     last = chapters[-1]["verses"][-1]
     m = re.search(r"^(.*\bAmen\.)\s+(.{0,400})$", last["text"])
     if m and re.search(r"\bwritten\b|\bEnglish\b|\bBible\b", m.group(2), re.I):
         last["text"] = m.group(1)
-        notes_dropped = m.group(2)
-        _ = notes_dropped  # recorded in TEXTS.md as a rule, not per book
-    # A trailing "chapter" made only of a subscription.
-    while chapters and len(chapters[-1]["verses"]) <= 2 and re.search(
-        r"\bwritten\b", " ".join(v["text"] for v in chapters[-1]["verses"]), re.I
-    ) and len(chapters) > 1:
-        chapters.pop()
-        notes.append("dropped a trailing subscription read as an extra chapter")
+        last["unverified"] = [w for w in last["unverified"] if w in last["text"]]
+
+
+def apply_corrections(work: list[dict], ops: list) -> list[str]:
+    """Apply hand-proofreading operations, in order, to a book's chapters.
+    Verse and chapter references ("12:5", 12) refer to the numbering at the
+    moment the operation runs; chapters are renumbered 1..n after chapter
+    operations and verses 1..n inside any chapter that an operation changes.
+    Returns the note prefixes marked as reviewed."""
+    reviewed: list[str] = []
+
+    def ref(cv: str) -> tuple[dict, int]:
+        c, v = (int(x) for x in cv.split(":"))
+        chapter = work[c - 1]
+        idx = next(i for i, verse in enumerate(chapter["verses"]) if verse["number"] == v)
+        return chapter, idx
+
+    def renumber(chapter: dict) -> None:
+        for i, verse in enumerate(chapter["verses"], 1):
+            verse["number"] = i
+
+    for op in ops:
+        kind = op[0]
+        if kind == "set":  # ["set", "c:v", "proofread text"]
+            chapter, i = ref(op[1])
+            chapter["verses"][i]["text"] = op[2]
+            chapter["verses"][i]["unverified"] = []
+        elif kind == "accept":  # ["accept", "c:v", "word"]: the word is right as printed
+            chapter, i = ref(op[1])
+            chapter["verses"][i]["unverified"].remove(op[2])
+        elif kind == "split_verse":  # ["split_verse", "c:v", "text that starts the next verse"]
+            chapter, i = ref(op[1])
+            verse = chapter["verses"][i]
+            at = verse["text"].index(op[2])
+            first, second = verse["text"][:at].rstrip(), verse["text"][at:]
+            verse["text"] = first
+            chapter["verses"].insert(i + 1, {"number": 0, "text": second, "unverified": [
+                w for w in verse["unverified"] if w in second]})
+            verse["unverified"] = [w for w in verse["unverified"] if w in first]
+            renumber(chapter)
+        elif kind == "merge_verses":  # ["merge_verses", "c:v"]: v and v+1 are one verse
+            chapter, i = ref(op[1])
+            a, b = chapter["verses"][i], chapter["verses"].pop(i + 1)
+            a["text"] = a["text"] + " " + b["text"]
+            a["unverified"] += b["unverified"]
+            renumber(chapter)
+        elif kind == "insert_verse":  # ["insert_verse", "c:v", "text"]: new verse after v (0 = first)
+            c, v = (int(x) for x in op[1].split(":"))
+            chapter = work[c - 1]
+            i = 0 if v == 0 else next(k for k, verse in enumerate(chapter["verses"]) if verse["number"] == v) + 1
+            chapter["verses"].insert(i, {"number": 0, "text": op[2], "unverified": []})
+            renumber(chapter)
+        elif kind == "delete_verse":  # ["delete_verse", "c:v"]
+            chapter, i = ref(op[1])
+            chapter["verses"].pop(i)
+            renumber(chapter)
+        elif kind == "split_chapter":  # ["split_chapter", "c:v"]: chapter c+1 starts at verse v
+            chapter, i = ref(op[1])
+            c = int(op[1].split(":")[0])
+            new = {"verses": chapter["verses"][i:], "confirmed": chapter["confirmed"]}
+            chapter["verses"] = chapter["verses"][:i]
+            work.insert(c, new)
+            renumber(chapter)
+            renumber(new)
+        elif kind == "merge_chapters":  # ["merge_chapters", c]: c and c+1 are one chapter
+            c = op[1]
+            work[c - 1]["verses"] += work.pop(c)["verses"]
+            renumber(work[c - 1])
+        elif kind == "delete_chapter":  # ["delete_chapter", c]
+            work.pop(op[1] - 1)
+        elif kind == "confirm":  # ["confirm", c, ...]: verse division checked against the scan
+            for c in op[1:]:
+                work[c - 1]["confirmed"] = True
+        elif kind == "review":  # ["review", "note prefix"]: the flagged text was checked and is right
+            reviewed.append(op[1])
+        else:
+            raise ValueError(f"unknown correction {op!r}")
+    return reviewed
 
 
 def join_hyphenated(words: list[str], unverified: list[str], fixer: J.Fixer) -> tuple[list[str], list[str]]:

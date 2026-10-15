@@ -306,7 +306,7 @@ class Fixer:
             candidates = {c for c in edit1(n) if c in self.vocab}
         if not candidates:
             return word, False
-        best = max(candidates, key=lambda c: self.vocab[c])
+        best = max(sorted(candidates), key=lambda c: self.vocab[c])
         return restyle(word, n, self.display[best]), True
 
 
@@ -645,7 +645,7 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
             verses.append(v)
         refs_in = [ref[it.ref].chapter if ref[it.ref].source == "kjv" else -1
                    for it in items[c0:c1] if it.ref is not None]
-        rc = max(set(refs_in), key=refs_in.count) if refs_in else None
+        rc = max(sorted(set(refs_in)), key=refs_in.count) if refs_in else None
         ch = BuiltChapter(verses, rc)
         ch.problems += _strip_summaries(ch, items[c0:c1])
         chapters.append(ch)

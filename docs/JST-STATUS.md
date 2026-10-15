@@ -86,6 +86,7 @@ against the scans.
 - scans disagree on chapter division near chapter 11
 - scans disagree on chapter division near chapter 25
 - scans disagree on chapter division near chapter 36
+- check the verse division of chapter(s) 1, 2, 5, 8, 9, 10, 11, 13, 24, 48
 - unexpected characters in 7:33
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
@@ -96,18 +97,21 @@ against the scans.
 
 ### Leviticus
 
+- check the verse division of chapter(s) 6
 - verse numbering skips at 6:6 (a verse number was lost)
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `7:37 thejpeace`
 
 ### Numbers
 
+- check the verse division of chapter(s) 3, 7
 - verse numbering skips at 3:6 (a verse number was lost)
 - 2 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `11:10 displ`
 
 ### Deuteronomy
 
+- check the verse division of chapter(s) 1, 10
 - verse numbering skips at 1:6 (a verse number was lost)
 - 2 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `2:23 vim`, `2:23 nnzerim,even`, `24:4 git`
@@ -138,6 +142,7 @@ against the scans.
 
 ### Ezra
 
+- check the verse division of chapter(s) 2
 - 1 chapter(s) where the two scans do not agree on the verse division
 
 ### Nehemiah
@@ -150,6 +155,7 @@ against the scans.
 
 ### Psalms
 
+- check the verse division of chapter(s) 36, 88, 119
 - unexpected characters in 3:8, 12:1
 - 3 chapter(s) where the two scans do not agree on the verse division
 - probably merged verses: 4:8
@@ -169,6 +175,7 @@ against the scans.
 ### Isaiah
 
 - check 42:27 ends with text not in the KJV: 'God promises to Israel.'
+- check the verse division of chapter(s) 1, 2, 4, 50
 - unexpected characters in 48:19
 - 4 chapter(s) where the two scans do not agree on the verse division
 - probably merged verses: 3:27, 13:6
@@ -176,12 +183,14 @@ against the scans.
 
 ### Jeremiah
 
+- check the verse division of chapter(s) 30
 - unexpected characters in 26:20
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `29:5 fruUof`, `29:26 beofiicers`, `49:33 aJnJle`
 
 ### Ezekiel
 
+- check the verse division of chapter(s) 44
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `43:9 frcin`, `44:15 thatept`
 
@@ -204,6 +213,7 @@ against the scans.
 - check 3:1 starts with text not in the KJV: 'JESUS.'
 - check 3:46 ends with text not in the KJV: 'Hear ye him.'
 - check 4:25 ends with text not in the KJV: "The commencement of Christ's teaching on the Mount."
+- check the verse division of chapter(s) 2, 3, 18, 23, 24, 28
 - verse numbering skips at 7:3 (a verse number was lost)
 - unexpected characters in 3:4, 3:39, 3:40
 - 6 chapter(s) where the two scans do not agree on the verse division
@@ -211,6 +221,7 @@ against the scans.
 
 ### Mark
 
+- check the verse division of chapter(s) 13, 14
 - verse numbering skips at 14:60 (a verse number was lost)
 - unexpected characters in 12:28, 13:27
 - 2 chapter(s) where the two scans do not agree on the verse division
@@ -219,6 +230,7 @@ against the scans.
 ### Luke
 
 - scans disagree on chapter division near chapter 19
+- check the verse division of chapter(s) 4, 18, 19
 - 3 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `19:11 fee`
 
@@ -226,6 +238,7 @@ against the scans.
 
 - scans disagree on chapter division near chapter 7
 - scans disagree on chapter division near chapter 16
+- check the verse division of chapter(s) 3, 6
 - unexpected characters in 7:39
 - 2 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`
@@ -238,6 +251,7 @@ against the scans.
 
 - scans disagree on chapter division near chapter 5
 - scans disagree on chapter division near chapter 9
+- check the verse division of chapter(s) 5
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `2:24 pherncd`
 
@@ -251,22 +265,27 @@ against the scans.
 
 ### Colossians
 
+- check the verse division of chapter(s) 2
 - 1 chapter(s) where the two scans do not agree on the verse division
 
 ### Hebrews
 
+- check the verse division of chapter(s) 1
 - 1 chapter(s) where the two scans do not agree on the verse division
 
 ### James
 
+- check the verse division of chapter(s) 2
 - 1 chapter(s) where the two scans do not agree on the verse division
 
 ### 1 Peter
 
+- check the verse division of chapter(s) 3
 - 1 chapter(s) where the two scans do not agree on the verse division
 
 ### 1 John
 
+- check the verse division of chapter(s) 2
 - 1 chapter(s) where the two scans do not agree on the verse division
 
 ### 2 John
@@ -287,6 +306,7 @@ against the scans.
 - check 9:1 starts with text not in the KJV: 'After this I looked, and behold, a door was opened into heaven: and the first vo'
 - check 22:1 starts with text not in the KJV: 'And I saw an angel come down out of heaven, having the key of the bottomless pit'
 - check 23:1 starts with text not in the KJV: 'And I saw a new heaven and a new earth; for the first heaven Bible. English.'
+- check the verse division of chapter(s) 1, 8, 9, 10, 13, 14, 19, 20, 21, 22, 23
 - verse numbering skips at 10:6 (a verse number was lost)
 - unexpected characters in 20:21
 - 11 chapter(s) where the two scans do not agree on the verse division
