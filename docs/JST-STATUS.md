@@ -19,7 +19,7 @@ against the scans.
 | OT | Joshua | 24 | 658 | ready | 0 | 0 |
 | OT | Judges | 21 | 618 | ready | 0 | 0 |
 | OT | Ruth | 4 | 85 | ready | 0 | 0 |
-| OT | 1 Samuel | 31 | 810 | ready | 0 | 0 |
+| OT | 1 Samuel | 31 | 788 | draft | 1 | 0 |
 | OT | 2 Samuel | 24 | 695 | ready | 0 | 0 |
 | OT | 1 Kings | 22 | 818 | ready | 0 | 0 |
 | OT | 2 Kings | 25 | 719 | ready | 0 | 0 |
@@ -28,14 +28,14 @@ against the scans.
 | OT | Ezra | 10 | 280 | ready | 0 | 0 |
 | OT | Nehemiah | 13 | 406 | ready | 0 | 0 |
 | OT | Esther | 10 | 167 | ready | 0 | 0 |
-| OT | Job | 42 | 1070 | ready | 0 | 0 |
-| OT | Psalms | 150 | 2465 | draft | 3 | 5 |
+| OT | Job | 42 | 1070 | draft | 0 | 0 |
+| OT | Psalms | 150 | 2461 | ready | 0 | 0 |
 | OT | Proverbs | 31 | 915 | ready | 0 | 0 |
 | OT | Ecclesiastes | 12 | 222 | ready | 0 | 0 |
-| OT | Isaiah | 66 | 1301 | ready | 0 | 0 |
-| OT | Jeremiah | 52 | 1365 | draft | 1 | 3 |
+| OT | Isaiah | 66 | 1301 | draft | 0 | 0 |
+| OT | Jeremiah | 52 | 1364 | ready | 0 | 0 |
 | OT | Lamentations | 5 | 154 | ready | 0 | 0 |
-| OT | Ezekiel | 48 | 1273 | draft | 1 | 2 |
+| OT | Ezekiel | 48 | 1273 | draft | 0 | 0 |
 | OT | Daniel | 12 | 357 | ready | 0 | 0 |
 | OT | Hosea | 14 | 197 | ready | 0 | 0 |
 | OT | Joel | 3 | 73 | ready | 0 | 0 |
@@ -49,35 +49,35 @@ against the scans.
 | OT | Haggai | 2 | 38 | ready | 0 | 0 |
 | OT | Zechariah | 14 | 209 | ready | 0 | 0 |
 | OT | Malachi | 4 | 55 | ready | 0 | 0 |
-| NT | Matthew | 29 | 1155 | draft | 6 | 9 |
-| NT | Mark | 16 | 758 | draft | 2 | 7 |
-| NT | Luke | 25 | 1194 | draft | 3 | 1 |
+| NT | Matthew | 29 | 1153 | draft | 6 | 9 |
+| NT | Mark | 16 | 751 | ready | 0 | 0 |
+| NT | Luke | 25 | 1187 | draft | 4 | 3 |
 | NT | John | 21 | 886 | draft | 2 | 4 |
-| NT | Acts | 28 | 1009 | ready | 0 | 0 |
+| NT | Acts | 28 | 1006 | draft | 1 | 0 |
 | NT | Romans | 17 | 438 | draft | 1 | 1 |
-| NT | 1 Corinthians | 16 | 440 | ready | 0 | 0 |
+| NT | 1 Corinthians | 16 | 439 | draft | 0 | 0 |
 | NT | 2 Corinthians | 13 | 257 | ready | 0 | 0 |
 | NT | Galatians | 6 | 149 | ready | 0 | 0 |
 | NT | Ephesians | 6 | 155 | ready | 0 | 0 |
 | NT | Philippians | 4 | 104 | ready | 0 | 0 |
-| NT | Colossians | 4 | 92 | draft | 1 | 0 |
+| NT | Colossians | 4 | 94 | ready | 0 | 0 |
 | NT | 1 Thessalonians | 5 | 89 | ready | 0 | 0 |
 | NT | 2 Thessalonians | 3 | 47 | ready | 0 | 0 |
 | NT | 1 Timothy | 6 | 113 | ready | 0 | 0 |
 | NT | 2 Timothy | 4 | 83 | ready | 0 | 0 |
 | NT | Titus | 3 | 46 | ready | 0 | 0 |
 | NT | Philemon | 1 | 25 | ready | 0 | 0 |
-| NT | Hebrews | 13 | 304 | draft | 1 | 0 |
-| NT | James | 5 | 107 | draft | 1 | 0 |
+| NT | Hebrews | 13 | 302 | ready | 0 | 0 |
+| NT | James | 5 | 107 | ready | 0 | 0 |
 | NT | 1 Peter | 5 | 105 | ready | 0 | 0 |
 | NT | 2 Peter | 3 | 61 | ready | 0 | 0 |
 | NT | 1 John | 5 | 105 | ready | 0 | 0 |
 | NT | 2 John | 1 | 13 | ready | 0 | 0 |
 | NT | 3 John | 1 | 14 | ready | 0 | 0 |
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
-| NT | Revelation | 23 | 380 | draft | 11 | 5 |
+| NT | Revelation | 23 | 381 | draft | 12 | 5 |
 
-**52 of 65 books ready.**
+**53 of 65 books ready.**
 
 ## Details for draft books
 
@@ -87,30 +87,27 @@ against the scans.
 - scans disagree on chapter division near chapter 25
 - scans disagree on chapter division near chapter 36
 - check the verse division of chapter(s) 1, 2, 5, 8, 9, 10, 11, 13, 24, 48
+- verse fragments (part of a neighbouring verse?) at 21:31, 22:21
 - unexpected characters in 7:33
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
 
-### Psalms
+### 1 Samuel
 
-- check the verse division of chapter(s) 36, 88, 119
-- unexpected characters in 3:8, 12:1
-- 3 chapter(s) where the two scans do not agree on the verse division
-- probably merged verses: 4:8
-- unverified words: `88:3 gva`, `88:17 Theycam`, `88:18 uu`, `110:1 conquest`, `119:120 adginents.`
-
-### Jeremiah
-
-- check the verse division of chapter(s) 30
-- unexpected characters in 26:20
+- check the verse division of chapter(s) 13
 - 1 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `29:5 fruUof`, `29:26 beofiicers`, `49:33 aJnJle`
+
+### Job
+
+- verse fragments (part of a neighbouring verse?) at 8:1
+
+### Isaiah
+
+- check 42:26 ends with text not in the KJV: 'God promises to Israel.'
 
 ### Ezekiel
 
-- check the verse division of chapter(s) 44
-- 1 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `43:9 frcin`, `44:15 thatept`
+- verse fragments (part of a neighbouring verse?) at 18:1
 
 ### Matthew
 
@@ -120,57 +117,47 @@ against the scans.
 - check 3:46 ends with text not in the KJV: 'Hear ye him.'
 - check 4:25 ends with text not in the KJV: "The commencement of Christ's teaching on the Mount."
 - check the verse division of chapter(s) 2, 3, 18, 23, 24, 28
+- verse fragments (part of a neighbouring verse?) at 5:13, 5:52, 6:14
 - verse numbering skips at 7:3 (a verse number was lost)
 - unexpected characters in 3:4, 3:39, 3:40
 - 6 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:39 hi§`, `17:11 xJone`, `23:6 Ptablai,`, `23:15 S"VFea`, `23:24 arejike`, `23:41 foretelUth`, `23:41 JerwsaUm,`, `24:56 bve.`, `27:49 juvi`
 
-### Mark
-
-- check the verse division of chapter(s) 13, 14
-- verse numbering skips at 14:60 (a verse number was lost)
-- unexpected characters in 12:28, 13:27
-- 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `3:30 niherit`, `9:3 .hey`, `13:8 ftO`, `13:52 ffrindincr`, `13:59 eth`, `13:60 ci-ppoint`, `14:57 sembled`
-
 ### Luke
 
 - scans disagree on chapter division near chapter 19
-- check the verse division of chapter(s) 4, 18, 19
-- 3 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `19:11 fee`
+- check the verse division of chapter(s) 8, 18, 19, 22
+- verse fragments (part of a neighbouring verse?) at 8:31, 22:28
+- 4 chapter(s) where the two scans do not agree on the verse division
+- unverified words: `19:11 fee`, `22:34 ray`, `22:35 ray`
 
 ### John
 
 - scans disagree on chapter division near chapter 7
 - scans disagree on chapter division near chapter 16
 - check the verse division of chapter(s) 3, 6
+- verse fragments (part of a neighbouring verse?) at 10:13
 - unexpected characters in 7:39
 - 2 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`
+
+### Acts
+
+- check the verse division of chapter(s) 12
+- 1 chapter(s) where the two scans do not agree on the verse division
 
 ### Romans
 
 - scans disagree on chapter division near chapter 5
 - scans disagree on chapter division near chapter 9
 - check the verse division of chapter(s) 5
+- verse fragments (part of a neighbouring verse?) at 1:12
 - 1 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `2:24 pherncd`
 
-### Colossians
+### 1 Corinthians
 
-- check the verse division of chapter(s) 2
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### Hebrews
-
-- check the verse division of chapter(s) 1
-- 1 chapter(s) where the two scans do not agree on the verse division
-
-### James
-
-- check the verse division of chapter(s) 2
-- 1 chapter(s) where the two scans do not agree on the verse division
+- verse fragments (part of a neighbouring verse?) at 7:34
 
 ### Revelation
 
@@ -182,10 +169,11 @@ against the scans.
 - check 9:1 starts with text not in the KJV: 'After this I looked, and behold, a door was opened into heaven: and the first vo'
 - check 22:1 starts with text not in the KJV: 'And I saw an angel come down out of heaven, having the key of the bottomless pit'
 - check 23:1 starts with text not in the KJV: 'And I saw a new heaven and a new earth; for the first heaven Bible. English.'
-- check the verse division of chapter(s) 1, 8, 9, 10, 13, 14, 19, 20, 21, 22, 23
+- check the verse division of chapter(s) 1, 8, 9, 10, 11, 13, 14, 19, 20, 21, 22, 23
+- verse fragments (part of a neighbouring verse?) at 15:5
 - verse numbering skips at 10:6 (a verse number was lost)
 - unexpected characters in 20:21
-- 11 chapter(s) where the two scans do not agree on the verse division
+- 12 chapter(s) where the two scans do not agree on the verse division
 - probably merged verses: 8:2, 19:10
 - unverified words: `2:9 Sdij`, `9:3 sardinestone;`, `16:8 whcfc`, `21:10 tha`, `23:1 English.`
 

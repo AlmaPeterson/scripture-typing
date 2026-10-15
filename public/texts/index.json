@@ -718,7 +718,8 @@
           "title": "1 Samuel",
           "unitLabel": "Chapter",
           "chapters": 31,
-          "path": "texts/jst-old-testament/1-samuel.json"
+          "path": "texts/jst-old-testament/1-samuel.json",
+          "draft": true
         },
         {
           "id": "2-samuel",
@@ -781,15 +782,15 @@
           "title": "Job",
           "unitLabel": "Chapter",
           "chapters": 42,
-          "path": "texts/jst-old-testament/job.json"
+          "path": "texts/jst-old-testament/job.json",
+          "draft": true
         },
         {
           "id": "psalms",
           "title": "Psalms",
           "unitLabel": "Chapter",
           "chapters": 150,
-          "path": "texts/jst-old-testament/psalms.json",
-          "draft": true
+          "path": "texts/jst-old-testament/psalms.json"
         },
         {
           "id": "proverbs",
@@ -810,15 +811,15 @@
           "title": "Isaiah",
           "unitLabel": "Chapter",
           "chapters": 66,
-          "path": "texts/jst-old-testament/isaiah.json"
+          "path": "texts/jst-old-testament/isaiah.json",
+          "draft": true
         },
         {
           "id": "jeremiah",
           "title": "Jeremiah",
           "unitLabel": "Chapter",
           "chapters": 52,
-          "path": "texts/jst-old-testament/jeremiah.json",
-          "draft": true
+          "path": "texts/jst-old-testament/jeremiah.json"
         },
         {
           "id": "lamentations",
@@ -945,8 +946,7 @@
           "title": "Mark",
           "unitLabel": "Chapter",
           "chapters": 16,
-          "path": "texts/jst-new-testament/mark.json",
-          "draft": true
+          "path": "texts/jst-new-testament/mark.json"
         },
         {
           "id": "luke",
@@ -969,7 +969,8 @@
           "title": "Acts",
           "unitLabel": "Chapter",
           "chapters": 28,
-          "path": "texts/jst-new-testament/acts.json"
+          "path": "texts/jst-new-testament/acts.json",
+          "draft": true
         },
         {
           "id": "romans",
@@ -984,7 +985,8 @@
           "title": "1 Corinthians",
           "unitLabel": "Chapter",
           "chapters": 16,
-          "path": "texts/jst-new-testament/1-corinthians.json"
+          "path": "texts/jst-new-testament/1-corinthians.json",
+          "draft": true
         },
         {
           "id": "2-corinthians",
@@ -1019,8 +1021,7 @@
           "title": "Colossians",
           "unitLabel": "Chapter",
           "chapters": 4,
-          "path": "texts/jst-new-testament/colossians.json",
-          "draft": true
+          "path": "texts/jst-new-testament/colossians.json"
         },
         {
           "id": "1-thessalonians",
@@ -1069,16 +1070,14 @@
           "title": "Hebrews",
           "unitLabel": "Chapter",
           "chapters": 13,
-          "path": "texts/jst-new-testament/hebrews.json",
-          "draft": true
+          "path": "texts/jst-new-testament/hebrews.json"
         },
         {
           "id": "james",
           "title": "James",
           "unitLabel": "Chapter",
           "chapters": 5,
-          "path": "texts/jst-new-testament/james.json",
-          "draft": true
+          "path": "texts/jst-new-testament/james.json"
         },
         {
           "id": "1-peter",

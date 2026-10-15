@@ -349,6 +349,10 @@ class BuiltChapter:
     verses: list[Verse]
     ref_chapter: int | None  # reference chapter most of it matches
     problems: list[str] = field(default_factory=list)
+    # Clearly printed verse numbers that disagree with the numbering given to
+    # the chapter (a sign the KJV numbering was filled in where the 1867
+    # edition numbers differently).
+    number_conflicts: int = 0
 
     @property
     def unverified(self) -> int:
@@ -456,11 +460,14 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
     # Pass 1: the word stream, plus where the structural markers fall in it.
     items: list[Item] = []
     nums: list[tuple[int, int | None]] = []  # (item position, value)
+    clean_nums: set[int] = set()  # positions of numbers printed in plain digits
     opens: list[int] = []  # capitalised chapter openings
     headers: list[tuple[int, int | None]] = []  # (item position, chapter number)
     for i, t in enumerate(toks):
         if t.kind == "n":
             nums.append((len(items), t.value))
+            if re.fullmatch(r"\d{1,3}", t.text):
+                clean_nums.add(len(items))
         elif t.kind == "c":
             opens.append(len(items))
         elif t.kind == "h":
@@ -503,8 +510,16 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
                 while first > 0 and (ref[first - 1].source, ref[first - 1].chapter, ref[first - 1].verse) == key:
                     first -= 1
                 if it.ref - first <= 3:
-                    back = it.ref - first
-                    ref_starts[key] = max(0, pos - back)
+                    # Back up over words the JST changed at the start of the
+                    # verse (not in the reference), but never into the
+                    # previous verse's reference words (the JST may simply
+                    # have dropped the verse's first word: "And the whole" ->
+                    # "The whole").
+                    start = pos
+                    for _ in range(it.ref - first):
+                        if start > 0 and items[start - 1].ref is None:
+                            start -= 1
+                    ref_starts[key] = start
 
     # Pass 2: chapter boundaries.
     num_pos = [p for p, _ in nums]
@@ -577,6 +592,7 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
 
         items = [items[k] for k in keep]
         bounds = sorted({moved(p) for p in bounds[:-1]}) + [len(items)]
+        clean_nums = {moved(p) for p, _ in nums if p not in drop and p in clean_nums}
         nums = [(moved(p), v) for p, v in nums if p not in drop]
         header_pos = [moved(p) for p in header_pos]
         ref_starts = {key: moved(p) for key, p in ref_starts.items() if p not in drop}
@@ -601,9 +617,13 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
                 events.append((p, "r", key))
         events.sort(key=lambda e: (e[0], e[1] != "n"))
         last_cut = c0
+        conflicts = 0
         for p, kind, val in events:
             if kind == "n":
                 v = val
+                matched = v == expected or (v is not None and _close(v, expected)) or (v == expected + 1 and p > last_cut)
+                if not matched and p in clean_nums and v is not None and v != expected - 1 and 1 < v < expected + 40:
+                    conflicts += 1
                 if v == expected or (v is not None and _close(v, expected)):
                     if p > last_cut:
                         cut_points.append((p, expected))
@@ -646,7 +666,7 @@ def build_book(toks: list[Tok], ref: list[RefWord], fixer: Fixer) -> list[BuiltC
         refs_in = [ref[it.ref].chapter if ref[it.ref].source == "kjv" else -1
                    for it in items[c0:c1] if it.ref is not None]
         rc = max(sorted(set(refs_in)), key=refs_in.count) if refs_in else None
-        ch = BuiltChapter(verses, rc)
+        ch = BuiltChapter(verses, rc, number_conflicts=conflicts)
         ch.problems += _strip_summaries(ch, items[c0:c1])
         chapters.append(ch)
     return chapters

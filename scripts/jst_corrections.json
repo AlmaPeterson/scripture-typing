@@ -273,10 +273,6 @@
   ],
   [
    "merge_verses",
-   "42:22"
-  ],
-  [
-   "merge_verses",
    "42:24"
   ],
   [
@@ -310,11 +306,6 @@
    2,
    4,
    42
-  ],
-  [
-   "set",
-   "42:22",
-   "The LORD is not well pleased with such a people, but for his righteousness' sake; he will magnify the law, and make it honourable."
   ],
   [
    "set",
@@ -450,27 +441,13 @@
  "1-john": [
   [
    "set",
-   "2:12",
-   "I write unto you, little children, because your sins are forgiven you for his name's sake."
-  ],
-  [
-   "set",
    "2:13",
    "I write unto you, fathers, because ye have known him that is from the beginning. I write unto you, young men, because ye have overcome the wicked one. I write unto you, little children, because ye have known the Father."
   ],
   [
    "set",
-   "2:20",
-   "But ye have an unction from the Holy One, and ye know all things."
-  ],
-  [
-   "set",
-   "2:22",
+   "2:21",
    "I have not written unto you because ye know not the truth, but because ye know it, and that no lie is of the truth."
-  ],
-  [
-   "delete_verse",
-   "2:21"
   ],
   [
    "confirm",
@@ -493,6 +470,351 @@
    "kjv_chapter",
    2,
    2
+  ]
+ ],
+ "colossians": [
+  [
+   "set",
+   "2:3",
+   "In whom are hid all the treasures of wisdom and knowledge."
+  ],
+  [
+   "set",
+   "2:19",
+   "And not holding the Head, from which all the body by joints and bands having nourishment ministered, and knit together, increaseth with the increase of God.",
+   "force"
+  ],
+  [
+   "insert_verse",
+   "2:19",
+   "Wherefore if ye be dead with Christ from the rudiments of the world, why, as though living in the world, are ye subject to ordinances,"
+  ],
+  [
+   "insert_verse",
+   "2:20",
+   "Which are after the doctrines and commandments of men, who teach you to touch not; taste not; handle not; all those things which are to perish with the using?"
+  ],
+  [
+   "confirm",
+   2
+  ]
+ ],
+ "james": [
+  [
+   "set",
+   "2:24",
+   "Likewise also Rahab the harlot was justified by works, when she had received the messengers, and sent them out another way?"
+  ],
+  [
+   "confirm",
+   2
+  ]
+ ],
+ "hebrews": [
+  [
+   "confirm",
+   1
+  ]
+ ],
+ "psalms": [
+  [
+   "kjv_chapter",
+   4,
+   4
+  ],
+  [
+   "set",
+   "3:8",
+   "Salvation belongeth unto the LORD: thy blessing is upon thy people. Selah."
+  ],
+  [
+   "set",
+   "12:1",
+   "In that day thou shalt help, O LORD, the poor and the meek of the earth. For the godly man shall cease to be found, and the faithful fail from among the children of men."
+  ],
+  [
+   "set",
+   "36:1",
+   "The wicked, who live in transgression, saith in their hearts, There is no condemnation; for there is no fear of God before their eyes."
+  ],
+  [
+   "set",
+   "36:4",
+   "He deviseth mischief upon his bed; he setteth himself in a way that is not good."
+  ],
+  [
+   "set",
+   "36:5",
+   "O LORD, thou art in the heavens; they are full of thy mercy. And the thoughts of a righteous man ascendeth up unto thee whose throne is far above the clouds."
+  ],
+  [
+   "confirm",
+   36
+  ],
+  [
+   "set",
+   "88:1",
+   "O LORD God of my salvation, I have cried day and night before thee:"
+  ],
+  [
+   "set",
+   "88:3",
+   "For my soul is full of troubles: and my life draweth nigh unto the grave."
+  ],
+  [
+   "set",
+   "88:17",
+   "They came round about me daily like water; they compassed me about together."
+  ],
+  [
+   "set",
+   "88:18",
+   "Lover and friend hast thou put far from me, and mine acquaintance into darkness."
+  ],
+  [
+   "confirm",
+   88
+  ],
+  [
+   "set",
+   "110:1",
+   "The LORD said unto my Lord, Sit thou at my right hand, until I make thine enemies thy footstool."
+  ],
+  [
+   "set",
+   "119:120",
+   "My flesh trembleth for fear of thee; and I am afraid of thy judgments."
+  ],
+  [
+   "set",
+   "119:123",
+   "Mine eyes fail for thy salvation, and for the word of thy righteousness."
+  ],
+  [
+   "set",
+   "119:126",
+   "And the time, O LORD, for me to work; for they have made void thy law."
+  ],
+  [
+   "confirm",
+   119
+  ]
+ ],
+ "jeremiah": [
+  [
+   "set",
+   "26:20",
+   "But there was a man among the priests, rose up and said, that, Urijah the son of Shemaiah of Kirjath-jearim, prophesied in the name of the Lord, who also prophesied against this city and against this land according to all the words of Jeremiah:"
+  ],
+  [
+   "set",
+   "29:5",
+   "Build ye houses, and dwell in them; and plant gardens, and eat the fruit of them;"
+  ],
+  [
+   "set",
+   "29:26",
+   "The LORD hath made thee priest in the stead of Jehoiada the priest, that ye should be officers in the house of the LORD, for every man that is mad, and maketh himself a prophet, that thou shouldest put him in prison, and in the stocks."
+  ],
+  [
+   "set",
+   "49:33",
+   "And Hazor shall be a dwelling for dragons, and a desolation for ever: there shall no man abide there, nor any son of man dwell in it."
+  ],
+  [
+   "confirm",
+   30
+  ]
+ ],
+ "ezekiel": [
+  [
+   "set",
+   "44:7",
+   "In that ye have brought into my sanctuary strangers, uncircumcised in heart, and uncircumcised in flesh, to be in my sanctuary, to pollute it, even my house, when ye offer my bread, the fat and the blood, and they have broken my covenant because of all your abominations."
+  ],
+  [
+   "set",
+   "44:8",
+   "Ye have not kept the charge of mine holy things: but ye have set keepers of my charge in my sanctuary for yourselves."
+  ],
+  [
+   "set",
+   "44:14",
+   "But I will make them keepers of the charge of the house, for all the service thereof, and for all that shall be done therein."
+  ],
+  [
+   "set",
+   "43:9",
+   "Now let them put away their whoredom, and the carcases of their kings, far from me, and I will dwell in the midst of them for ever."
+  ],
+  [
+   "set",
+   "44:15",
+   "But the priests the Levites, the sons of Zadok, that kept the charge of my sanctuary when the children of Israel went astray from me, they shall come near to me to minister unto me, and they shall stand before me to offer unto me the fat and the blood, saith the Lord GOD:"
+  ],
+  [
+   "confirm",
+   44
+  ]
+ ],
+ "mark": [
+  [
+   "resplit",
+   1,
+   [
+    "The voice of one crying",
+    "John did baptize",
+    "And there went out unto him",
+    "And John was clothed",
+    "I indeed have baptized",
+    "And it came to pass in those days",
+    "And straightway coming up",
+    "And there came a voice",
+    "And immediately the Spirit",
+    "And he was there in the wilderness",
+    "Now after that John",
+    "The time is fulfilled",
+    "And now as he walked",
+    "And Jesus said unto them, Come",
+    "And straightway they forsook",
+    "And when he had gone a little",
+    "And he called them",
+    "And they went into Capernaum",
+    "And they were astonished",
+    "And there was in their synagogue",
+    "And Jesus rebuked him",
+    "And when the unclean spirit",
+    "And they were all amazed",
+    "And immediately his fame",
+    "And forthwith when",
+    "And Simon's wife's mother",
+    "And he came and took her",
+    "And at evening",
+    "And he healed many",
+    "And in the morning",
+    "And Simon and they",
+    "And when they had found him",
+    "And he said unto them, Let us go",
+    "And he preached in their",
+    "And there came a leper",
+    "And Jesus, moved with compassion",
+    "And as soon as he had spoken",
+    "And he straitly charged",
+    "But he went out"
+   ]
+  ],
+  [
+   "set",
+   "1:40",
+   "But he went out, and began to publish it much, and to blaze abroad the matter, insomuch that Jesus could no more openly enter into the city, but was without in solitary places; and they came to him from every quarter."
+  ],
+  [
+   "set",
+   "1:12",
+   "Now after that John was put in prison, Jesus came into Galilee, preaching the gospel of the kingdom of God; and saying,"
+  ],
+  [
+   "set_chapter",
+   13,
+   [
+    "And as Jesus went out of the temple, his disciples came to him for to hear him, saying, Master, show us concerning the buildings of the temple.",
+    "And he said unto them, Behold ye these stones of the temple, and all this great work, and buildings of the temple?",
+    "Verily I say unto you, they shall be thrown down and left unto the Jews desolate.",
+    "And Jesus said unto them, See ye not all these things, and do you not understand them?",
+    "Verily I say unto you, There shall not be left here upon this temple, one stone upon another, which shall not be thrown down.",
+    "And Jesus left them and went upon the mount of Olives.",
+    "And as he sat upon the mount of Olives, the disciples came unto him privately, saying,",
+    "Tell us, when shall these things be which thou hast said, concerning the destruction of the temple, and the Jews?",
+    "And what is the sign of thy coming, and of the end of the world, (or the destruction of the wicked, which is the end of the world?)",
+    "And Jesus answered and said unto them, Take heed that no man deceive you; for many shall come in my name, saying, I am Christ, and shall deceive many.",
+    "Then shall they deliver you up to be afflicted, and shall kill you, and ye shall be hated of all nations for my name's sake.",
+    "And then shall many be offended, and shall betray one another; and many false prophets shall arise, and shall deceive many;",
+    "And because iniquity shall abound, the love of many shall wax cold; but he that shall endure unto the end, the same shall be saved.",
+    "When you therefore shall see the abomination of desolation, spoken of by Daniel the prophet concerning the destruction of Jerusalem, then you shall stand in the holy place. (Whoso readeth let him understand.)",
+    "Then let them who be in Judea flee into the mountains;",
+    "And let him who is on the housetop flee, and not return to take anything out of his house;",
+    "Neither let him who is in the field, return back to take his clothes.",
+    "And woe unto them who are with child, and unto them who give suck in those days.",
+    "Therefore pray ye the Lord, that your flight be not in the winter, neither on the Sabbath day.",
+    "For then, in those days, shall be great tribulations on the Jews, and upon the inhabitants of Jerusalem; such as was not before sent upon Israel, of God, since the beginning of their kingdom, (for it is written their enemies shall scatter them,) until this time; no, nor ever shall be sent again upon Israel.",
+    "All these things are the beginning of sorrows.",
+    "And except those days should be shortened, there should no flesh be saved; but for the elect's sake, according to the covenant, those days shall be shortened.",
+    "Behold these things I have spoken unto you concerning the Jews.",
+    "And then immediately after the tribulations of those days which shall come upon Jerusalem, if any man shall say unto you, Lo, here is Christ; or there; believe him not.",
+    "For in those days there shall also arise false Christs, and false prophets, and shall show great signs and wonders; insomuch, that if possible, they shall deceive the very elect, who are the elect according to the covenant.",
+    "Behold, I speak these things unto you, for the elect's sake.",
+    "And you also shall hear of wars, and rumours of wars; see that ye be not troubled; for all I have told you must come to pass, but the end is not yet.",
+    "Behold, I have told you before, wherefore if they shall say unto you, Behold, he is in the desert; go not forth; Behold, he is in the secret chambers; believe it not.",
+    "For as the light of the morning cometh out of the east, and shineth even unto the west, and covereth the whole earth, so shall also the coming of the Son of Man be.",
+    "And now I show unto you a parable. Behold, wheresoever the carcass is, there will the eagles be gathered together;",
+    "So likewise, shall mine elect be gathered from the four quarters of the earth.",
+    "And they shall hear of wars and rumours of wars. Behold, I speak unto you for mine elect's sake.",
+    "For nation shall rise against nation, and kingdom against kingdom;",
+    "There shall be famines, and pestilences, and earthquakes in divers places.",
+    "And again, because iniquity shall abound, the love of men shall wax cold; but he who shall not be overcome, the same shall be saved.",
+    "And again this gospel of the kingdom shall be preached in all the world, for a witness unto all nations, and then shall the end come, or the destruction of the wicked.",
+    "And again shall the abomination of desolation, spoken of by Daniel the prophet, be fulfilled.",
+    "And immediately after the tribulation of those days, the sun shall be darkened, and the moon shall not give her light, and the stars shall fall from heaven, and the powers of heaven shall be shaken.",
+    "Verily I say unto you, This generation in the which these things shall be shown forth, shall not pass away till all I have told you shall be fulfilled.",
+    "Although the days will come that heaven and earth shall pass away, yet my words shall not pass away, but all shall be fulfilled.",
+    "And as I said before, After the tribulation of those days, and the powers of the heavens shall be shaken, then shall appear the sign of the Son of Man in heaven; and then shall all the tribes of the earth mourn;",
+    "And they shall see the Son of Man coming in the clouds of heaven, with power and great glory.",
+    "And whoso treasureth up my word shall not be deceived.",
+    "For the Son of Man shall come; and he shall send his angels before him with the great sound of a trumpet, and they shall gather together his elect from the four winds, from one end of heaven to the other.",
+    "Now learn a parable of the fig tree. When his branches are yet tender, and putteth forth leaves, ye know that summer is nigh at hand.",
+    "So likewise, mine elect, when they shall see all these things, they shall know that he is near, even at the doors.",
+    "But of that day and hour no one knoweth; no, not the angels of God in heaven, but my Father only.",
+    "But as it was in the days of Noah, so it shall be also at the coming of the Son of Man; for it shall be with them as it was in the days which were before the flood.",
+    "Until the day that Noah entered into the ark, they were eating and drinking, marrying and giving in marriage, and knew not until the flood came and took them all away; so shall also the coming of the Son of Man be.",
+    "Then shall be fulfilled that which is written, That in the last days, two shall be in the field, one shall be taken and the other left.",
+    "Two shall be grinding at the mill; the one taken, and the other left.",
+    "And what I say unto one, I say unto all men.",
+    "Watch therefore, for ye know not at what hour your Lord doth come.",
+    "But know this, if the good man of the house had known in what watch the thief would come, he would have watched, and would not have suffered his house to have been broken up; but would have been ready.",
+    "Therefore, be ye also ready, for in such an hour as ye think not, the Son of Man cometh.",
+    "Who then is a faithful and wise servant, whom his lord hath made ruler over his household, to give them meat in due season?",
+    "Blessed is that servant whom his lord, when he cometh, shall find so doing.",
+    "And verily I say unto you, he shall make him ruler over all his goods.",
+    "But if that evil servant shall say in his heart, My lord delayeth his coming; and shall begin to smite his fellow servants, and to eat and drink with the drunken;",
+    "The lord of that servant shall come in a day when he looketh not for him, and in an hour that he is not aware of, and shall cut him asunder, and shall appoint him his portion with the hypocrites.",
+    "There shall be weeping and gnashing of teeth; and thus cometh the end."
+   ]
+  ],
+  [
+   "set",
+   "14:57",
+   "And there followed him a certain young man, a disciple, having a linen cloth cast about his naked body; and the young men laid hold on him, and he left the linen cloth and fled from them naked, and saved himself out of their hands."
+  ],
+  [
+   "delete_verse",
+   "14:58"
+  ],
+  [
+   "set",
+   "14:58",
+   "And they led Jesus away to the high priest, and with him were assembled all the chief priests, and the elders, and the scribes.",
+   "force"
+  ],
+  [
+   "set",
+   "3:30",
+   "But there is a sin which shall not be forgiven. He that shall blaspheme against the Holy Ghost hath never forgiveness, but is in danger of being cut down out of the world. And they shall inherit eternal damnation. And this he said unto them be"
+  ],
+  [
+   "set",
+   "9:3",
+   "And there appeared unto them Elias with Moses, or in other words, John the Baptist and Moses; and they were talking with Jesus."
+  ],
+  [
+   "set",
+   "12:28",
+   "And Jesus answering said unto them, Ye do err therefore, because ye know not, and understand not the scriptures, neither the power of God?"
+  ],
+  [
+   "confirm",
+   1,
+   13,
+   14
   ]
  ]
 }

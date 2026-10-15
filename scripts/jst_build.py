@@ -130,6 +130,15 @@ def build(lds: dict, raw: Path, opening_caps, tidy, book_file, slug) -> dict[str
             for v in c["verses"]
             if re.search(r"[^A-Za-z ,.;:?!'\"()—\-\[\]]", v["text"])
         ]
+        kjv_len = {(c["number"], v["number"]): len(v["text"].split()) for c in kjv_book["chapters"] for v in c["verses"]}
+        fragments = [
+            f"{c['number']}:{v['number']}"
+            for c in out_chapters
+            for v in c["verses"]
+            if len(v["text"].split()) <= 3 and kjv_len.get((c["number"], v["number"]), 99) > 5
+        ]
+        if fragments:
+            notes.append(f"verse fragments (part of a neighbouring verse?) at {', '.join(fragments[:10])}")
         if gaps:
             notes.append(f"verse numbering skips at {gaps[0]} (a verse number was lost)")
         if odd:
@@ -249,6 +258,12 @@ def apply_corrections(work: list[dict], ops: list, kjv_book: dict | None = None)
         kind = op[0]
         if kind == "set":  # ["set", "c:v", "proofread text"]
             chapter, i = ref(op[1])
+            # Guard against a correction landing on the wrong verse after the
+            # automatic build changes: the old and new text must be similar.
+            old = chapter["verses"][i]["text"]
+            similar = difflib.SequenceMatcher(None, old.lower().split(), op[2].lower().split(), autojunk=False).ratio()
+            if similar < 0.5 and op[3:] != ["force"]:
+                raise ValueError(f"correction for {op[1]} does not match the verse there: {old[:60]!r}")
             chapter["verses"][i]["text"] = op[2]
             chapter["verses"][i]["unverified"] = []
         elif kind == "accept":  # ["accept", "c:v", "word"]: the word is right as printed
@@ -323,6 +338,29 @@ def apply_corrections(work: list[dict], ops: list, kjv_book: dict | None = None)
                 "verses": [{"number": v["number"], "text": v["text"], "unverified": []} for v in kc["verses"]],
                 "confirmed": True,
             }
+        elif kind == "resplit":
+            # ["resplit", c, ["opening words of verse 2", "... verse 3", ...]]:
+            # the 1867 verse division read from the scan. The chapter's text is
+            # re-cut where each listed verse begins.
+            chapter = work[op[1] - 1]
+            words = " ".join(v["text"] for v in chapter["verses"]).split()
+            pending = [w for v in chapter["verses"] for w in v["unverified"]]
+            normed = [J.norm(w) for w in words]
+            cuts, pos = [0], 1
+            for phrase in op[2]:
+                target = [J.norm(w) for w in phrase.split() if J.norm(w)]
+                hit = next((i for i in range(pos, len(normed) - len(target) + 1) if normed[i : i + len(target)] == target), None)
+                if hit is None:
+                    raise ValueError(f"resplit {op[1]}: verse start {phrase!r} not found")
+                cuts.append(hit)
+                pos = hit + 1
+            texts = [" ".join(words[a:b]) for a, b in zip(cuts, cuts[1:] + [len(words)])]
+            texts = [t[:1].upper() + t[1:] for t in texts]
+            chapter["verses"] = [
+                {"number": i, "text": t, "unverified": [w for w in pending if w in t.split()]}
+                for i, t in enumerate(texts, 1)
+            ]
+            chapter["confirmed"] = True
         elif kind == "renumber":  # ["renumber", c, ...]: number the verses 1..n (a verse number was misread)
             for c in op[1:]:
                 renumber(work[c - 1])
@@ -388,6 +426,8 @@ def bad_score(ch: J.BuiltChapter) -> int:
 def kjv_consistent(ch: J.BuiltChapter, kjv_counts: dict[int, int]) -> bool:
     """The chapter's verses start exactly where the KJV chapter's verses start
     (allowing one verse whose first word the OCR garbled)."""
+    if ch.number_conflicts:
+        return False
     starts = [v.ref_start for v in ch.verses]
     known = [s for s in starts if s is not None]
     if not known or any(s[0] != "kjv" for s in known):
