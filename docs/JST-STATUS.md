@@ -12,27 +12,27 @@ against the scans.
 | Volume | Book | Chapters | Verses | Status | Chapters to check | Unverified words |
 | --- | --- | ---: | ---: | --- | ---: | ---: |
 | OT | Genesis | 50 | 1792 | draft | 10 | 7 |
-| OT | Exodus | 40 | 1206 | draft | 0 | 0 |
-| OT | Leviticus | 27 | 859 | draft | 1 | 1 |
-| OT | Numbers | 36 | 1288 | draft | 2 | 1 |
-| OT | Deuteronomy | 34 | 959 | draft | 2 | 3 |
-| OT | Joshua | 24 | 658 | draft | 0 | 1 |
-| OT | Judges | 21 | 618 | draft | 0 | 2 |
+| OT | Exodus | 40 | 1206 | ready | 0 | 0 |
+| OT | Leviticus | 27 | 859 | draft | 1 | 0 |
+| OT | Numbers | 36 | 1288 | draft | 2 | 0 |
+| OT | Deuteronomy | 34 | 959 | draft | 2 | 0 |
+| OT | Joshua | 24 | 658 | ready | 0 | 0 |
+| OT | Judges | 21 | 618 | ready | 0 | 0 |
 | OT | Ruth | 4 | 85 | ready | 0 | 0 |
-| OT | 1 Samuel | 31 | 810 | draft | 0 | 3 |
+| OT | 1 Samuel | 31 | 810 | ready | 0 | 0 |
 | OT | 2 Samuel | 24 | 695 | ready | 0 | 0 |
 | OT | 1 Kings | 22 | 818 | ready | 0 | 0 |
 | OT | 2 Kings | 25 | 719 | ready | 0 | 0 |
-| OT | 1 Chronicles | 29 | 942 | draft | 0 | 1 |
-| OT | 2 Chronicles | 35 | 810 | draft | 0 | 2 |
+| OT | 1 Chronicles | 29 | 942 | ready | 0 | 0 |
+| OT | 2 Chronicles | 36 | 822 | ready | 0 | 0 |
 | OT | Ezra | 10 | 211 | draft | 1 | 0 |
-| OT | Nehemiah | 13 | 406 | draft | 0 | 1 |
+| OT | Nehemiah | 13 | 406 | ready | 0 | 0 |
 | OT | Esther | 10 | 167 | ready | 0 | 0 |
 | OT | Job | 42 | 1069 | draft | 0 | 0 |
 | OT | Psalms | 150 | 2465 | draft | 3 | 5 |
-| OT | Proverbs | 31 | 915 | draft | 0 | 1 |
-| OT | Ecclesiastes | 11 | 210 | draft | 0 | 3 |
-| OT | Isaiah | 66 | 1306 | draft | 4 | 12 |
+| OT | Proverbs | 31 | 915 | ready | 0 | 0 |
+| OT | Ecclesiastes | 12 | 222 | ready | 0 | 0 |
+| OT | Isaiah | 66 | 1301 | ready | 0 | 0 |
 | OT | Jeremiah | 52 | 1365 | draft | 1 | 3 |
 | OT | Lamentations | 5 | 154 | ready | 0 | 0 |
 | OT | Ezekiel | 48 | 1273 | draft | 1 | 2 |
@@ -77,7 +77,7 @@ against the scans.
 | NT | Jude | 1 | 25 | draft | 0 | 1 |
 | NT | Revelation | 23 | 380 | draft | 11 | 5 |
 
-**27 of 65 books ready.**
+**37 of 65 books ready.**
 
 ## Details for draft books
 
@@ -91,63 +91,28 @@ against the scans.
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
 
-### Exodus
-
-- unexpected characters in 22:31
-
 ### Leviticus
 
 - check the verse division of chapter(s) 6
 - verse numbering skips at 6:6 (a verse number was lost)
 - 1 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `7:37 thejpeace`
 
 ### Numbers
 
 - check the verse division of chapter(s) 3, 7
 - verse numbering skips at 3:6 (a verse number was lost)
 - 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `11:10 displ`
 
 ### Deuteronomy
 
 - check the verse division of chapter(s) 1, 10
 - verse numbering skips at 1:6 (a verse number was lost)
 - 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `2:23 vim`, `2:23 nnzerim,even`, `24:4 git`
-
-### Joshua
-
-- unverified words: `21:8 nianded`
-
-### Judges
-
-- unexpected characters in 9:48
-- unverified words: `6:15 ray`, `9:48 !i93`
-
-### 1 Samuel
-
-- probably merged verses: 10:27
-- unverified words: `11:2 Amu.`, `20:12 soufivicJ`, `26:23 tiand`
-
-### 1 Chronicles
-
-- unverified words: `27:1 Jai`
-
-### 2 Chronicles
-
-- chapter 14 not found in either scan
-- probably merged verses: 13:22
-- unverified words: `13:22 overtttroweth`, `21:7 XXiri.`
 
 ### Ezra
 
 - check the verse division of chapter(s) 2
 - 1 chapter(s) where the two scans do not agree on the verse division
-
-### Nehemiah
-
-- unverified words: `12:1 Jli`
 
 ### Job
 
@@ -160,26 +125,6 @@ against the scans.
 - 3 chapter(s) where the two scans do not agree on the verse division
 - probably merged verses: 4:8
 - unverified words: `88:3 gva`, `88:17 Theycam`, `88:18 uu`, `110:1 conquest`, `119:120 adginents.`
-
-### Proverbs
-
-- unverified words: `4:15 iut`
-
-### Ecclesiastes
-
-- chapter 4 not found in either scan
-- unexpected characters in 3:22
-- probably merged verses: 3:22
-- unverified words: `3:22 I'xm'/y`, `3:22 solitariness,`, `11:4 jit`
-
-### Isaiah
-
-- check 42:27 ends with text not in the KJV: 'God promises to Israel.'
-- check the verse division of chapter(s) 1, 2, 4, 50
-- unexpected characters in 48:19
-- 4 chapter(s) where the two scans do not agree on the verse division
-- probably merged verses: 3:27, 13:6
-- unverified words: `1:5 Jen`, `1:9 iiio`, `1:9 orrali.`, `1:10 Ky`, `1:11 JiOxA`, `1:11 im`, `1:11 bul'oci`, `1:12 haiiK`, `1:14 apj`, `43:24 le`, `48:8 tinoo`, `48:19 deBtro3`
 
 ### Jeremiah
 

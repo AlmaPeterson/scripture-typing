@@ -669,8 +669,7 @@
           "title": "Exodus",
           "unitLabel": "Chapter",
           "chapters": 40,
-          "path": "texts/jst-old-testament/exodus.json",
-          "draft": true
+          "path": "texts/jst-old-testament/exodus.json"
         },
         {
           "id": "leviticus",
@@ -701,16 +700,14 @@
           "title": "Joshua",
           "unitLabel": "Chapter",
           "chapters": 24,
-          "path": "texts/jst-old-testament/joshua.json",
-          "draft": true
+          "path": "texts/jst-old-testament/joshua.json"
         },
         {
           "id": "judges",
           "title": "Judges",
           "unitLabel": "Chapter",
           "chapters": 21,
-          "path": "texts/jst-old-testament/judges.json",
-          "draft": true
+          "path": "texts/jst-old-testament/judges.json"
         },
         {
           "id": "ruth",
@@ -724,8 +721,7 @@
           "title": "1 Samuel",
           "unitLabel": "Chapter",
           "chapters": 31,
-          "path": "texts/jst-old-testament/1-samuel.json",
-          "draft": true
+          "path": "texts/jst-old-testament/1-samuel.json"
         },
         {
           "id": "2-samuel",
@@ -753,16 +749,14 @@
           "title": "1 Chronicles",
           "unitLabel": "Chapter",
           "chapters": 29,
-          "path": "texts/jst-old-testament/1-chronicles.json",
-          "draft": true
+          "path": "texts/jst-old-testament/1-chronicles.json"
         },
         {
           "id": "2-chronicles",
           "title": "2 Chronicles",
           "unitLabel": "Chapter",
-          "chapters": 35,
-          "path": "texts/jst-old-testament/2-chronicles.json",
-          "draft": true
+          "chapters": 36,
+          "path": "texts/jst-old-testament/2-chronicles.json"
         },
         {
           "id": "ezra",
@@ -777,8 +771,7 @@
           "title": "Nehemiah",
           "unitLabel": "Chapter",
           "chapters": 13,
-          "path": "texts/jst-old-testament/nehemiah.json",
-          "draft": true
+          "path": "texts/jst-old-testament/nehemiah.json"
         },
         {
           "id": "esther",
@@ -808,24 +801,21 @@
           "title": "Proverbs",
           "unitLabel": "Chapter",
           "chapters": 31,
-          "path": "texts/jst-old-testament/proverbs.json",
-          "draft": true
+          "path": "texts/jst-old-testament/proverbs.json"
         },
         {
           "id": "ecclesiastes",
           "title": "Ecclesiastes",
           "unitLabel": "Chapter",
-          "chapters": 11,
-          "path": "texts/jst-old-testament/ecclesiastes.json",
-          "draft": true
+          "chapters": 12,
+          "path": "texts/jst-old-testament/ecclesiastes.json"
         },
         {
           "id": "isaiah",
           "title": "Isaiah",
           "unitLabel": "Chapter",
           "chapters": 66,
-          "path": "texts/jst-old-testament/isaiah.json",
-          "draft": true
+          "path": "texts/jst-old-testament/isaiah.json"
         },
         {
           "id": "jeremiah",

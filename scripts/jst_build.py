@@ -102,7 +102,7 @@ def build(lds: dict, raw: Path, opening_caps, tidy, book_file, slug) -> dict[str
         for c in work:
             c["verses"] = [v for v in c["verses"] if v["text"].strip()]
         # Hand proofreading (scripts/jst_corrections.json).
-        reviewed = apply_corrections(work, corrections.get(kjv_book["id"], []))
+        reviewed = apply_corrections(work, corrections.get(kjv_book["id"], []), kjv_book)
         notes = [x for x in notes if not any(x.startswith(r) for r in reviewed)]
 
         out_chapters = [
@@ -195,7 +195,39 @@ def strip_book_tail(chapters: list[dict], notes: list[str]) -> None:
         last["unverified"] = [w for w in last["unverified"] if w in last["text"]]
 
 
-def apply_corrections(work: list[dict], ops: list) -> list[str]:
+def split_by_kjv(text: str, kjv_chapters: list[dict]) -> list[list[str]]:
+    """Split running text into chapters and verses at the places where the
+    given KJV chapters' verses begin (used where the 1867 verse numbering is
+    the KJV's but the OCR lost the numbers)."""
+    words = text.split()
+    normed = [J.norm(w) for w in words]
+    starts: list[tuple[int, int]] = []  # (word index, chapter index)
+    pos = 0
+    for ci, ch in enumerate(kjv_chapters):
+        for v in ch["verses"]:
+            target = [J.norm(w) for w in v["text"].split() if J.norm(w)]
+            # The JST sometimes changes a verse's first word ("So Abijah" ->
+            # "Abijah"), so also try without it.
+            for t in (target[:4], target[:3], target[1:5], target[1:4], target[:2]):
+                k = len(t)
+                hit = next((i for i in range(pos, len(normed) - k + 1) if normed[i : i + k] == t), None)
+                if hit is not None:
+                    if t[0] != target[0] and hit > pos and normed[hit - 1] not in target[:1]:
+                        pass  # first word dropped or changed by the JST; start at the match
+                    break
+            else:
+                raise ValueError(f"KJV {ch['number']}:{v['number']} start not found when re-splitting")
+            starts.append((hit, ci))
+            pos = hit + 1
+    if starts[0][0] != 0:
+        raise ValueError("text before the first KJV verse: " + " ".join(words[: starts[0][0]]))
+    out: list[list[str]] = [[] for _ in kjv_chapters]
+    for (a, ci), (b, _) in zip(starts, starts[1:] + [(len(words), 0)]):
+        out[ci].append(" ".join(words[a:b]))
+    return out
+
+
+def apply_corrections(work: list[dict], ops: list, kjv_book: dict | None = None) -> list[str]:
     """Apply hand-proofreading operations, in order, to a book's chapters.
     Verse and chapter references ("12:5", 12) refer to the numbering at the
     moment the operation runs; chapters are renumbered 1..n after chapter
@@ -260,6 +292,29 @@ def apply_corrections(work: list[dict], ops: list) -> list[str]:
             c = op[1]
             work[c - 1]["verses"] += work.pop(c)["verses"]
             renumber(work[c - 1])
+        elif kind == "rebuild_chapters":
+            # ["rebuild_chapters", first, last, [kjv chapters], [text to drop]]:
+            # join chapters first..last, drop the given text (leaked summaries)
+            # and re-split at the KJV verse starts of the listed chapters.
+            first, last, kjv_numbers, drops = op[1], op[2], op[3], op[4]
+            text = " ".join(v["text"] for c in work[first - 1 : last] for v in c["verses"])
+            for d in drops:
+                if d not in text:
+                    raise ValueError(f"text to drop not found: {d!r}")
+                text = text.replace(d, " ")
+            kjv = [kjv_book["chapters"][n - 1] for n in kjv_numbers]
+            pending = [w for c in work[first - 1 : last] for v in c["verses"] for w in v["unverified"] if w in text]
+            rebuilt = [
+                {"verses": [{"number": i, "text": t, "unverified": [w for w in pending if w in t.split()]}
+                            for i, t in enumerate(vs, 1)], "confirmed": True}
+                for vs in split_by_kjv(text, kjv)
+            ]
+            work[first - 1 : last] = rebuilt
+        elif kind == "set_chapter":  # ["set_chapter", c, ["verse 1", "verse 2", ...]]: transcribed from the scan
+            work[op[1] - 1] = {
+                "verses": [{"number": i, "text": t, "unverified": []} for i, t in enumerate(op[2], 1)],
+                "confirmed": True,
+            }
         elif kind == "delete_chapter":  # ["delete_chapter", c]
             work.pop(op[1] - 1)
         elif kind == "confirm":  # ["confirm", c, ...]: verse division checked against the scan

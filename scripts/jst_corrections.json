@@ -1,1 +1,311 @@
-{}
+{
+ "exodus": [
+  [
+   "set",
+   "22:31",
+   "And ye shall be holy men unto me: neither shall ye eat any flesh that is torn of beasts in the field; ye shall cast it to the dogs."
+  ]
+ ],
+ "leviticus": [
+  [
+   "set",
+   "7:37",
+   "This is the law of the burnt offering, of the meat offering, and of the sin offering, and of the trespass offering, and of the consecrations, and of the sacrifice of the peace offerings;"
+  ]
+ ],
+ "numbers": [
+  [
+   "set",
+   "11:10",
+   "Then Moses heard the people weep throughout their families, every man in the door of his tent: and the anger of the LORD was kindled greatly; Moses also was displeased."
+  ]
+ ],
+ "deuteronomy": [
+  [
+   "set",
+   "2:23",
+   "And the Avim which dwelt in Hazerim, even unto Azzah, the Caphtorim, which came forth out of Caphtor, destroyed them, and dwelt in their stead.)"
+  ],
+  [
+   "set",
+   "24:4",
+   "Her former husband, which sent her away, may not take her again to be his wife, after that she is denied; for that is abomination before the LORD: and thou shalt not cause the land to sin, which the LORD thy God giveth thee for an inheritance."
+  ]
+ ],
+ "judges": [
+  [
+   "set",
+   "6:15",
+   "And he said unto him, O my Lord, wherewith shall I save Israel? behold, my family is poor in Manasseh, and I am the least in my father's house."
+  ],
+  [
+   "set",
+   "9:48",
+   "And Abimelech gat him up to mount Zalmon, he and all the people that were with him; and Abimelech took an axe in his hand, and cut down a bough from the trees, and took it, and laid it on his shoulder, and said unto the people that were with him, What ye have seen me do, make haste, and do as I have done."
+  ]
+ ],
+ "joshua": [
+  [
+   "set",
+   "21:8",
+   "And the children of Israel gave by lot unto the Levites these cities with their suburbs, as the LORD commanded by the hand of Moses."
+  ]
+ ],
+ "1-samuel": [
+  [
+   "set",
+   "11:2",
+   "And Nahash the Ammonite answered them, On this condition will I make a covenant with you, that I may thrust out all your right eyes, and lay it for a reproach in all Israel."
+  ],
+  [
+   "set",
+   "26:23",
+   "The LORD render to every man his righteousness and his faithfulness: for the LORD delivered thee into my hand to-day, but I would not stretch forth mine hand against the LORD's anointed."
+  ],
+  [
+   "split_verse",
+   "10:27",
+   "The intrigue of Nahash"
+  ],
+  [
+   "delete_verse",
+   "10:28"
+  ],
+  [
+   "set",
+   "20:12",
+   "And Jonathan said unto David, O LORD God of Israel, when I have sounded my father about to morrow any time, or the third day, and, behold, if there be good toward David, and I then send not unto thee, and show it thee;"
+  ]
+ ],
+ "2-chronicles": [
+  [
+   "rebuild_chapters",
+   13,
+   13,
+   [
+    13,
+    14
+   ],
+   [
+    "Asa destroyeth idolatry, overtttroweth Zerah, and spoileth the Ethiopians."
+   ]
+  ],
+  [
+   "set",
+   "14:1",
+   "So Abijah slept with his fathers, and they buried him in the city of David: and Asa his son reigned in his stead. In his days the land was quiet ten years."
+  ],
+  [
+   "review",
+   "chapter 14 not found"
+  ],
+  [
+   "set",
+   "22:7",
+   "And the destruction of Ahaziah was of God by coming to Joram; for when he was come, he went out with Jehoram against Jehu the son of Nimshi, whom the LORD had anointed to cut off the house of Ahab."
+  ]
+ ],
+ "ecclesiastes": [
+  [
+   "rebuild_chapters",
+   3,
+   3,
+   [
+    3,
+    4
+   ],
+   [
+    "I'xm'/y is increased by oppression, envy, idleness, covetousness, solitariness, and by wilfulness."
+   ]
+  ],
+  [
+   "set",
+   "12:4",
+   "And the doors shall be shut in the streets, when the sound of the grinding is low, and he shall rise up at the voice of the bird, and all the daughters of music shall be brought low;"
+  ],
+  [
+   "review",
+   "chapter 4 not found"
+  ]
+ ],
+ "1-chronicles": [
+  [
+   "set",
+   "27:1",
+   "Now the children of Israel after their number, to wit, the chief fathers and captains of thousands and hundreds, and their officers that served the king in any matter of the courses, which came in and went out month by month throughout all the months of the year, of every course were twenty and four thousand."
+  ]
+ ],
+ "proverbs": [
+  [
+   "set",
+   "4:15",
+   "Avoid it, pass not by it, turn from it, and pass away."
+  ]
+ ],
+ "nehemiah": [
+  [
+   "set",
+   "12:1",
+   "Now these are the priests and the Levites that went up with Zerubbabel the son of Shealtiel, and Jeshua: Seraiah, Jeremiah, Ezra,"
+  ]
+ ],
+ "isaiah": [
+  [
+   "set",
+   "1:5",
+   "Why should ye be stricken any more? ye will revolt more and more: the whole head is sick, and the whole heart faint."
+  ],
+  [
+   "set",
+   "1:9",
+   "Except the LORD of hosts had left unto us a very small remnant, we should have been as Sodom, and we should have been like unto Gomorrah."
+  ],
+  [
+   "set",
+   "1:10",
+   "Hear the word of the LORD, ye rulers of Sodom; give ear unto the law of our God, ye people of Gomorrah."
+  ],
+  [
+   "set",
+   "1:11",
+   "To what purpose is the multitude of your sacrifices unto me? saith the LORD: I am full of the burnt offerings of rams, and the fat of fed beasts; and I delight not in the blood of bullocks, or of lambs, or of he goats."
+  ],
+  [
+   "set",
+   "1:12",
+   "When ye come to appear before me, who hath required this at your hand, to tread my courts?"
+  ],
+  [
+   "set",
+   "1:14",
+   "Your new moons and your appointed feasts my soul hateth: they are a trouble unto me; I am weary to bear them."
+  ],
+  [
+   "set",
+   "2:1",
+   "The word that Isaiah the son of Amoz saw concerning Judah and Jerusalem."
+  ],
+  [
+   "split_verse",
+   "3:27",
+   "In that day shall the branch"
+  ],
+  [
+   "delete_verse",
+   "3:28"
+  ],
+  [
+   "confirm",
+   3
+  ],
+  [
+   "delete_verse",
+   "13:1"
+  ],
+  [
+   "delete_verse",
+   "13:1"
+  ],
+  [
+   "delete_verse",
+   "13:1"
+  ],
+  [
+   "delete_verse",
+   "13:1"
+  ],
+  [
+   "delete_verse",
+   "13:1"
+  ],
+  [
+   "rebuild_chapters",
+   13,
+   13,
+   [
+    13
+   ],
+   [
+    "Cry out and shout, thou inhabitant of Zion: for great is the Holy One of Israel in the midst of thee. Desolation of Babylon."
+   ]
+  ],
+  [
+   "set_chapter",
+   50,
+   [
+    "Yea, for thus saith the LORD, Have I put thee away, or have I cast thee off for ever? For thus saith the LORD, Where is the bill of your mother's divorcement? To whom have I put thee away, or to which of my creditors have I sold you; yea, to whom have I sold you?",
+    "Behold, for your iniquities have ye sold yourselves, and for your transgressions is your mother put away; wherefore, when I came there was no man; when I called there was none to answer. O house of Israel, is my hand shortened at all, that it cannot redeem; or have I no power to deliver?",
+    "Behold, at my rebuke I dry up the sea, I make their rivers a wilderness; and their fish to stink, because the waters are dried up, and they die because of thirst. I clothe the heavens with blackness, and I make sackcloth their covering.",
+    "The Lord GOD hath given me the tongue of the learned, that I should know how to speak a word in season unto thee, O house of Israel, when ye are weary. He waketh morning by morning, he waketh mine ear to hear as the learned.",
+    "The Lord GOD hath appointed mine ears, and I was not rebellious, neither turned away back. I gave my back to the smiters, and my cheeks to them that plucked off the hair. I hid not my face from shame and spitting, for the Lord GOD will help me; therefore shall I not be confounded; therefore have I set my face like a flint, and I know that I shall not be ashamed, and the Lord is near and he justifieth me.",
+    "Who will contend with me? let us stand together. Who is mine adversary? let him come near me, and I will smite him with the strength of my mouth; for the Lord GOD will help me; and all they which shall condemn me, behold all they shall wax old as a garment, and the moth shall eat them up.",
+    "Who is among you that feareth the LORD, that obeyeth the voice of his servant, that walketh in darkness, and hath no light? Let him trust in the name of the LORD, and stay upon his God.",
+    "Behold all ye that kindleth fire, that compass yourselves about with sparks; walk in the light of your fire, and in the sparks which ye have kindled; this shall ye have of mine hand, ye shall lie down in sorrow."
+   ]
+  ],
+  [
+   "merge_verses",
+   "42:22"
+  ],
+  [
+   "merge_verses",
+   "42:24"
+  ],
+  [
+   "set",
+   "43:24",
+   "Thou hast bought me no sweet cane with money, neither hast thou filled me with the fat of thy sacrifices: but thou hast made me to serve with thy sins, thou hast wearied me with thine iniquities."
+  ],
+  [
+   "set",
+   "48:8",
+   "Yea, thou heardest not; yea, thou knewest not; yea, from that time that thine ear was not opened: for I knew that thou wouldest deal very treacherously, and wast called a transgressor from the womb."
+  ],
+  [
+   "set",
+   "48:19",
+   "Thy seed also had been as the sand, and the offspring of thy bowels like the gravel thereof; his name should not have been cut off nor destroyed from before me."
+  ],
+  [
+   "set",
+   "1:6",
+   "From the sole of the foot even unto the head there is no soundness in it; but wounds, and bruises, and putrifying sores: they have not been closed, neither bound up, neither mollified with ointment."
+  ],
+  [
+   "set",
+   "1:7",
+   "Your country is desolate, your cities are burned with fire: your land, strange devour it in your presence, and it is desolate, as overthrown by strange"
+  ],
+  [
+   "confirm",
+   1,
+   2,
+   4,
+   42
+  ],
+  [
+   "set",
+   "42:22",
+   "The LORD is not well pleased with such a people, but for his righteousness' sake; he will magnify the law, and make it honourable."
+  ],
+  [
+   "set",
+   "42:24",
+   "Who among them will give ear unto thee, or hearken and hear thee for the time to come? and who gave Jacob for a spoil, and Israel to the robber? did not the LORD, he against whom they have sinned?"
+  ],
+  [
+   "set",
+   "42:25",
+   "For they would not walk in his ways, neither were they obedient unto his law; therefore he hath poured upon them the fury of his anger, and the strength of battle: and they have set them on fire round about, yet they knew not; and it burned them, yet they laid it not to heart."
+  ],
+  [
+   "review",
+   "check 42:27"
+  ],
+  [
+   "set",
+   "13:3",
+   "I have commanded my sanctified ones, I have also called my mighty ones, for mine anger is not upon them that rejoice in my highness."
+  ]
+ ]
+}
