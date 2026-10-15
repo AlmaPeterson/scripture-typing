@@ -42,6 +42,8 @@ function VerseBlockImpl({
         <button
           type="button"
           className={`note-button ${note ? 'has-note' : ''}`}
+          // Keep focus in the typing input until the note editor opens.
+          onMouseDown={(e) => e.preventDefault()}
           onClick={() => onEditNote(layout.number)}
           aria-label={`${note ? 'Edit' : 'Add'} note on ${label} ${layout.number}`}
           title={note ? 'Edit note' : 'Add a note'}

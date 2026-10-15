@@ -320,6 +320,12 @@ function TypingSession({
           value={typedVerses ? doneVerses / typedVerses : 1}
           label="Progress through this chapter"
         />
+        {/* An overlay below the bar, so it never moves the text under the pointer. */}
+        {!focused && !finished && editing === null && (
+          <button type="button" className="paused" onClick={focusInput}>
+            Paused – click here or press Enter to keep typing
+          </button>
+        )}
       </div>
 
       {saveError && (
@@ -413,11 +419,6 @@ function TypingSession({
           focusInput()
         }}
       >
-        {!focused && !finished && editing === null && (
-          <button type="button" className="paused" onClick={focusInput}>
-            Paused – click here or press Enter to keep typing
-          </button>
-        )}
         {engine.verses.map((layout, i) => {
           let mode: VerseMode
           if (layout.skipped) mode = 'skipped'

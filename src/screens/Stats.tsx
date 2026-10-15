@@ -433,7 +433,7 @@ function KeyPanels({ keyStats }: { keyStats: Parameters<typeof rankKeys>[0] }) {
           This is an estimate: the app cannot see which finger pressed a key, so it assumes standard
           touch-typing positions on a QWERTY keyboard.
         </p>
-        <BarList items={fingerItems} format={fmt} />
+        <BarList items={fingerItems} format={fmt} mono={false} />
       </section>
     </>
   )

@@ -611,11 +611,15 @@ main {
 }
 
 .paused {
-  position: sticky;
-  top: 7rem;
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 50%;
+  transform: translateX(-50%);
   z-index: 5;
-  display: block;
-  margin: 0 auto 0.5rem;
+  white-space: nowrap;
+  max-width: calc(100vw - 2rem);
+  overflow: hidden;
+  text-overflow: ellipsis;
   padding: 0.5rem 1rem;
   font: 600 0.9rem var(--font-ui);
   color: var(--text);

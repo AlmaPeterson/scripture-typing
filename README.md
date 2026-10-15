@@ -11,7 +11,21 @@ as an app from Chrome or Edge on Windows and Linux.
 - Plan and app design: [docs/PLAN.md](docs/PLAN.md)
 - Scripture sources, licences and data format: [docs/TEXTS.md](docs/TEXTS.md)
 
-> Status: project setup. The app screens are not built yet.
+> Status: v1 app built (Home, Library, Course, Chapter grid, Typing, Stats,
+> Settings). JST books marked as drafts are labelled in the app.
+
+### Using it
+
+- **Library** → add a course to Home. Its books are downloaded so it works
+  offline.
+- **Home** → **Continue** goes to the verse after the last one you completed.
+- **Typing**: just type. Verse numbers are skipped; press Space or Enter
+  between verses. Curly quotes, dashes and ellipses are typed as `'` `"` `-` and
+  `...`. Backspace fixes a mistake (it still counts against accuracy);
+  Ctrl+Backspace deletes a word; Esc pauses; Enter resumes. Hover a verse (or
+  Tab to its note button) to add a note.
+- **Settings**: theme, text size, scroll style, the per-course January 1 reset,
+  and Export / Import / Delete of all data (one JSON file).
 
 ## Run it locally
 
@@ -28,6 +42,7 @@ Other scripts:
 npm run build      # type-check and build to dist/
 npm run preview    # serve the production build locally
 npm run lint       # ESLint
+npm test           # Vitest unit and component tests (jsdom + fake-indexeddb)
 npm run format     # Prettier (write); format:check to verify
 ```
 

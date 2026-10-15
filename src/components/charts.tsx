@@ -137,10 +137,13 @@ export function BarList({
   items,
   format,
   max,
+  mono = true,
 }: {
   items: { key: string; label: string; value: number; note?: string }[]
   format: (v: number) => string
   max?: number
+  /** Show labels in the monospace key font. */
+  mono?: boolean
 }) {
   if (items.length === 0) return <p className="muted">Not enough data yet.</p>
   const top = max ?? Math.max(...items.map((i) => i.value), 1)
@@ -148,7 +151,7 @@ export function BarList({
     <ul className="bars">
       {items.map((item) => (
         <li key={item.key} title={item.note}>
-          <span className="key-label">{item.label}</span>
+          <span className={mono ? 'key-label' : undefined}>{item.label}</span>
           <span className="bar-track" aria-hidden="true">
             <span
               className="bar-fill"
