@@ -948,17 +948,15 @@
           "id": "luke",
           "title": "Luke",
           "unitLabel": "Chapter",
-          "chapters": 25,
-          "path": "texts/jst-new-testament/luke.json",
-          "draft": true
+          "chapters": 24,
+          "path": "texts/jst-new-testament/luke.json"
         },
         {
           "id": "john",
           "title": "John",
           "unitLabel": "Chapter",
           "chapters": 21,
-          "path": "texts/jst-new-testament/john.json",
-          "draft": true
+          "path": "texts/jst-new-testament/john.json"
         },
         {
           "id": "acts",

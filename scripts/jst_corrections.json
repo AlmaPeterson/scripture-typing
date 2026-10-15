@@ -927,5 +927,149 @@
    "confirm",
    7
   ]
+ ],
+ "john": [
+  [
+   "set",
+   "3:1",
+   "There was a man of the Pharisees named Nicodemus, a ruler of the Jews;",
+   "force"
+  ],
+  [
+   "set",
+   "3:2",
+   "The same came to Jesus by night, and said unto him, Rabbi, we know that thou art a teacher come from God: for no man can do these miracles which thou doest, except God be with him."
+  ],
+  [
+   "set",
+   "6:40",
+   "And this is the will of him that sent me, that every one which seeth the Son, and believeth on him, may have everlasting life: and I will raise him up in the resurrection of the just"
+  ],
+  [
+   "set",
+   "7:1",
+   "After these things Jesus walked in Galilee: for he would not walk in Jewry, because the Jews sought to kill him."
+  ],
+  [
+   "set",
+   "7:26",
+   "But, lo, he speaketh boldly, and they say nothing unto him. Do the rulers know indeed that this is the very Christ?"
+  ],
+  [
+   "set",
+   "7:39",
+   "(But this spake he of the Spirit, which they that believe on him should receive: for the Holy Ghost was promised unto them who believe, after that Jesus was glorified.)"
+  ],
+  [
+   "set",
+   "8:1",
+   "And Jesus went unto the mount of Olives.",
+   "force"
+  ],
+  [
+   "merge_verses",
+   "10:13"
+  ],
+  [
+   "set",
+   "10:12",
+   "And the shepherd is not as a hireling, whose own the sheep are not, who seeth the wolf coming, and leaveth the sheep, and fleeth: and the wolf catcheth the sheep and scattereth them."
+  ],
+  [
+   "confirm",
+   3,
+   6,
+   10
+  ],
+  [
+   "review",
+   "scans disagree"
+  ]
+ ],
+ "luke": [
+  [
+   "merge_chapters",
+   18
+  ],
+  [
+   "merge_verses",
+   "8:31"
+  ],
+  [
+   "set",
+   "16:1",
+   "And he said also unto his disciples, There was a certain rich man who had a steward; and the same was accused unto him, that he had wasted his goods."
+  ],
+  [
+   "set",
+   "18:7",
+   "And shall not God avenge his own elect, who cry day and night unto him, though he bear long with men?"
+  ],
+  [
+   "set",
+   "18:31",
+   "Then he took the twelve, and said unto them, Behold, we go up to Jerusalem, and all things which are written by the prophets concerning the Son of Man shall be accomplished."
+  ],
+  [
+   "merge_verses",
+   "21:28"
+  ],
+  [
+   "merge_verses",
+   "21:24"
+  ],
+  [
+   "split_verse",
+   "21:28",
+   "And he spake to them a parable"
+  ],
+  [
+   "set",
+   "21:27",
+   "And when these things begin to come to pass, then look up, and lift up your heads; for the day of your redemption draweth nigh."
+  ],
+  [
+   "set",
+   "21:28",
+   "And then shall they see the Son of Man coming in a cloud, with power and great glory."
+  ],
+  [
+   "set",
+   "21:29",
+   "And he spake to them a parable, saying, Behold the fig tree, and all the trees;"
+  ],
+  [
+   "set",
+   "21:33",
+   "Heaven and earth shall pass away, but my word shall not pass away."
+  ],
+  [
+   "set",
+   "21:34",
+   "Let my disciples therefore take heed to themselves, lest at any time their hearts be overcharged with surfeiting, and drunkenness, and cares of this life, and that day come upon them unawares."
+  ],
+  [
+   "confirm",
+   21
+  ],
+  [
+   "set",
+   "8:31",
+   "And there was there a herd of many swine feeding on the mountain:"
+  ],
+  [
+   "set",
+   "8:43",
+   "For he had an only daughter, about twelve years of age, and she lay a dying. But as he went the people thronged him."
+  ],
+  [
+   "confirm",
+   8,
+   18
+  ],
+  [
+   "review",
+   "scans disagree"
+  ]
  ]
 }

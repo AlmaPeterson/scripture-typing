@@ -51,8 +51,8 @@ against the scans.
 | OT | Malachi | 4 | 55 | ready | 0 | 0 |
 | NT | Matthew | 29 | 1153 | draft | 6 | 9 |
 | NT | Mark | 16 | 751 | ready | 0 | 0 |
-| NT | Luke | 25 | 1187 | draft | 4 | 3 |
-| NT | John | 21 | 886 | draft | 2 | 4 |
+| NT | Luke | 24 | 1185 | ready | 0 | 0 |
+| NT | John | 21 | 885 | ready | 0 | 0 |
 | NT | Acts | 28 | 1007 | ready | 0 | 0 |
 | NT | Romans | 16 | 436 | ready | 0 | 0 |
 | NT | 1 Corinthians | 16 | 437 | ready | 0 | 0 |
@@ -77,7 +77,7 @@ against the scans.
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
 | NT | Revelation | 23 | 381 | draft | 12 | 5 |
 
-**60 of 65 books ready.**
+**62 of 65 books ready.**
 
 ## Details for draft books
 
@@ -105,24 +105,6 @@ against the scans.
 - unexpected characters in 3:4, 3:39, 3:40
 - 6 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:39 hi§`, `17:11 xJone`, `23:6 Ptablai,`, `23:15 S"VFea`, `23:24 arejike`, `23:41 foretelUth`, `23:41 JerwsaUm,`, `24:56 bve.`, `27:49 juvi`
-
-### Luke
-
-- scans disagree on chapter division near chapter 19
-- check the verse division of chapter(s) 8, 18, 19, 22
-- verse fragments (part of a neighbouring verse?) at 8:31, 22:28
-- 4 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `19:11 fee`, `22:34 ray`, `22:35 ray`
-
-### John
-
-- scans disagree on chapter division near chapter 7
-- scans disagree on chapter division near chapter 16
-- check the verse division of chapter(s) 3, 6
-- verse fragments (part of a neighbouring verse?) at 10:13
-- unexpected characters in 7:39
-- 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `3:2 andaid`, `6:40 oro`, `7:26 llicv`, `7:39 un+o`
 
 ### Revelation
 
