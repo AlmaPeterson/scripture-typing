@@ -1,13 +1,16 @@
-// All persistent storage goes through the `Storage` interface below so the
+// All persistent storage goes through the `Storage` interface so the
 // IndexedDB (Dexie) implementation can later be swapped for, or synced with,
-// a server-backed one. Nothing outside src/storage/ should import Dexie.
-//
-// Placeholder: the record types and the Dexie implementation are filled in
-// when the screens are built (see docs/PLAN.md, "Data model").
+// a server-backed one. Nothing outside src/storage/ imports Dexie.
 
-export interface Storage {
-  /** Export every stored record as one JSON-serialisable object (Settings → Export). */
-  exportAll(): Promise<unknown>
-  /** Replace all stored data with a previously exported backup (Settings → Import). */
-  importAll(data: unknown): Promise<void>
+import { DexieStorage } from './dexie'
+import type { Storage } from './storage'
+
+export type { Storage } from './storage'
+export * from './types'
+export { BackupError, validateBackup } from './backup'
+export { localDate } from './dexie'
+
+/** The app's storage. Screens use this through `useStorage()` so tests can swap it. */
+export function createStorage(name?: string): Storage {
+  return new DexieStorage(name)
 }

@@ -21,5 +21,16 @@ export default defineConfig([
       ecmaVersion: 2023,
       globals: { ...globals.browser, ...globals.node },
     },
+    rules: {
+      // Only src/storage/ may touch IndexedDB (docs/PLAN.md, "Storage boundary").
+      'no-restricted-imports': [
+        'error',
+        { paths: [{ name: 'dexie', message: 'Use the Storage interface in src/storage/.' }] },
+      ],
+    },
+  },
+  {
+    files: ['src/storage/**'],
+    rules: { 'no-restricted-imports': 'off' },
   },
 ])
