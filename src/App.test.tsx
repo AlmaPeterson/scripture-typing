@@ -143,6 +143,11 @@ describe('App', () => {
     // A mistake fixed with Backspace, then the rest of verse 1 and Enter to end it.
     await user.keyboard('In tje{Backspace}{Backspace}he beginning.{Enter}')
     expect(screen.getByTestId('live-accuracy').textContent).not.toBe('100.0%')
+    // The finished verse goes back to plain text, without the mistake marked.
+    expect(document.querySelector('[data-verse="1"] .verse-text')).toHaveTextContent(
+      'In the beginning.',
+    )
+    expect(document.querySelector('[data-verse="1"] .ch')).toBeNull()
     await waitFor(async () =>
       expect((await storage.getChapterProgress('mini', 'alpha', 1))?.completedVerses).toEqual([1]),
     )

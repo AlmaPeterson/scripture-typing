@@ -680,9 +680,6 @@ main {
 .ch.correct {
   color: var(--typed);
 }
-.verse-done .ch.correct {
-  color: var(--muted);
-}
 .ch.corrected {
   color: var(--typed);
   text-decoration: underline dotted var(--corrected);

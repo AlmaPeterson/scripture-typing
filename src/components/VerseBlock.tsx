@@ -37,7 +37,8 @@ function VerseBlockImpl({
           {layout.number}
         </span>
         <span className="verse-text">
-          {mode === 'current' || mode === 'done' ? renderTyped(layout, engine) : layout.text}
+          {/* Finished verses go back to plain text, without their mistakes. */}
+          {mode === 'current' ? renderTyped(layout, engine) : layout.text}
         </span>
         <button
           type="button"
