@@ -933,9 +933,8 @@
           "id": "matthew",
           "title": "Matthew",
           "unitLabel": "Chapter",
-          "chapters": 29,
-          "path": "texts/jst-new-testament/matthew.json",
-          "draft": true
+          "chapters": 28,
+          "path": "texts/jst-new-testament/matthew.json"
         },
         {
           "id": "mark",

@@ -1183,5 +1183,343 @@
    1,
    11
   ]
+ ],
+ "matthew": [
+  [
+   "set_chapter",
+   1,
+   [
+    "The book of the generation of Jesus Christ, the son of David, the son of Abraham.",
+    "Abraham begat Isaac; and Isaac begat Jacob; and Jacob begat Judas and his brethren; and Judas begat Phares and Zara of Thamar; and Phares begat Esrom; and Esrom begat Aram; and Aram begat Aminidab; and Aminidab begat Naason; and Naason begat Salmon; and Salmon begat Booz of Rachab; and Booz begat Obed of Ruth; and Obed begat Jesse; and Jesse begat David the king.",
+    "And David the king begat Solomon of her whom David had taken of Urias; and Solomon begat Roboam; and Roboam begat Abia; and Abia begat Asa; and Asa begat Josaphat; and Josaphat begat Joram; and Joram begat Ozias; and Ozias begat Joatham; and Joatham begat Achaz; and Achaz begat Ezekias; and Ezekias begat Manasses; and Manasses begat Amon; and Amon begat Josias; and Josias begat Jechonias and his brethren, about the time they were carried away to Babylon.",
+    "And after they were brought to Babylon, Jechonias begat Salathiel; and Salathiel begat Zorobable; and Zorobable begat Abiud; and Abiud begat Eliakim; and Eliakim begat Azor; and Azor begat Sadoc; and Sadoc begat Achim; and Achim begat Eliud; and Eliud begat Eleazar; and Eleazar begat Matthan; and Matthan begat Jacob; and Jacob begat Joseph, the husband of Mary, of whom was born Jesus, as the prophets have written, who is called Christ.",
+    "So all the generations from Abraham to David, were fourteen generations; and from David until the carrying away into Babylon, were fourteen generations; and from the carrying away into Babylon until Christ, were fourteen generations."
+   ]
+  ],
+  [
+   "set",
+   "3:1",
+   "Now when Jesus was born in Bethlehem of Judea, in the days of Herod the king, behold, there came wise men from the east to Jerusalem,"
+  ],
+  [
+   "set",
+   "3:4",
+   "And when he had gathered all the chief priests and scribes of the people together, he demanded of them, saying, Where is the place that is written of by the prophets, in which Christ should be born? For he greatly feared, yet he believed not the prophets."
+  ],
+  [
+   "set",
+   "3:39",
+   "And it is he of whom I shall bear record, whose fan shall be in his hand, and he will thoroughly purge his floor, and gather his wheat into the garner; but in the fulness of his own time will burn up the chaff with unquenchable fire."
+  ],
+  [
+   "set",
+   "3:40",
+   "Thus came John, preaching and baptizing in the river of Jordan; bearing record, that he who was coming after him had power to baptize with the Holy Ghost and fire."
+  ],
+  [
+   "review",
+   "check 3:46"
+  ],
+  [
+   "review",
+   "check 3:1"
+  ],
+  [
+   "set",
+   "4:25",
+   "And there followed him great multitudes of people from Galilee, and from Decapolis, and Jerusalem, and Judea, and beyond Jordan.",
+   "force"
+  ],
+  [
+   "review",
+   "check 4:25"
+  ],
+  [
+   "merge_verses",
+   "5:13"
+  ],
+  [
+   "set",
+   "5:13",
+   "And blessed are ye when men shall revile you, and persecute you, and shall say all manner of evil against you falsely, for my sake."
+  ],
+  [
+   "merge_verses",
+   "5:50"
+  ],
+  [
+   "set",
+   "5:50",
+   "And if ye salute your brethren only, what do ye more than others? Do not even the publicans the same?"
+  ],
+  [
+   "merge_verses",
+   "6:13"
+  ],
+  [
+   "set",
+   "6:13",
+   "And forgive us our trespasses, as we forgive those who trespass against us."
+  ],
+  [
+   "insert_verse",
+   "7:0",
+   "Now these are the words which Jesus taught his disciples that they should say unto the people."
+  ],
+  [
+   "renumber",
+   7
+  ],
+  [
+   "split_verse",
+   "5:28",
+   "Behold, it is written"
+  ],
+  [
+   "set",
+   "5:29",
+   "Behold, it is written by them of old time, that thou shalt not commit adultery."
+  ],
+  [
+   "merge_verses",
+   "5:38"
+  ],
+  [
+   "merge_verses",
+   "5:38"
+  ],
+  [
+   "set",
+   "5:38",
+   "But I say unto you, swear not at all; neither by heaven, for it is God's home; nor by the earth, for it is his footstool; neither by Jerusalem, for it is the city of the great King; neither shalt thou swear by thy head, because thou canst not make one hair white or black."
+  ],
+  [
+   "confirm",
+   5
+  ],
+  [
+   "merge_verses",
+   "6:16"
+  ],
+  [
+   "split_verse",
+   "6:27",
+   "And your heavenly Father will provide"
+  ],
+  [
+   "split_verse",
+   "6:28",
+   "Therefore I say unto you, take no thought"
+  ],
+  [
+   "split_verse",
+   "6:29",
+   "Behold the fowls"
+  ],
+  [
+   "merge_verses",
+   "6:18"
+  ],
+  [
+   "confirm",
+   6,
+   7
+  ],
+  [
+   "set",
+   "6:1",
+   "And it came to pass that, as Jesus taught his disciples, he said unto them, Take heed that ye do not your alms before men, to be seen of them: otherwise ye have no reward of your Father who is in heaven."
+  ],
+  [
+   "set",
+   "6:18",
+   "But thou, when thou fastest, anoint thy head, and wash thy face, that thou appear not unto men to fast, but unto thy Father who is in secret: and thy Father who seeth in secret, shall reward thee openly."
+  ],
+  [
+   "merge_chapters",
+   25
+  ],
+  [
+   "merge_verses",
+   "25:1"
+  ],
+  [
+   "set",
+   "25:1",
+   "And then at that day, before the Son of Man comes, the kingdom of heaven shall be likened unto ten virgins, who took their lamps, and went forth to meet the bridegroom."
+  ],
+  [
+   "merge_verses",
+   "25:37"
+  ],
+  [
+   "insert_verse",
+   "25:38",
+   "Then shall the righteous answer him, saying, Lord, when saw we thee an hungered, and fed thee; or thirsty, and gave thee drink?"
+  ],
+  [
+   "merge_verses",
+   "25:3"
+  ],
+  [
+   "confirm",
+   24,
+   25
+  ],
+  [
+   "confirm",
+   2,
+   3
+  ],
+  [
+   "set",
+   "17:11",
+   "And again I say unto you that Elias has come already, concerning whom it is written, Behold, I will send my messenger, and he shall prepare the way before me; and they knew him not, and have done unto him, whatsoever they listed."
+  ],
+  [
+   "set",
+   "23:6",
+   "And greetings in the markets, and to be called of men, Rabbi, Rabbi, (which is master.)"
+  ],
+  [
+   "set",
+   "23:15",
+   "And ye say, Whosoever sweareth by the altar, it is nothing; but whosoever sweareth by the gift that is upon it, he is guilty."
+  ],
+  [
+   "set",
+   "23:24",
+   "Woe unto you, Scribes and Pharisees, hypocrites! For ye are like unto whited sepulchres, which indeed appear beautiful outwardly, but are within full of the bones of the dead, and of all uncleanness."
+  ],
+  [
+   "set",
+   "23:41",
+   "Then understood his disciples that he should come again on the earth, after that he was glorified and crowned on the right hand of God."
+  ],
+  [
+   "set",
+   "24:56",
+   "And thus cometh the end of the wicked, according to the prophecy of Moses, saying: They shall be cut off from among the people; But the end of the earth is not yet, but bye and bye."
+  ],
+  [
+   "set",
+   "26:49",
+   "And forthwith he came to Jesus, and said, Hail, Master; and kissed him."
+  ],
+  [
+   "confirm",
+   23
+  ],
+  [
+   "merge_verses",
+   "18:2"
+  ],
+  [
+   "set",
+   "18:2",
+   "And Jesus called a little child unto him, and set him in the midst of them, and said, Verily, I say unto you, Except ye be converted, and become as little children, ye shall not enter into the kingdom of heaven."
+  ],
+  [
+   "set",
+   "18:8",
+   "And if thine eye offend thee, pluck it out and cast it from thee; it is better for thee to enter into life with one eye, rather than having two eyes to be cast into hell fire.",
+   "force"
+  ],
+  [
+   "set",
+   "18:9",
+   "And a man's hand is his friend, and his foot, also; and a man's eye, are they of his own household.",
+   "force"
+  ],
+  [
+   "confirm",
+   18
+  ],
+  [
+   "set",
+   "27:39",
+   "And sitting down they watched him there. And Pilate wrote a title, and put it on the cross, and the writing was, JESUS OF NAZARETH, THE KING OF THE JEWS, in letters of Greek, and Latin, and Hebrew."
+  ],
+  [
+   "set",
+   "27:49",
+   "And the Lord said unto him, This day thou shalt be with me in Paradise. Now from the sixth hour there was darkness over all the land unto the ninth hour."
+  ],
+  [
+   "resplit",
+   27,
+   [
+    "And when they had bound him",
+    "Then Judas, who had betrayed",
+    "Saying, I have sinned",
+    "And they said unto him, What is that",
+    "And he cast down the pieces",
+    "And the chief priests took",
+    "And they took counsel",
+    "Then was fulfilled",
+    "And therefore they took",
+    "And Jesus stood before",
+    "And Jesus said unto him, Thou sayest",
+    "And when he was accused",
+    "Then saith Pilate",
+    "And he answered him not",
+    "Now at the feast",
+    "And they had then",
+    "Therefore when they were gathered",
+    "For he knew that for envy",
+    "When he was set down",
+    "But the chief priests and elders persuaded",
+    "And the governor said unto them, Whether",
+    "Pilate said unto them, What shall",
+    "And all said unto him",
+    "And the governor said, Why",
+    "When Pilate saw",
+    "Then answered all the people",
+    "Then released he Barabbas",
+    "Then the soldiers",
+    "And they stripped him",
+    "And when they had platted",
+    "And they spit upon him",
+    "And after that they had mocked",
+    "And as they came out",
+    "And when they were come unto a place",
+    "They gave him vinegar",
+    "And they crucified him",
+    "And sitting down",
+    "And Pilate wrote a title",
+    "JESUS OF NAZARETH",
+    "And the chief priests said unto Pilate",
+    "But Pilate answered",
+    "Then were there two thieves",
+    "And they that passed by",
+    "Likewise also the chief priests",
+    "He trusted in God",
+    "One of the thieves",
+    "And the Lord said unto him",
+    "Now from the sixth hour",
+    "And about the ninth hour",
+    "Some of them that stood",
+    "And straightway one of them",
+    "The rest said",
+    "Jesus, when he had cried",
+    "And, behold, the veil",
+    "And the graves were opened",
+    "And after his resurrection",
+    "Now when the centurion",
+    "And many women were there",
+    "When the evening was come",
+    "Then Pilate commanded",
+    "And when Joseph had taken",
+    "And there was Mary Magdalene",
+    "Now the next day",
+    "Command therefore",
+    "Pilate said unto them, Ye have",
+    "So they went"
+   ]
+  ],
+  [
+   "review",
+   "scans disagree"
+  ]
  ]
 }

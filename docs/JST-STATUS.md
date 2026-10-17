@@ -49,7 +49,7 @@ against the scans.
 | OT | Haggai | 2 | 38 | ready | 0 | 0 |
 | OT | Zechariah | 14 | 209 | ready | 0 | 0 |
 | OT | Malachi | 4 | 55 | ready | 0 | 0 |
-| NT | Matthew | 29 | 1153 | draft | 6 | 9 |
+| NT | Matthew | 28 | 1131 | ready | 0 | 0 |
 | NT | Mark | 16 | 751 | ready | 0 | 0 |
 | NT | Luke | 24 | 1185 | ready | 0 | 0 |
 | NT | John | 21 | 885 | ready | 0 | 0 |
@@ -77,7 +77,7 @@ against the scans.
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
 | NT | Revelation | 22 | 404 | ready | 0 | 0 |
 
-**63 of 65 books ready.**
+**64 of 65 books ready.**
 
 ## Details for draft books
 
@@ -91,18 +91,4 @@ against the scans.
 - unexpected characters in 7:33
 - 10 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `5:17 ies.`, `7:33 testi2a`, `24:6 XXIV.`, `24:41 ray`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
-
-### Matthew
-
-- scans disagree on chapter division near chapter 2
-- scans disagree on chapter division near chapter 24
-- check 3:1 starts with text not in the KJV: 'JESUS.'
-- check 3:46 ends with text not in the KJV: 'Hear ye him.'
-- check 4:25 ends with text not in the KJV: "The commencement of Christ's teaching on the Mount."
-- check the verse division of chapter(s) 2, 3, 18, 23, 24, 28
-- verse fragments (part of a neighbouring verse?) at 5:13, 5:52, 6:14
-- verse numbering skips at 7:3 (a verse number was lost)
-- unexpected characters in 3:4, 3:39, 3:40
-- 6 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `3:39 hi§`, `17:11 xJone`, `23:6 Ptablai,`, `23:15 S"VFea`, `23:24 arejike`, `23:41 foretelUth`, `23:41 JerwsaUm,`, `24:56 bve.`, `27:49 juvi`
 
