@@ -140,8 +140,8 @@ describe('App', () => {
     // Typing view: verse numbers shown, typing goes to the hidden input.
     const input = await screen.findByLabelText('Type Alpha 1')
     await waitFor(() => expect(input).toHaveFocus())
-    // A mistake fixed with Backspace, then the rest of verse 1.
-    await user.keyboard('In tje{Backspace}{Backspace}he beginning.')
+    // A mistake fixed with Backspace, then the rest of verse 1 and Enter to end it.
+    await user.keyboard('In tje{Backspace}{Backspace}he beginning.{Enter}')
     expect(screen.getByTestId('live-accuracy').textContent).not.toBe('100.0%')
     await waitFor(async () =>
       expect((await storage.getChapterProgress('mini', 'alpha', 1))?.completedVerses).toEqual([1]),
@@ -157,8 +157,8 @@ describe('App', () => {
     ])
     await waitFor(() => expect(input).toHaveFocus())
 
-    // Verse 2: Enter between verses, the em dash typed as "-", one wrong key left unfixed.
-    await user.keyboard('{Enter}God saix-light.')
+    // Verse 2: the em dash typed as "-", one wrong key left unfixed.
+    await user.keyboard('God saix-light.')
     expect(await screen.findByText('Alpha 1 complete')).toBeInTheDocument()
 
     const progress = await storage.getChapterProgress('mini', 'alpha', 1)
@@ -190,7 +190,7 @@ describe('App', () => {
     render(<App storage={storage} />)
     const input = await screen.findByLabelText('Type Alpha 1')
     await waitFor(() => expect(input).toHaveFocus())
-    await user.keyboard('In the beginning.')
+    await user.keyboard('In the beginning. ')
     await waitFor(async () => expect(await storage.getProgress('mini')).toHaveLength(1))
 
     await go('#/')
@@ -220,13 +220,16 @@ describe('App', () => {
     await user.keyboard('In the beginning')
     expect(screen.getByTestId('live-wpm').textContent).toMatch(/^\d+$/)
     expect(screen.getByTestId('chapter-wpm').textContent).toMatch(/^chapter \d+$/)
-    // The verse WPM starts again at the next verse; the chapter WPM carries on.
+    // Enter ends the verse: the verse WPM starts again at the next verse and
+    // the chapter WPM carries on.
     await user.keyboard('.')
+    expect(screen.getByTestId('live-wpm').textContent).toMatch(/^\d+$/)
+    await user.keyboard('{Enter}')
     expect(screen.getByTestId('live-wpm')).toHaveTextContent('–')
     expect(screen.getByTestId('chapter-wpm')).not.toHaveTextContent('chapter 0')
 
-    // Enter between verses, then finish the chapter.
-    await user.keyboard('{Enter}God said-light.')
+    // Finish the chapter.
+    await user.keyboard('God said-light.')
     expect(await screen.findByText('Alpha 1 complete')).toBeInTheDocument()
     expect(screen.getByText('Press Enter to continue.')).toBeInTheDocument()
     // An Enter straight after the last key is ignored.

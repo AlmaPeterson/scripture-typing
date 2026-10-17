@@ -25,7 +25,9 @@ function prefersReducedMotion(): boolean {
  * come below it. The window scrolls when the caret moves to a new line (or,
  * for the "block" style, when it drifts too far below the centre). The
  * `.scripture` padding in index.css gives the first and last lines room to
- * reach the centre.
+ * reach the centre; with the "top" start there is no room above the first
+ * line, so the window stays at the top (scrollTo is clamped to 0) until the
+ * line being typed gets down to the centre.
  */
 export function useCentredLine({ textRef, barRef, tick, finished, scrollStyle }: Options) {
   const lastLineTop = useRef<number | null>(null)

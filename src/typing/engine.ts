@@ -3,13 +3,13 @@
 // A chapter is a list of verses. Each verse is turned into a list of
 // "positions", one per character the user must type (after converting
 // special characters, see normalize.ts). Verse numbers are never typed.
-// Between two verses there is one separator position that accepts Space or
-// Enter.
+// Every verse but the last ends with one separator position that accepts
+// Space or Enter, so a verse is complete once the space after it is typed.
 //
 // Mistakes: a wrong key is shown red and the cursor moves on; the user can
 // keep typing or press Backspace. Every wrong keystroke counts against
-// accuracy, even if fixed. The last character of a verse must be typed
-// correctly before the verse is complete, so a verse never ends on a typo
+// accuracy, even if fixed. The last character of a verse (and the separator
+// after it) must be typed correctly before the verse is complete, so a verse never ends on a typo
 // that can no longer be fixed. Completed verses are locked: Backspace cannot
 // go back into them.
 //
@@ -41,11 +41,11 @@ export interface VerseLayout {
   /** Verse before the starting verse: shown as already done, not typed now. */
   skipped: boolean
   tokens: Token[]
-  /** First position of the verse (its separator, if it has one). */
+  /** First position of the verse. */
   start: number
-  /** One past the last position. */
+  /** One past the last position (its separator, if it has one). */
   end: number
-  /** Position of the separator before this verse, or -1. */
+  /** Position of the separator after this verse, or -1. */
   separator: number
 }
 
@@ -80,7 +80,7 @@ export interface InputResult {
   /** False if the key was ignored (not a character, or the chapter is finished). */
   accepted: boolean
   correct: boolean
-  /** A wrong key on the last character of a verse: counted, but the cursor does not move. */
+  /** A wrong key on the last character of a verse or its separator: counted, but the cursor does not move. */
   blocked: boolean
   completedVerse?: VerseResult
   finished: boolean
@@ -154,10 +154,6 @@ export class TypingEngine {
         separator: -1,
       }
       if (index < start) return layout
-      if (index > start) {
-        layout.separator = this.positions.length
-        this.positions.push({ expected: ' ', verse: index, separator: true, word: -1 })
-      }
       for (const ch of v.text) {
         const form = typedForm(ch)
         layout.tokens.push({ display: ch, start: this.positions.length, length: form.length })
@@ -167,6 +163,11 @@ export class TypingEngine {
       }
       layout.end = this.positions.length
       this.findWords(layout)
+      if (index < verses.length - 1) {
+        layout.separator = this.positions.length
+        this.positions.push({ expected: ' ', verse: index, separator: true, word: -1 })
+      }
+      layout.end = this.positions.length
       return layout
     })
 
@@ -237,7 +238,7 @@ export class TypingEngine {
   /**
    * Live WPM for the verse the cursor is in (the last verse once finished):
    * its correct characters so far over its own active time. It starts again
-   * from 0 at each verse; the separator before a verse counts towards that
+   * from 0 at each verse; the separator after a verse counts towards that
    * verse, as in its VerseResult. Pauses longer than `idleMs` are not counted.
    */
   get verseWpm(): number {
@@ -314,7 +315,8 @@ export class TypingEngine {
     this.recordKeyStats(p, correct, timed ? dt : null)
     this.trackWord(p, correct, time, prevTime, timed)
 
-    const last = p === verse.end - 1
+    // The last character of a verse and the separator after it.
+    const last = p === verse.end - 1 || p === verse.separator - 1
     if (!correct && last) {
       this.blockedKey = ch
       this.prevKey = { pos: p, correct: false }

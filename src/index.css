@@ -613,11 +613,15 @@ main {
   font-family: var(--font-text);
   font-size: var(--text-size);
   line-height: 1.75;
-  /* Room above the first line and below the last so the line being typed can
-     always sit in the middle of the window (see useCentredLine). */
-  padding-top: 50vh;
+  /* Room below the last line (and, for the "middle" start, above the first)
+     so the line being typed can sit in the middle of the window (see
+     useCentredLine). */
+  padding-top: 0.5rem;
   padding-bottom: 50vh;
   cursor: text;
+}
+.scripture.start-middle {
+  padding-top: 50vh;
 }
 /* Once the chapter is finished the summary is at the top; no need for the gap. */
 .summary ~ .scripture {
@@ -696,7 +700,7 @@ main {
   color: var(--faint);
   font-family: var(--font-ui);
   font-size: 0.8em;
-  margin-right: 0.15em;
+  margin-left: 0.15em;
 }
 .is-focused .ch.caret {
   box-shadow: inset 2px 0 0 var(--caret);

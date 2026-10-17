@@ -107,17 +107,21 @@ export interface DailyTotals extends TypingTotals {
 }
 
 export type ScrollStyle = 'smooth' | 'instant' | 'block'
+/** Where the first line sits: at the top of the screen, or already in the middle. */
+export type TypingStart = 'top' | 'middle'
 export type Theme = 'system' | 'light' | 'dark'
 export type TextSize = 'small' | 'medium' | 'large'
 
 export interface Settings {
   scrollStyle: ScrollStyle
+  typingStart: TypingStart
   theme: Theme
   textSize: TextSize
 }
 
 export const DEFAULT_SETTINGS: Settings = {
   scrollStyle: 'smooth',
+  typingStart: 'top',
   theme: 'system',
   textSize: 'medium',
 }

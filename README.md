@@ -19,14 +19,15 @@ as an app from Chrome or Edge on Windows and Linux.
 - **Library** → add a course to Home. Its books are downloaded so it works
   offline.
 - **Home** → **Continue** goes to the verse after the last one you completed.
-- **Typing**: just type. Verse numbers are skipped; press Space or Enter
-  between verses. Curly quotes, dashes and ellipses are typed as `'` `"` `-` and
+- **Typing**: just type. Verse numbers are skipped; press Space or Enter at
+  the end of each verse. Curly quotes, dashes and ellipses are typed as `'` `"` `-` and
   `...`. Backspace fixes a mistake (it still counts against accuracy);
   Ctrl+Backspace deletes a word; Esc pauses; Enter resumes. The big WPM is
   for the verse you are typing; the small one under it is for the whole
   chapter. When a chapter is finished, Enter goes on to the next one. Hover a
   verse (or Tab to its note button) to add a note.
-- **Settings**: theme, text size, scroll style, the per-course January 1 reset,
+- **Settings**: theme, text size, scroll style, whether a chapter starts at
+  the top of the screen or in the middle, the per-course January 1 reset,
   and Export / Import / Delete of all data (one JSON file).
 
 ## Run it locally

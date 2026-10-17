@@ -2,7 +2,14 @@ import { useCallback, useRef, useState } from 'react'
 import { useApp, useLoad } from '../app/context'
 import { Loading } from '../components/ui'
 import { findCourse } from '../library/texts'
-import { BackupError, localDate, type ScrollStyle, type TextSize, type Theme } from '../storage'
+import {
+  BackupError,
+  localDate,
+  type ScrollStyle,
+  type TextSize,
+  type Theme,
+  type TypingStart,
+} from '../storage'
 
 const SCROLL_STYLES: { value: ScrollStyle; label: string; help: string }[] = [
   {
@@ -19,6 +26,19 @@ const SCROLL_STYLES: { value: ScrollStyle; label: string; help: string }[] = [
     value: 'block',
     label: 'Block',
     help: 'The line you are typing moves down a few lines, then the text jumps up a block to bring it back above the middle.',
+  },
+]
+
+const TYPING_STARTS: { value: TypingStart; label: string; help: string }[] = [
+  {
+    value: 'top',
+    label: 'At the top',
+    help: 'A chapter starts at the top of the screen; the text starts scrolling once the line you are typing reaches the middle.',
+  },
+  {
+    value: 'middle',
+    label: 'In the middle',
+    help: 'The line you are typing is always in the middle, with blank space above the first line.',
   },
 ]
 
@@ -153,6 +173,21 @@ export function Settings() {
                 value={s.value}
                 checked={settings.scrollStyle === s.value}
                 onChange={() => updateSettings({ scrollStyle: s.value })}
+              />
+              {s.label} <span className="muted">– {s.help}</span>
+            </label>
+          ))}
+        </fieldset>
+        <fieldset>
+          <legend>Where the first line starts</legend>
+          {TYPING_STARTS.map((s) => (
+            <label key={s.value} className="choice">
+              <input
+                type="radio"
+                name="typingStart"
+                value={s.value}
+                checked={settings.typingStart === s.value}
+                onChange={() => updateSettings({ typingStart: s.value })}
               />
               {s.label} <span className="muted">– {s.help}</span>
             </label>

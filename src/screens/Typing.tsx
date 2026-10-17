@@ -13,7 +13,7 @@ import {
   type CourseInfo,
   type Verse,
 } from '../library/texts'
-import type { Note, ScrollStyle } from '../storage'
+import type { Note, ScrollStyle, TypingStart } from '../storage'
 import { TypingEngine, type VerseResult } from '../typing'
 import { useCentredLine } from './useCentredLine'
 
@@ -94,6 +94,7 @@ export function Typing({ courseId, bookId, chapter, after }: Props) {
       resumed={resumed}
       initialNotes={data.notes}
       scrollStyle={settings.scrollStyle}
+      typingStart={settings.typingStart}
       onRestart={() => {
         setRestarts((n) => n + 1)
         navigate(paths.typing(courseId, bookId, chapter, 0), { replace: true })
@@ -111,6 +112,7 @@ interface SessionProps {
   resumed: boolean
   initialNotes: Note[]
   scrollStyle: ScrollStyle
+  typingStart: TypingStart
   onRestart: () => void
 }
 
@@ -128,6 +130,7 @@ function TypingSession({
   resumed,
   initialNotes,
   scrollStyle,
+  typingStart,
   onRestart,
 }: SessionProps) {
   const { storage } = useApp()
@@ -202,7 +205,8 @@ function TypingSession({
     setTick((n) => n + 1)
   }
 
-  // Keep the current line in the middle of the screen as lines are finished.
+  // Keep the current line in the middle of the screen as lines are finished
+  // (with "top", the first lines sit above the middle until it is reached).
   useCentredLine({ textRef, barRef, tick, finished, scrollStyle })
 
   // Start typing straight away; Enter brings focus back after a pause. On the
@@ -401,7 +405,7 @@ function TypingSession({
 
       <div
         ref={textRef}
-        className={`scripture ${focused || finished ? 'is-focused' : 'is-paused'}`}
+        className={`scripture start-${typingStart} ${focused || finished ? 'is-focused' : 'is-paused'}`}
         onMouseUp={(e) => {
           const target = e.target as HTMLElement
           if (finished || target.closest('button, textarea, a, form')) return

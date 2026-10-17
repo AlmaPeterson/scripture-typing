@@ -75,23 +75,6 @@ export const VerseBlock = memo(VerseBlockImpl)
 function renderTyped(layout: VerseLayout, engine: TypingEngine): ReactNode[] {
   const cursor = engine.cursor
   const out: ReactNode[] = []
-  if (layout.separator >= 0) {
-    const p = layout.separator
-    const state = engine.charState(p)
-    const caret = cursor === p
-    if (caret || state === 'wrong') {
-      out.push(
-        <span
-          key="sep"
-          className={`ch sep ${caret ? 'caret' : ''} ${state === 'wrong' ? 'wrong' : ''} ${caret && engine.blockedKey !== null ? 'blocked' : ''}`}
-          data-caret={caret || undefined}
-          title={caret ? 'Press Space or Enter' : undefined}
-        >
-          ␣
-        </span>,
-      )
-    }
-  }
   layout.tokens.forEach((tok, i) => {
     if (tok.length === 0) {
       out.push(
@@ -122,6 +105,23 @@ function renderTyped(layout: VerseLayout, engine: TypingEngine): ReactNode[] {
       </span>,
     )
   })
+  if (layout.separator >= 0) {
+    const p = layout.separator
+    const state = engine.charState(p)
+    const caret = cursor === p
+    if (caret || state === 'wrong') {
+      out.push(
+        <span
+          key="sep"
+          className={`ch sep ${caret ? 'caret' : ''} ${state === 'wrong' ? 'wrong' : ''} ${caret && engine.blockedKey !== null ? 'blocked' : ''}`}
+          data-caret={caret || undefined}
+          title={caret ? 'Press Space or Enter' : undefined}
+        >
+          ␣
+        </span>,
+      )
+    }
+  }
   return out
 }
 

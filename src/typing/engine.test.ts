@@ -49,7 +49,8 @@ describe('TypingEngine layout', () => {
     ])
     // "In the" + " " + "And"
     expect(e.length).toBe(6 + 1 + 3)
-    expect(e.verses[1].separator).toBe(6)
+    expect(e.verses[0].separator).toBe(6) // the space ends verse 1
+    expect(e.verses[1].separator).toBe(-1) // nothing after the last verse
     expect(e.expectedAt(6)).toBe(' ')
   })
 
@@ -83,7 +84,7 @@ describe('TypingEngine layout', () => {
     )
     expect(e.verses[0].skipped).toBe(true)
     expect(e.verseDone(0)).toBe(true)
-    expect(e.length).toBe(3 + 1 + 3) // no separator before the starting verse
+    expect(e.length).toBe(3 + 1 + 3) // no separator after the last verse
     expect(e.currentVerse).toBe(1)
     const results: InputResult[] = []
     type(e, 'two six', 0, 100, results)
@@ -167,7 +168,12 @@ describe('TypingEngine typing', () => {
     expect(e.cursor).toBe(1)
     expect(e.blockedKey).toBe('x')
     expect(e.errors).toBe(1)
-    const ok = e.input('b', t + 200)
+    expect(e.input('b', t + 200).completedVerse).toBeUndefined()
+    expect(e.blockedKey).toBeNull()
+    // The separator after the verse is blocked the same way.
+    expect(e.input('z', t + 300).blocked).toBe(true)
+    expect(e.cursor).toBe(2)
+    const ok = e.input(' ', t + 400)
     expect(ok.completedVerse?.verseNumber).toBe(1)
     expect(e.blockedKey).toBeNull()
   })
@@ -187,12 +193,13 @@ describe('TypingEngine typing', () => {
       { number: 2, text: 'cd' },
     ])
     let t = type(e, 'ab', 0)
+    expect(e.backspace((t += 100))).toBe(true) // verse 1 is done only after its space
+    t = type(e, 'b ', t)
     expect(e.backspace((t += 100))).toBe(false)
-    t = type(e, ' c', t)
+    t = type(e, 'c', t)
     expect(e.backspace((t += 100))).toBe(true)
-    expect(e.backspace((t += 100))).toBe(true) // the separator belongs to verse 2
     expect(e.backspace(t + 100)).toBe(false)
-    expect(e.cursor).toBe(2)
+    expect(e.cursor).toBe(3)
   })
 
   it('Ctrl+Backspace deletes back to the start of the word', () => {
@@ -211,13 +218,13 @@ describe('TypingEngine typing', () => {
       { number: 2, text: 'cd' },
     ])
     const results: InputResult[] = []
-    type(e, 'ab', 0, 100, results)
-    type(e, ' xd', 200, 100, results) // wrong 'x' instead of 'c', left unfixed
+    type(e, 'ab ', 0, 100, results)
+    type(e, 'xd', 300, 100, results) // wrong 'x' instead of 'c', left unfixed
     const [v1, v2] = completed(results)
-    expect(v1).toMatchObject({ verseNumber: 1, correctChars: 2, keystrokes: 2, errors: 0 })
+    expect(v1).toMatchObject({ verseNumber: 1, correctChars: 3, keystrokes: 3, errors: 0 })
     expect(v1.accuracy).toBe(1)
-    expect(v2).toMatchObject({ verseNumber: 2, correctChars: 2, keystrokes: 3, errors: 1 })
-    expect(v2.accuracy).toBeCloseTo(2 / 3)
+    expect(v2).toMatchObject({ verseNumber: 2, correctChars: 1, keystrokes: 2, errors: 1 })
+    expect(v2.accuracy).toBeCloseTo(1 / 2)
     expect(e.verseDone(0)).toBe(true)
     expect(e.verseDone(1)).toBe(true)
   })
@@ -250,9 +257,10 @@ describe('TypingEngine timing', () => {
     const results: InputResult[] = []
     type(e, 'ab cd', 0, 100, results)
     const [v1, v2] = completed(results)
-    expect(v1.activeMs).toBe(100)
-    expect(v2.activeMs).toBe(300) // separator + c + d
-    expect(v2.wpm).toBeCloseTo(wpm(3, 300))
+    expect(v1.activeMs).toBe(200) // b + separator
+    expect(v2.activeMs).toBe(200) // c + d
+    expect(v1.wpm).toBeCloseTo(wpm(3, 200))
+    expect(v2.wpm).toBeCloseTo(wpm(2, 200))
   })
 
   it('restarts the live verse WPM at each verse and keeps the chapter WPM', () => {
@@ -263,18 +271,22 @@ describe('TypingEngine timing', () => {
     expect(e.verseWpm).toBe(0)
     let t = type(e, 'abcd', 0, 100)
     expect(e.verseWpm).toBeCloseTo(wpm(4, 300))
-    t = type(e, 'e', t, 100) // verse 1: 5 chars in 400ms
-    // Verse 1 is done: the cursor is on verse 2's separator, nothing typed there yet.
+    t = type(e, 'e', t, 100)
+    // The cursor is on verse 1's separator, so verse 1 is still the live one.
+    expect(e.currentVerse).toBe(0)
+    expect(e.verseWpm).toBeCloseTo(wpm(5, 400))
+    t = type(e, ' ', t, 200) // verse 1: 6 chars in 600ms
+    // Verse 1 is done: the cursor is at the start of verse 2, nothing typed there yet.
     expect(e.currentVerse).toBe(1)
     expect(e.verseWpm).toBe(0)
     expect(e.verseActiveMs).toBe(0)
-    expect(e.wpm).toBeCloseTo(wpm(5, 400))
-    // Verse 2 typed slower: separator + 5 chars, 200ms apart.
+    expect(e.wpm).toBeCloseTo(wpm(6, 600))
+    // Verse 2 typed slower: 5 chars, 200ms apart.
     const results: InputResult[] = []
-    type(e, ' fghij', t, 200, results)
+    type(e, 'fghij', t, 200, results)
     expect(e.finished).toBe(true)
-    expect(e.verseActiveMs).toBe(1200)
-    expect(e.verseWpm).toBeCloseTo(wpm(6, 1200))
+    expect(e.verseActiveMs).toBe(1000)
+    expect(e.verseWpm).toBeCloseTo(wpm(5, 1000))
     expect(e.verseWpm).toBeCloseTo(completed(results)[0].wpm)
     // The chapter numbers cover both verses.
     expect(e.activeMs).toBe(1600)

@@ -92,10 +92,14 @@ books opens a **Course** screen listing its books; a course with one book
 - Shows the full chapter.
 - The current line stays in the vertical middle of the window, so the text
   already typed is readable above it and the text to come below it; the text
-  scrolls up as each line is finished. At the start of a chapter there is
-  blank space above the first line, and at the end blank space below the
-  last, so they can reach the middle too. Scroll style is a setting (smooth
-  line-by-line, instant line-by-line, or jump a block at a time).
+  scrolls up as each line is finished. By default a chapter starts at the top
+  of the screen and only starts scrolling once the line being typed reaches
+  the middle; a setting instead puts blank space above the first line so it
+  starts in the middle. There is blank space below the last line so it can
+  reach the middle too. Scroll style is a setting (smooth line-by-line,
+  instant line-by-line, or jump a block at a time).
+- The space (or Enter) between two verses is typed at the end of the verse
+  it follows: a verse is complete once that space is typed.
 - Live WPM for the current verse / paragraph (restarting at each one), with
   the whole chapter's WPM beside it, and accuracy for the chapter.
 - On the end-of-chapter summary, Enter goes to the next chapter.
@@ -109,7 +113,7 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
 ### Settings
 
 - Per course: **reset progress every January 1** (notes are kept).
-- Scroll style.
+- Scroll style, and whether a chapter starts at the top or in the middle.
 - **Export / Import** a backup of all data as one JSON file.
 
 ## Behaviour
