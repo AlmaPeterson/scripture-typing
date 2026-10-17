@@ -31,3 +31,6 @@ raw/
 
 # Python
 __pycache__/
+
+# Claude Code local files (agent worktrees)
+.claude/
