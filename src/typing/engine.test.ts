@@ -255,6 +255,43 @@ describe('TypingEngine timing', () => {
     expect(v2.wpm).toBeCloseTo(wpm(3, 300))
   })
 
+  it('restarts the live verse WPM at each verse and keeps the chapter WPM', () => {
+    const e = new TypingEngine([
+      { number: 1, text: 'abcde' },
+      { number: 2, text: 'fghij' },
+    ])
+    expect(e.verseWpm).toBe(0)
+    let t = type(e, 'abcd', 0, 100)
+    expect(e.verseWpm).toBeCloseTo(wpm(4, 300))
+    t = type(e, 'e', t, 100) // verse 1: 5 chars in 400ms
+    // Verse 1 is done: the cursor is on verse 2's separator, nothing typed there yet.
+    expect(e.currentVerse).toBe(1)
+    expect(e.verseWpm).toBe(0)
+    expect(e.verseActiveMs).toBe(0)
+    expect(e.wpm).toBeCloseTo(wpm(5, 400))
+    // Verse 2 typed slower: separator + 5 chars, 200ms apart.
+    const results: InputResult[] = []
+    type(e, ' fghij', t, 200, results)
+    expect(e.finished).toBe(true)
+    expect(e.verseActiveMs).toBe(1200)
+    expect(e.verseWpm).toBeCloseTo(wpm(6, 1200))
+    expect(e.verseWpm).toBeCloseTo(completed(results)[0].wpm)
+    // The chapter numbers cover both verses.
+    expect(e.activeMs).toBe(1600)
+    expect(e.wpm).toBeCloseTo(wpm(11, 1600))
+  })
+
+  it('counts only correct characters and active time in the live verse WPM', () => {
+    const e = new TypingEngine([{ number: 1, text: 'abcdef' }], { idleMs: 5000 })
+    let t = type(e, 'abx', 0, 100) // x is wrong
+    expect(e.verseWpm).toBeCloseTo(wpm(2, 200))
+    e.backspace((t += 100))
+    t += 60000 // a long pause is not counted
+    type(e, 'cdef', t, 100)
+    expect(e.verseActiveMs).toBe(300 + 300)
+    expect(e.verseWpm).toBeCloseTo(wpm(6, 600))
+  })
+
   it('counts Backspace time as active time', () => {
     const e = new TypingEngine([{ number: 1, text: 'abc' }])
     let t = type(e, 'ax', 0, 100)

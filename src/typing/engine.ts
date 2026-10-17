@@ -234,6 +234,23 @@ export class TypingEngine {
     return accuracy(this.correctKeystrokes, this.keystrokes)
   }
 
+  /**
+   * Live WPM for the verse the cursor is in (the last verse once finished):
+   * its correct characters so far over its own active time. It starts again
+   * from 0 at each verse; the separator before a verse counts towards that
+   * verse, as in its VerseResult. Pauses longer than `idleMs` are not counted.
+   */
+  get verseWpm(): number {
+    const index = this.currentVerse
+    const c = this.counters[index]
+    return c ? wpm(this.correctCharsIn(index), c.activeMs) : 0
+  }
+
+  /** Active time so far in the verse the cursor is in, in ms. */
+  get verseActiveMs(): number {
+    return this.counters[this.currentVerse]?.activeMs ?? 0
+  }
+
   expectedAt(p: number): string {
     return this.positions[p].expected
   }
@@ -393,11 +410,7 @@ export class TypingEngine {
   private verseResult(index: number): VerseResult {
     const v = this.verses[index]
     const c = this.counters[index]
-    let correctChars = 0
-    for (let p = v.start; p < v.end; p++) {
-      const t = this.typed[p]
-      if (t !== null && this.isCorrect(p, t)) correctChars++
-    }
+    const correctChars = this.correctCharsIn(index)
     return {
       verseIndex: index,
       verseNumber: v.number,
@@ -409,6 +422,18 @@ export class TypingEngine {
       wpm: wpm(correctChars, c.activeMs),
       accuracy: accuracy(c.correctKeystrokes, c.keystrokes),
     }
+  }
+
+  /** Characters of a verse currently typed correctly. */
+  private correctCharsIn(index: number): number {
+    const v = this.verses[index]
+    const end = Math.min(v.end, this.cursorPos)
+    let n = 0
+    for (let p = v.start; p < end; p++) {
+      const t = this.typed[p]
+      if (t !== null && this.isCorrect(p, t)) n++
+    }
+    return n
   }
 
   private bump(kind: KeyStatKind, key: string, correct: boolean, dt: number | null) {
