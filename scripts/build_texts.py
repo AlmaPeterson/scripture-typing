@@ -59,6 +59,22 @@ LDS_VOLUME_IDS = {
 # ("IN the beginning"). LORD in capitals is the KJV rendering of the divine
 # name and is kept.
 KEEP_CAPS = {"LORD", "GOD", "I", "O", "A"}
+OPENING_NAMES = {"ISRAEL"}
+# Words printed in small caps after a one-letter chapter opening ("I WILL").
+RUN_ON_CAPS = {
+    "AM", "BESEECH", "CHARGE", "CLAP", "COME", "COMMEND", "CRIED", "EXHORT", "FALSE",
+    "FOOLISH", "GIVE", "GOOD", "GREAT", "HEARKEN", "LIFTED", "LOVE", "PRAISE", "PRAYER",
+    "REVELATION", "SAID", "SAW", "SAY", "SING", "SOFT", "THEREFORE", "WAITED", "WAS",
+    "WILL", "WISE", "YE",
+}
+
+# Errors in the source data: (book title, chapter, verse) -> (wrong, right).
+SOURCE_FIXES = {
+    # The source drops "was eight years old when he" (KJV 2 Chronicles 34:1).
+    ("2 Chronicles", 34, 1): ("JOSIAHbegan", "JOSIAH was eight years old when he began"),
+    # A heading in small caps; printed today as "A Word of Wisdom".
+    ("Doctrine and Covenants", 89, 1): ("A WORD OF WISDOM", "A Word of Wisdom"),
+}
 
 
 def slug(title: str) -> str:
@@ -78,12 +94,31 @@ def tidy(text: str) -> str:
 
 
 def opening_caps(text: str) -> str:
-    """'IN the beginning' -> 'In the beginning' (chapter-opening small caps)."""
+    """'IN the beginning' -> 'In the beginning' (chapter-opening small caps).
+
+    After a one-letter first word the small caps run on: 'I WILL extol',
+    'O GIVE thanks', 'A GREAT and marvelous work', 'I, THE Lord'.
+    """
     m = re.match(r"^([A-Z][A-Z']+)\b", text)
     if m and m.group(1) not in KEEP_CAPS and len(m.group(1)) > 1:
         word = m.group(1)
         return word[0] + word[1:].lower() + text[len(word):]
+    m = re.match(r"^((?:[AIO]|Oh),? )((?:[A-Z][A-Z']+\b ?)+)", text)
+    if m:
+        words = m.group(2).split(" ")
+        caps = " ".join(opening_word(w) for w in words)
+        return m.group(1) + caps + text[m.end() :]
+    # The JST text can have these as "I Exhort", "A Good name".
+    m = re.match(r"^((?:[AIO]|Oh),? )([A-Z][a-z]+)\b", text)
+    if m and m.group(2).upper() in RUN_ON_CAPS:
+        return m.group(1) + m.group(2).lower() + text[m.end() :]
     return text
+
+
+def opening_word(word: str) -> str:
+    if word in KEEP_CAPS:
+        return word
+    return word.capitalize() if word in OPENING_NAMES else word.lower()
 
 
 def book_file(volume: str, book_id: str, title: str, unit_label: str, chapters: list[dict]) -> dict:
@@ -122,6 +157,10 @@ def load_lds_scriptures() -> dict[str, list[dict]]:
         if not chapters or chapters[-1]["number"] != ch:
             chapters.append({"number": ch, "verses": []})
         text = tidy(text)
+        fix = SOURCE_FIXES.get((title, ch, vn))
+        if fix:
+            assert fix[0] in text, (title, ch, vn)
+            text = text.replace(*fix)
         if vn == 1:
             text = opening_caps(text)
         chapters[-1]["verses"].append({"number": vn, "text": text})

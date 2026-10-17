@@ -62,10 +62,15 @@ dataset contains verse text only (no headings, footnotes or study helps).
   "Acts 15:18") are kept because they are part of the 1835 text.
 - **Chapter-opening capitals.** The sources print the first word of each
   chapter in capitals as typography ("IN the beginning"). That word is
-  converted to normal case ("In the beginning"). `LORD` (the KJV rendering of
+  converted to normal case ("In the beginning"); after a one-letter first word
+  the capitals run on to the next word ("I WILL extol" becomes "I will extol",
+  "O ISRAEL" becomes "O Israel"). `LORD` (the KJV rendering of
   the divine name) and other capitals inside verses are kept.
 - **Dashes.** The sources write an em dash as `--`. It is stored as `—`
   (and typed as `-`, see below).
+- **Source errors.** 2 Chronicles 34:1 in the source is missing "was eight
+  years old when he"; the build restores it (`SOURCE_FIXES` in
+  `scripts/build_texts.py`).
 - **Brackets** that are part of the printed text (D&C 109:2 "[Kirtland]",
   D&C 131:2 "[meaning ...]", Joseph Smith—History 1:2 "[1838]", and the KJV's
   1 John 2:23 "[but]") are kept.
@@ -133,6 +138,16 @@ Other rules applied to the JST text:
   text changed).
 - Words in `scripts/jst_words.txt` were checked by hand against the scans and
   are accepted as real words.
+- Obvious printer's errors in the 1867 edition are corrected (Genesis 17:8
+  "covennat" is typed as "covenant").
+
+Both scans were read by OCR software that makes the same mistakes on the
+same worn type, so two scans agreeing is not proof. After the first
+proofreading pass, every JST verse was compared word by word with the KJV and
+the differences that look like misreadings ("earnest" for "camest", "ho" for
+"he", stray letters, lost chapter-opening capitals, leaked chapter summaries)
+were checked against the page images and corrected. Some OCR errors that
+happen to form a plausible JST change may remain; please report any you find.
 
 ## Data format
 
