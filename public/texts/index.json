@@ -1117,8 +1117,7 @@
           "title": "Revelation",
           "unitLabel": "Chapter",
           "chapters": 22,
-          "path": "texts/jst-new-testament/revelation.json",
-          "draft": true
+          "path": "texts/jst-new-testament/revelation.json"
         }
       ]
     }

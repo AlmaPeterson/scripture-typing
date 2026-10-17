@@ -1141,6 +1141,47 @@
    "kjv_chapter",
    18,
    18
+  ],
+  [
+   "set",
+   "2:9",
+   "I know thy works, and tribulation, and poverty, (but thou art rich) and I know the blasphemy of them which say they are Jews, and are not, but are the synagogue of Satan."
+  ],
+  [
+   "set",
+   "9:15",
+   "And the four angels were loosed, which were prepared for an hour, and a day, and a month, and a year, for to slay the third part of men."
+  ],
+  [
+   "set",
+   "13:8",
+   "And all that dwell upon the earth shall worship him, whose names are not written in the book of life of the Lamb slain from the foundation of the world."
+  ],
+  [
+   "set",
+   "14:3",
+   "And they sung as it were a new song before the throne, and before the four beasts, and the elders: and no man could learn that song but the hundred and forty and four thousand, which were redeemed from the earth."
+  ],
+  [
+   "set",
+   "17:11",
+   "And the beast that was, and is not, even he is the eighth, and is of the seven, and goeth into perdition."
+  ],
+  [
+   "set",
+   "15:1",
+   "And I saw another sign in heaven, great and marvellous, seven angels having the seven last plagues; for in them is filled up the wrath of God.",
+   "force"
+  ],
+  [
+   "set",
+   "1:4",
+   "Now this is the testimony of John to the seven servants who are over the seven churches in Asia: Grace unto you, and peace, from him who is, and who was, and who is to come; who hath sent forth his angel from before his throne, to testify unto those who are the seven servants over the seven churches."
+  ],
+  [
+   "confirm",
+   1,
+   11
   ]
  ]
 }

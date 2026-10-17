@@ -75,9 +75,9 @@ against the scans.
 | NT | 2 John | 1 | 13 | ready | 0 | 0 |
 | NT | 3 John | 1 | 14 | ready | 0 | 0 |
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
-| NT | Revelation | 22 | 404 | draft | 2 | 6 |
+| NT | Revelation | 22 | 404 | ready | 0 | 0 |
 
-**62 of 65 books ready.**
+**63 of 65 books ready.**
 
 ## Details for draft books
 
@@ -105,10 +105,4 @@ against the scans.
 - unexpected characters in 3:4, 3:39, 3:40
 - 6 chapter(s) where the two scans do not agree on the verse division
 - unverified words: `3:39 hi§`, `17:11 xJone`, `23:6 Ptablai,`, `23:15 S"VFea`, `23:24 arejike`, `23:41 foretelUth`, `23:41 JerwsaUm,`, `24:56 bve.`, `27:49 juvi`
-
-### Revelation
-
-- check the verse division of chapter(s) 1, 11
-- 2 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `2:9 Sdij`, `9:15 Andlhe`, `13:8 whcfc`, `14:3 iiid`, `15:1 ven,`, `17:11 irt`
 
