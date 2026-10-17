@@ -28,7 +28,7 @@ interface Props {
 }
 
 export function Typing({ courseId, bookId, chapter, after }: Props) {
-  const { storage, library, settings } = useApp()
+  const { storage, library, settings, updateSettings } = useApp()
   const course = library ? findCourse(library, courseId) : undefined
   const bookInfo = course ? findBook(course, bookId) : undefined
   const [restarts, setRestarts] = useState(0)
@@ -95,6 +95,8 @@ export function Typing({ courseId, bookId, chapter, after }: Props) {
       initialNotes={data.notes}
       scrollStyle={settings.scrollStyle}
       typingStart={settings.typingStart}
+      showWordWpm={settings.showWordWpm}
+      onToggleWordWpm={() => void updateSettings({ showWordWpm: !settings.showWordWpm })}
       onRestart={() => {
         setRestarts((n) => n + 1)
         navigate(paths.typing(courseId, bookId, chapter, 0), { replace: true })
@@ -113,6 +115,8 @@ interface SessionProps {
   initialNotes: Note[]
   scrollStyle: ScrollStyle
   typingStart: TypingStart
+  showWordWpm: boolean
+  onToggleWordWpm: () => void
   onRestart: () => void
 }
 
@@ -131,6 +135,8 @@ function TypingSession({
   initialNotes,
   scrollStyle,
   typingStart,
+  showWordWpm,
+  onToggleWordWpm,
   onRestart,
 }: SessionProps) {
   const { storage } = useApp()
@@ -284,6 +290,17 @@ function TypingSession({
             <h1>
               {chapterLabel} {book.draft && <DraftBadge />}
             </h1>
+            <button
+              type="button"
+              className="word-wpm-toggle"
+              aria-pressed={showWordWpm}
+              // Keep focus in the typing input.
+              onMouseDown={(e) => e.preventDefault()}
+              onClick={onToggleWordWpm}
+              title="Show the WPM of each word of 4 or more letters above it"
+            >
+              Word WPM
+            </button>
           </div>
           <dl className="live-stats" aria-label="Live stats">
             <div>
@@ -292,7 +309,7 @@ function TypingSession({
                 {engine.verseActiveMs > 0 ? formatWpm(engine.verseWpm) : '–'}
               </dd>
               <dd className="live-sub" data-testid="chapter-wpm">
-                {book.unitLabel.toLowerCase()} {formatWpm(engine.wpm)}
+                {formatWpm(engine.wpm)} WPM this {book.unitLabel.toLowerCase()}
               </dd>
             </div>
             <div>
@@ -303,6 +320,9 @@ function TypingSession({
               <dt>{unitWord}</dt>
               <dd>
                 {engine.verses[current]?.number ?? '–'}/{lastVerseNumber}
+              </dd>
+              <dd className="live-sub" data-testid="chapter-number">
+                {book.unitLabel} {chapter}
               </dd>
             </div>
           </dl>
@@ -405,7 +425,7 @@ function TypingSession({
 
       <div
         ref={textRef}
-        className={`scripture start-${typingStart} ${focused || finished ? 'is-focused' : 'is-paused'}`}
+        className={`scripture start-${typingStart} ${focused || finished ? 'is-focused' : 'is-paused'} ${showWordWpm ? 'show-word-wpm' : ''}`}
         onMouseUp={(e) => {
           const target = e.target as HTMLElement
           if (finished || target.closest('button, textarea, a, form')) return
@@ -426,6 +446,7 @@ function TypingSession({
               engine={engine}
               mode={mode}
               tick={mode === 'current' ? tick : 0}
+              showWordWpm={showWordWpm}
               unitLabel={book.unitLabel}
               note={notes.get(layout.number)}
               editing={editing === layout.number}

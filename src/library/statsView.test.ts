@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import type { DailyTotals, KeyStat, VerseStat } from '../storage'
-import { aggregate, dailyHistory, rankKeys, slowestFastest } from './statsView'
+import { aggregate, dailyHistory, fingerTotals, rankKeys, slowestFastest } from './statsView'
 
 function vs(
   bookId: string,
@@ -94,5 +94,39 @@ describe('dailyHistory', () => {
     const all = dailyHistory(rows, null, today)
     expect(all).toHaveLength(3)
     expect(all[0].wpm).toBe(100)
+  })
+})
+
+describe('fingerTotals', () => {
+  const ks = (kind: KeyStat['kind'], key: string, totalMs = 100): KeyStat => ({
+    kind,
+    key,
+    count: 1,
+    timedCount: 1,
+    totalMs,
+    errors: 0,
+    updatedAt: 0,
+  })
+  const stats = [
+    ks('letter', 'e'),
+    ks('letter', 'k'),
+    ks('key', ';'),
+    ks('finger', 'thumb', 50),
+    ks('finger', 'left-middle', 999),
+  ]
+
+  it('maps letters and other keys to fingers for the chosen layout', () => {
+    const qwerty = fingerTotals(stats, 'qwerty')
+    expect(qwerty.get('left-middle')).toMatchObject({ count: 1, totalMs: 100 })
+    expect(qwerty.get('right-middle')).toMatchObject({ count: 1 })
+    expect(qwerty.get('right-pinky')).toMatchObject({ count: 1 })
+    expect(qwerty.get('thumb')).toMatchObject({ count: 1, totalMs: 50 })
+
+    const dvorak = fingerTotals(stats, 'dvorak')
+    // Dvorak: e is the left middle finger's home key, k is the left index, ; the left pinky.
+    expect(dvorak.get('left-middle')).toMatchObject({ count: 1 })
+    expect(dvorak.get('left-index')).toMatchObject({ count: 1 })
+    expect(dvorak.get('left-pinky')).toMatchObject({ count: 1 })
+    expect(dvorak.get('right-middle')).toMatchObject({ count: 0 })
   })
 })

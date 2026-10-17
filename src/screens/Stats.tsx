@@ -1,21 +1,31 @@
 import { useCallback, useState } from 'react'
 import { useApp, useLoad } from '../app/context'
 import { paths } from '../app/router'
-import { BarChart, BarList, LineChart } from '../components/charts'
+import { BarChart, BarList, LineChart, type Detail } from '../components/charts'
 import { formatDate, formatDuration, formatPercent, formatWpm } from '../components/format'
 import { Loading } from '../components/ui'
 import {
   aggregate,
   dailyHistory,
+  fingerTotals,
   rankKeys,
   shortDate,
   slowestFastest,
   type Aggregate,
+  type DayPoint,
   type RankedKey,
 } from '../library/statsView'
 import { findBook, findCourse, type LibraryIndex } from '../library/texts'
 import type { VerseStat } from '../storage'
-import { FINGER_LABELS, FINGERS, accuracy, keyStatWpm, wpm } from '../typing'
+import {
+  FINGER_LABELS,
+  FINGERS,
+  KEYBOARD_LAYOUTS,
+  accuracy,
+  keyStatWpm,
+  wpm,
+  type KeyboardLayout,
+} from '../typing'
 
 const RANGES: { label: string; days: number | null }[] = [
   { label: '30 days', days: 30 },
@@ -24,8 +34,22 @@ const RANGES: { label: string; days: number | null }[] = [
   { label: 'All', days: null },
 ]
 
+/** Everything about a day, for the chart tooltips. */
+function dayDetails(d: DayPoint): Detail[] {
+  const details = [
+    { label: 'Speed', value: `${formatWpm(d.wpm)} WPM` },
+    { label: 'Accuracy', value: formatPercent(d.accuracy, 1) },
+    { label: 'Time', value: formatDuration(d.activeMs) },
+    { label: 'Verses', value: String(d.verses) },
+    { label: 'Mistakes', value: String(d.errors) },
+  ]
+  if (d.chaptersCompleted > 0)
+    details.push({ label: 'Chapters finished', value: String(d.chaptersCompleted) })
+  return details
+}
+
 export function Stats() {
-  const { storage, library } = useApp()
+  const { storage, library, settings, updateSettings } = useApp()
   const load = useCallback(async () => {
     const [daily, sessions, verseStats, keyStats] = await Promise.all([
       storage.getDaily(),
@@ -124,13 +148,21 @@ export function Stats() {
             <h3 className="chart-title">Speed (WPM per day)</h3>
             <LineChart
               title="Words per minute per day"
-              points={history.map((d) => ({ label: shortDate(d.date), value: d.wpm }))}
+              points={history.map((d) => ({
+                label: shortDate(d.date),
+                value: d.wpm,
+                details: dayDetails(d),
+              }))}
               format={(v) => v.toFixed(0)}
             />
             <h3 className="chart-title">Accuracy per day</h3>
             <LineChart
               title="Accuracy per day"
-              points={history.map((d) => ({ label: shortDate(d.date), value: d.accuracy * 100 }))}
+              points={history.map((d) => ({
+                label: shortDate(d.date),
+                value: d.accuracy * 100,
+                details: dayDetails(d),
+              }))}
               min={Math.max(
                 0,
                 Math.floor(Math.min(...history.map((d) => d.accuracy * 100)) / 5) * 5 - 5,
@@ -141,7 +173,11 @@ export function Stats() {
             <h3 className="chart-title">Minutes typed per day</h3>
             <BarChart
               title="Minutes typed per day"
-              points={history.map((d) => ({ label: shortDate(d.date), value: d.activeMs / 60000 }))}
+              points={history.map((d) => ({
+                label: shortDate(d.date),
+                value: d.activeMs / 60000,
+                details: dayDetails(d),
+              }))}
               format={(v) => v.toFixed(v < 10 ? 1 : 0)}
             />
             <details>
@@ -219,7 +255,11 @@ export function Stats() {
         </div>
       </section>
 
-      <KeyPanels keyStats={keyStats} />
+      <KeyPanels
+        keyStats={keyStats}
+        layout={settings.keyboardLayout}
+        onLayout={(keyboardLayout) => void updateSettings({ keyboardLayout })}
+      />
     </div>
   )
 }
@@ -353,16 +393,32 @@ function Breakdown({ library, verseStats }: { library: LibraryIndex; verseStats:
   )
 }
 
-function rankedItems(list: RankedKey[], showKey: (k: string) => string = (k) => k) {
+function rankedItems(list: RankedKey[], perWord = false) {
   return list.map((r) => ({
     key: r.key,
-    label: showKey(r.key),
+    label: r.key,
     value: r.wpm,
-    note: `${r.samples} samples · ${formatPercent(r.errorRate, 1)} mistakes`,
+    details: [
+      { label: 'Typed', value: `${r.count} times` },
+      { label: 'Timed', value: `${r.samples} times` },
+      {
+        label: perWord ? 'Average per word' : 'Average per key',
+        value: `${Math.round(r.avgMs)} ms`,
+      },
+      { label: 'Mistakes', value: `${r.errors} (${formatPercent(r.errorRate, 1)})` },
+    ],
   }))
 }
 
-function KeyPanels({ keyStats }: { keyStats: Parameters<typeof rankKeys>[0] }) {
+function KeyPanels({
+  keyStats,
+  layout,
+  onLayout,
+}: {
+  keyStats: Parameters<typeof rankKeys>[0]
+  layout: KeyboardLayout
+  onLayout: (layout: KeyboardLayout) => void
+}) {
   const words = slowestFastest(rankKeys(keyStats, 'word', 1), 10)
   const letters = slowestFastest(rankKeys(keyStats, 'letter', 5), 8)
   const bigrams = slowestFastest(rankKeys(keyStats, 'bigram', 5), 10)
@@ -370,17 +426,26 @@ function KeyPanels({ keyStats }: { keyStats: Parameters<typeof rankKeys>[0] }) {
   const all = [...words.slowest, ...words.fastest, ...letters.fastest, ...bigrams.fastest]
   const max = Math.max(1, ...all.map((r) => r.wpm))
 
+  const fingers = fingerTotals(keyStats, layout)
   const fingerItems = FINGERS.map((f) => {
-    const s = keyStats.find((k) => k.kind === 'finger' && k.key === f)
-    return s && s.timedCount > 0
+    const s = fingers.get(f)!
+    return s.timedCount > 0
       ? {
           key: f,
           label: FINGER_LABELS[f],
           value: keyStatWpm('finger', f, s),
-          note: `${s.timedCount} keys · ${formatPercent(s.errors / Math.max(1, s.count + s.errors), 1)} mistakes`,
+          details: [
+            { label: 'Keys typed', value: String(s.count) },
+            { label: 'Average per key', value: `${Math.round(s.totalMs / s.timedCount)} ms` },
+            {
+              label: 'Mistakes',
+              value: `${s.errors} (${formatPercent(s.errors / Math.max(1, s.count + s.errors), 1)})`,
+            },
+          ],
         }
       : null
   }).filter((x) => x !== null)
+  const layoutLabel = KEYBOARD_LAYOUTS.find((l) => l.value === layout)?.label ?? layout
 
   return (
     <>
@@ -392,11 +457,11 @@ function KeyPanels({ keyStats }: { keyStats: Parameters<typeof rankKeys>[0] }) {
         <div className="two-col">
           <div>
             <h3>Slowest</h3>
-            <BarList items={rankedItems(words.slowest)} format={fmt} max={max} />
+            <BarList items={rankedItems(words.slowest, true)} format={fmt} max={max} />
           </div>
           <div>
             <h3>Fastest</h3>
-            <BarList items={rankedItems(words.fastest)} format={fmt} max={max} />
+            <BarList items={rankedItems(words.fastest, true)} format={fmt} max={max} />
           </div>
         </div>
       </section>
@@ -428,10 +493,22 @@ function KeyPanels({ keyStats }: { keyStats: Parameters<typeof rankKeys>[0] }) {
       </section>
 
       <section className="panel" aria-labelledby="fingers">
-        <h2 id="fingers">Fingers (estimate)</h2>
+        <div className="panel-head">
+          <h2 id="fingers">Fingers (estimate)</h2>
+          <label className="inline-select">
+            Keyboard layout{' '}
+            <select value={layout} onChange={(e) => onLayout(e.target.value as KeyboardLayout)}>
+              {KEYBOARD_LAYOUTS.map((l) => (
+                <option key={l.value} value={l.value}>
+                  {l.label}
+                </option>
+              ))}
+            </select>
+          </label>
+        </div>
         <p className="panel-note">
           This is an estimate: the app cannot see which finger pressed a key, so it assumes standard
-          touch-typing positions on a QWERTY keyboard.
+          touch-typing positions on a {layoutLabel} keyboard.
         </p>
         <BarList items={fingerItems} format={fmt} mono={false} />
       </section>

@@ -24,9 +24,13 @@ as an app from Chrome or Edge on Windows and Linux.
   `...`. Backspace fixes a mistake (it still counts against accuracy);
   Ctrl+Backspace deletes a word; Esc pauses; Enter resumes. The big WPM is
   for the verse you are typing; the small one under it is for the whole
-  chapter. When a chapter is finished, Enter goes on to the next one. Hover a
+  chapter. **Word WPM** (under the chapter title, or in Settings) shows how
+  fast you typed each word of 4 or more letters, above the word. When a chapter is finished, Enter goes on to the next one. Hover a
   verse (or Tab to its note button) to add a note.
-- **Settings**: theme, text size, scroll style, whether a chapter starts at
+- **Stats**: hover a chart point or a bar for its details. Pick your
+  keyboard layout (QWERTY, Dvorak, Colemak, Colemak-DH, Workman, QWERTZ,
+  AZERTY) above the finger estimate.
+- **Settings**: theme, text size, scroll style, word WPM, whether a chapter starts at
   the top of the screen or in the middle, the per-course January 1 reset,
   and Export / Import / Delete of all data (one JSON file).
 

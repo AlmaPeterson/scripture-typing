@@ -11,6 +11,8 @@ interface Props {
   mode: VerseMode
   /** Changes on every keystroke for the current verse only, so other verses do not re-render. */
   tick: number
+  /** Show the speed of each word of 4+ letters above it once it is typed. */
+  showWordWpm: boolean
   unitLabel: string
   note: Note | undefined
   editing: boolean
@@ -23,6 +25,7 @@ function VerseBlockImpl({
   layout,
   engine,
   mode,
+  showWordWpm,
   unitLabel,
   note,
   editing,
@@ -39,7 +42,11 @@ function VerseBlockImpl({
         </span>
         <span className="verse-text">
           {/* Finished verses go back to plain text, without their mistakes. */}
-          {mode === 'current' ? renderTyped(layout, engine) : layout.text}
+          {mode === 'current'
+            ? renderTyped(layout, engine, showWordWpm)
+            : mode === 'done' && showWordWpm
+              ? renderPlainWithSpeeds(layout, engine)
+              : layout.text}
           {mode === 'done' && <VerseWpm layout={layout} engine={engine} />}
         </span>
         <button
@@ -75,9 +82,60 @@ function VerseBlockImpl({
 
 export const VerseBlock = memo(VerseBlockImpl)
 
-function renderTyped(layout: VerseLayout, engine: TypingEngine): ReactNode[] {
-  const cursor = engine.cursor
+/**
+ * Wrap the rendered tokens of each word of 4+ letters in a span with its
+ * speed above it. `nodes[i]` is what token i renders as.
+ */
+function withWordSpeeds(layout: VerseLayout, engine: TypingEngine, nodes: ReactNode[]) {
   const out: ReactNode[] = []
+  let i = 0
+  while (i < layout.tokens.length) {
+    const tok = layout.tokens[i]
+    const id = tok.length > 0 ? engine.shownWordAt(tok.start) : -1
+    if (id < 0) {
+      out.push(nodes[i])
+      i++
+      continue
+    }
+    const group: ReactNode[] = []
+    while (
+      i < layout.tokens.length &&
+      layout.tokens[i].length > 0 &&
+      engine.shownWordAt(layout.tokens[i].start) === id
+    ) {
+      group.push(nodes[i])
+      i++
+    }
+    const speed = engine.wordSpeed(id)
+    out.push(
+      <span key={`w${id}`} className="word">
+        {speed && (
+          <span
+            className={`word-wpm ${speed.hadError ? 'had-error' : ''}`}
+            aria-hidden="true"
+            title={speed.hadError ? 'Typed with a mistake' : undefined}
+          >
+            {formatWpm(speed.wpm)}
+          </span>
+        )}
+        {group}
+      </span>,
+    )
+  }
+  return out
+}
+
+function renderPlainWithSpeeds(layout: VerseLayout, engine: TypingEngine): ReactNode[] {
+  return withWordSpeeds(
+    layout,
+    engine,
+    layout.tokens.map((tok) => tok.display),
+  )
+}
+
+function renderTyped(layout: VerseLayout, engine: TypingEngine, showWordWpm: boolean): ReactNode[] {
+  const cursor = engine.cursor
+  let out: ReactNode[] = []
   layout.tokens.forEach((tok, i) => {
     if (tok.length === 0) {
       out.push(
@@ -108,6 +166,7 @@ function renderTyped(layout: VerseLayout, engine: TypingEngine): ReactNode[] {
       </span>,
     )
   })
+  if (showWordWpm) out = withWordSpeeds(layout, engine, out)
   if (layout.separator >= 0) {
     const p = layout.separator
     const state = engine.charState(p)

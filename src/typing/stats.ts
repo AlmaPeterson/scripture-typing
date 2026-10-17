@@ -21,9 +21,9 @@ export function msPerCharToWpm(msPerChar: number): number {
   return 60000 / msPerChar / 5
 }
 
-export type KeyStatKind = 'letter' | 'bigram' | 'word' | 'finger'
+export type KeyStatKind = 'letter' | 'bigram' | 'word' | 'finger' | 'key'
 
-/** Running totals for one letter, bigram, word (5+ letters) or finger. */
+/** Running totals for one letter, bigram, word (5+ letters), finger or other key (space, punctuation). */
 export interface KeyStatTotals {
   /** Correct keystrokes (or completed words). */
   count: number

@@ -1,6 +1,7 @@
-// Standard touch-typing finger assignments on a QWERTY keyboard (docs/PLAN.md).
-// The app cannot see which finger pressed a key, so per-finger figures are an
-// estimate that assumes these assignments.
+// Standard touch-typing finger assignments (docs/PLAN.md). Fingers belong to
+// physical key positions; a keyboard layout decides which character is on
+// each position. The app cannot see which finger pressed a key, so
+// per-finger figures are an estimate that assumes these assignments.
 
 export type Finger =
   | 'left-pinky'
@@ -37,50 +38,99 @@ export const FINGER_LABELS: Record<Finger, string> = {
   'right-pinky': 'Right pinky',
 }
 
-const KEYS: Record<Finger, string> = {
-  'left-pinky': '`1qaz',
-  'left-ring': '2wsx',
-  'left-middle': '3edc',
-  'left-index': '45rtfgvb',
-  thumb: ' ',
-  'right-index': '67yuhjnm',
-  'right-middle': '8ik,',
-  'right-ring': '9ol.',
-  'right-pinky': "0-=p[];'/\\\n",
+export type KeyboardLayout =
+  'qwerty' | 'dvorak' | 'colemak' | 'colemak-dh' | 'workman' | 'qwertz' | 'azerty'
+
+export const KEYBOARD_LAYOUTS: { value: KeyboardLayout; label: string }[] = [
+  { value: 'qwerty', label: 'QWERTY' },
+  { value: 'dvorak', label: 'Dvorak' },
+  { value: 'colemak', label: 'Colemak' },
+  { value: 'colemak-dh', label: 'Colemak-DH' },
+  { value: 'workman', label: 'Workman' },
+  { value: 'qwertz', label: 'QWERTZ (German)' },
+  { value: 'azerty', label: 'AZERTY (French)' },
+]
+
+// Fingers of each physical key, by row, as indexes into FINGERS. Rows are the
+// number row (from the key left of 1), the top row, the home row and the
+// bottom row, left to right, as on a US keyboard. The extra key some rows
+// have on ISO keyboards is typed with the pinky.
+const ROW_FINGERS = [
+  [0, 0, 1, 2, 3, 3, 5, 5, 6, 7, 8, 8, 8],
+  [0, 1, 2, 3, 3, 5, 5, 6, 7, 8, 8, 8, 8],
+  [0, 1, 2, 3, 3, 5, 5, 6, 7, 8, 8, 8],
+  [0, 0, 1, 2, 3, 3, 5, 5, 6, 7, 8],
+]
+
+/** Each layout's rows: [unshifted, shifted]. The bottom row starts with the ISO key left of Z (a space where there is none). */
+const LAYOUT_ROWS: Record<KeyboardLayout, [string, string][]> = {
+  qwerty: [
+    ['`1234567890-=', '~!@#$%^&*()_+'],
+    ['qwertyuiop[]\\', 'QWERTYUIOP{}|'],
+    ["asdfghjkl;'", 'ASDFGHJKL:"'],
+    [' zxcvbnm,./', ' ZXCVBNM<>?'],
+  ],
+  dvorak: [
+    ['`1234567890[]', '~!@#$%^&*(){}'],
+    ["',.pyfgcrl/=\\", '"<>PYFGCRL?+|'],
+    ['aoeuidhtns-', 'AOEUIDHTNS_'],
+    [' ;qjkxbmwvz', ' :QJKXBMWVZ'],
+  ],
+  colemak: [
+    ['`1234567890-=', '~!@#$%^&*()_+'],
+    ['qwfpgjluy;[]\\', 'QWFPGJLUY:{}|'],
+    ["arstdhneio'", 'ARSTDHNEIO"'],
+    [' zxcvbkm,./', ' ZXCVBKM<>?'],
+  ],
+  'colemak-dh': [
+    ['`1234567890-=', '~!@#$%^&*()_+'],
+    ['qwfpbjluy;[]\\', 'QWFPBJLUY:{}|'],
+    ["arstgmneio'", 'ARSTGMNEIO"'],
+    [' zxcdvkh,./', ' ZXCDVKH<>?'],
+  ],
+  workman: [
+    ['`1234567890-=', '~!@#$%^&*()_+'],
+    ['qdrwbjfup;[]\\', 'QDRWBJFUP:{}|'],
+    ["ashtgyneoi'", 'ASHTGYNEOI"'],
+    [' zxmcvkl,./', ' ZXMCVKL<>?'],
+  ],
+  qwertz: [
+    ['^1234567890ß´', '°!"§$%&/()=?`'],
+    ['qwertzuiopü+#', "QWERTZUIOPÜ*'"],
+    ['asdfghjklöä', 'ASDFGHJKLÖÄ'],
+    ['<yxcvbnm,.-', '>YXCVBNM;:_'],
+  ],
+  azerty: [
+    ['²&é"\'(-è_çà)=', '³1234567890°+'],
+    ['azertyuiop^$*', 'AZERTYUIOP¨£µ'],
+    ['qsdfghjklmù', 'QSDFGHJKLM%'],
+    ['<wxcvbn,;:!', '>WXCVBN?./§'],
+  ],
 }
 
-// Shifted symbol -> the key it is on.
-const SHIFTED: Record<string, string> = {
-  '~': '`',
-  '!': '1',
-  '@': '2',
-  '#': '3',
-  $: '4',
-  '%': '5',
-  '^': '6',
-  '&': '7',
-  '*': '8',
-  '(': '9',
-  ')': '0',
-  _: '-',
-  '+': '=',
-  '{': '[',
-  '}': ']',
-  '|': '\\',
-  ':': ';',
-  '"': "'",
-  '<': ',',
-  '>': '.',
-  '?': '/',
+function buildMap(layout: KeyboardLayout): Map<string, Finger> {
+  const map = new Map<string, Finger>([
+    [' ', 'thumb'],
+    ['\n', 'right-pinky'],
+  ])
+  LAYOUT_ROWS[layout].forEach((pair, row) => {
+    for (const keys of pair) {
+      ;[...keys].forEach((ch, i) => {
+        if (ch !== ' ' && !map.has(ch)) map.set(ch, FINGERS[ROW_FINGERS[row][i]])
+      })
+    }
+  })
+  return map
 }
 
-const KEY_TO_FINGER = new Map<string, Finger>()
-for (const finger of FINGERS) {
-  for (const key of KEYS[finger]) KEY_TO_FINGER.set(key, finger)
-}
+const MAPS = new Map<KeyboardLayout, Map<string, Finger>>()
 
-/** The finger that types `ch` in standard touch typing, or undefined if unknown. */
-export function fingerFor(ch: string): Finger | undefined {
-  const base = SHIFTED[ch] ?? ch.toLowerCase()
-  return KEY_TO_FINGER.get(base)
+/** The finger that types `ch` in standard touch typing on `layout`, or undefined if unknown. */
+export function fingerFor(ch: string, layout: KeyboardLayout = 'qwerty'): Finger | undefined {
+  let map = MAPS.get(layout)
+  if (!map) {
+    map = buildMap(layout)
+    MAPS.set(layout, map)
+  }
+  return map.get(ch) ?? map.get(ch.toLowerCase())
 }

@@ -562,6 +562,23 @@ main {
   text-decoration: underline;
 }
 
+/* Turns the speed above each word on and off. */
+.word-wpm-toggle {
+  margin-top: 0.3rem;
+  padding: 0.1rem 0.6rem;
+  font: 0.75rem var(--font-ui);
+  color: var(--muted);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 999px;
+  cursor: pointer;
+}
+.word-wpm-toggle[aria-pressed='true'] {
+  background: var(--accent-soft);
+  color: var(--text);
+  font-weight: 600;
+}
+
 .live-stats {
   display: flex;
   gap: 1.5rem;
@@ -681,6 +698,29 @@ main {
   color: var(--faint);
   white-space: nowrap;
   user-select: none;
+}
+/* The speed of each word of 4+ letters, above it. Extra line height makes room. */
+.scripture.show-word-wpm {
+  line-height: 2.5;
+}
+.word {
+  position: relative;
+}
+.word-wpm {
+  position: absolute;
+  left: 50%;
+  bottom: 100%;
+  transform: translateX(-50%);
+  font-family: var(--font-ui);
+  font-size: 0.5em;
+  font-weight: 600;
+  line-height: 1;
+  color: var(--faint);
+  white-space: nowrap;
+  user-select: none;
+}
+.word-wpm.had-error {
+  color: var(--corrected);
 }
 .verse-current .verse-num {
   color: var(--accent);
@@ -967,6 +1007,99 @@ legend {
 }
 .chart .bar-mark {
   fill: var(--chart-1);
+}
+/* Hover details for charts and bar lists. */
+.chart-frame {
+  position: relative;
+}
+.chart .hover-line {
+  stroke: var(--muted);
+  stroke-width: 1;
+  stroke-dasharray: 3 3;
+}
+.chart .hover-band {
+  fill: var(--accent-soft);
+}
+.chart-tip,
+.bar-tip {
+  position: absolute;
+  z-index: 20;
+  min-width: 9rem;
+  padding: 0.45rem 0.65rem;
+  font: 0.8rem var(--font-ui);
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  box-shadow: var(--shadow);
+  pointer-events: none;
+  white-space: nowrap;
+}
+.chart-tip {
+  margin-top: -0.75rem;
+  transform: translate(-50%, -100%);
+}
+.chart-tip-start {
+  transform: translate(-1rem, -100%);
+}
+.chart-tip-end {
+  transform: translate(calc(-100% + 1rem), -100%);
+}
+.chart-tip-title {
+  color: var(--muted);
+  font-size: 0.75rem;
+}
+.chart-tip-value {
+  font-size: 1rem;
+  font-weight: 600;
+  font-variant-numeric: tabular-nums;
+}
+.tip-details {
+  margin: 0.3rem 0 0;
+  display: grid;
+  gap: 0.1rem;
+}
+.tip-details div {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+}
+.tip-details dt {
+  color: var(--muted);
+}
+.tip-details dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.bars li {
+  position: relative;
+}
+.bars li:hover,
+.bars li:focus-visible {
+  background: var(--surface-2);
+  border-radius: 6px;
+}
+.bar-tip {
+  display: none;
+  right: 0;
+  bottom: calc(100% + 0.3rem);
+}
+.bars li:hover .bar-tip,
+.bars li:focus-visible .bar-tip {
+  display: block;
+}
+.inline-select {
+  font-size: 0.85rem;
+  color: var(--muted);
+}
+.inline-select select {
+  margin-left: 0.3rem;
+  padding: 0.25rem 0.4rem;
+  font: inherit;
+  color: var(--text);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 6px;
 }
 .chart-title {
   margin: 1rem 0 0.25rem;

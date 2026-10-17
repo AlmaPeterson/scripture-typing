@@ -406,5 +406,48 @@ describe('TypingEngine key stats', () => {
     expect(stat(stats, 'finger', 'left-pinky')).toMatchObject({ count: 2, timedCount: 1 })
     expect(stat(stats, 'finger', 'right-pinky')).toMatchObject({ count: 1, timedCount: 1 })
     expect(stat(stats, 'finger', 'thumb')).toMatchObject({ count: 1, totalMs: 100 })
+    // Punctuation is kept per key too (for other keyboard layouts); spaces are not.
+    expect(stat(stats, 'key', ';')).toMatchObject({ count: 1, timedCount: 1 })
+    expect(stat(stats, 'key', ' ')).toBeUndefined()
+  })
+})
+
+describe('word speed shown above words', () => {
+  const id = (e: TypingEngine, p: number) => e.shownWordAt(p)
+
+  it('marks words of 4 or more letters only', () => {
+    const e = new TypingEngine([{ number: 1, text: 'the Lord God' }])
+    expect(id(e, 0)).toBe(-1)
+    expect(id(e, 4)).toBe(0)
+    expect(id(e, 7)).toBe(0)
+    expect(id(e, 9)).toBe(-1)
+  })
+
+  it('times a word from the key before it to its last letter', () => {
+    const e = new TypingEngine([{ number: 1, text: 'in Lord' }])
+    type(e, 'in ', 0, 100)
+    expect(e.wordSpeed(0)).toBeNull()
+    type(e, 'Lord', 300, 120)
+    // 4 letters in 480 ms.
+    expect(e.wordSpeed(0)).toEqual({ wpm: wpm(4, 480), hadError: false })
+  })
+
+  it('times the first word typed from its first key', () => {
+    const e = new TypingEngine([{ number: 1, text: 'Lord' }])
+    type(e, 'Lord', 0, 100)
+    expect(e.wordSpeed(0)?.wpm).toBeCloseTo(wpm(3, 300))
+  })
+
+  it('notes a fixed mistake, and skips words with a long pause or a mistake left in', () => {
+    const e = new TypingEngine([{ number: 1, text: 'a Lord b Lord c Lord' }])
+    let t = type(e, 'a Lx', 0, 100)
+    e.backspace(t + 100)
+    t = type(e, 'ord b ', t + 100, 100)
+    expect(e.wordSpeed(0)?.hadError).toBe(true)
+    t = type(e, 'Lo', t, 100)
+    t = type(e, 'rd c ', t + 10000, 100)
+    expect(e.wordSpeed(1)).toBeNull()
+    type(e, 'Lxrd', t, 100)
+    expect(e.wordSpeed(2)).toBeNull()
   })
 })

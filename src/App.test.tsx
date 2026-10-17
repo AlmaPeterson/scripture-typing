@@ -159,10 +159,15 @@ describe('App', () => {
     await user.click(screen.getByRole('button', { name: 'Add note on verse 1' }))
     await user.type(screen.getByLabelText('Note on verse 1'), 'Creation')
     await user.click(screen.getByRole('button', { name: 'Save note' }))
-    expect(await screen.findByText('Creation')).toBeInTheDocument()
-    expect(await storage.getNotes('mini', 'alpha', 1)).toEqual([
-      expect.objectContaining({ verse: 1, text: 'Creation' }),
-    ])
+    // Wait for the save: until then, the editor's textarea also holds the text.
+    await waitFor(async () =>
+      expect(await storage.getNotes('mini', 'alpha', 1)).toEqual([
+        expect.objectContaining({ verse: 1, text: 'Creation' }),
+      ]),
+    )
+    await waitFor(() =>
+      expect(document.querySelector('[data-verse="1"] .note-text')).toHaveTextContent('Creation'),
+    )
     await waitFor(() => expect(input).toHaveFocus())
 
     // Verse 2: the em dash typed as "-", one wrong key left unfixed.
@@ -227,14 +232,14 @@ describe('App', () => {
     expect(screen.getByTestId('live-wpm')).toHaveTextContent('–')
     await user.keyboard('In the beginning')
     expect(screen.getByTestId('live-wpm').textContent).toMatch(/^\d+$/)
-    expect(screen.getByTestId('chapter-wpm').textContent).toMatch(/^chapter \d+$/)
+    expect(screen.getByTestId('chapter-wpm').textContent).toMatch(/^\d+ WPM this chapter$/)
     // Enter ends the verse: the verse WPM starts again at the next verse and
     // the chapter WPM carries on.
     await user.keyboard('.')
     expect(screen.getByTestId('live-wpm').textContent).toMatch(/^\d+$/)
     await user.keyboard('{Enter}')
     expect(screen.getByTestId('live-wpm')).toHaveTextContent('–')
-    expect(screen.getByTestId('chapter-wpm')).not.toHaveTextContent('chapter 0')
+    expect(screen.getByTestId('chapter-wpm')).not.toHaveTextContent(/^0 WPM/)
 
     // Finish the chapter.
     await user.keyboard('God said-light.')
@@ -384,13 +389,14 @@ describe('App', () => {
     await waitFor(() => expect(input).toHaveFocus())
     await user.keyboard('In the beginning. God said-light.')
     expect(await screen.findByText('Alpha 1 complete')).toBeInTheDocument()
+    await waitFor(async () => expect(await storage.getVerseStats()).toHaveLength(2))
 
     await go('#/stats')
     expect(await screen.findByRole('heading', { name: 'History' })).toBeInTheDocument()
     expect(screen.getByRole('img', { name: 'Words per minute per day' })).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Fingers (estimate)' })).toBeInTheDocument()
     expect(screen.getByText(/This is an estimate/)).toBeInTheDocument()
-    expect(screen.getByText('beginning')).toBeInTheDocument()
+    expect(screen.getAllByText('beginning')[0]).toHaveClass('key-label')
 
     // Drill down: course -> book -> chapter -> verses.
     await user.click(screen.getByRole('button', { name: 'Mini Scripture' }))

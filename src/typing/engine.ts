@@ -53,7 +53,10 @@ interface Position {
   expected: string
   verse: number
   separator: boolean
+  /** Word of 5+ letters this is in (for word stats), or -1. */
   word: number
+  /** Word of 4+ letters this is in (for the speed shown above words), or -1. */
+  shown: number
 }
 
 interface WordSpan {
@@ -107,6 +110,18 @@ interface WordState {
   hadError: boolean
 }
 
+/** Speed of one word as it was typed, for showing above it. */
+export interface WordSpeed {
+  wpm: number
+  /** A wrong key was typed in the word (then fixed). */
+  hadError: boolean
+}
+
+interface ShownWordState extends WordState {
+  /** Time of the word's first key, for when no key came before it. */
+  firstTime: number
+}
+
 const IGNORED: InputResult = { accepted: false, correct: false, blocked: false, finished: false }
 
 export class TypingEngine {
@@ -114,6 +129,8 @@ export class TypingEngine {
   readonly startVerse: number
   private readonly positions: Position[] = []
   private readonly words: WordSpan[] = []
+  private readonly shownWords: { start: number; end: number }[] = []
+  private readonly shownSpeeds: (WordSpeed | null)[] = []
   private readonly typed: (string | null)[]
   private readonly everWrong: boolean[]
   private readonly counters: VerseCounters[]
@@ -124,6 +141,7 @@ export class TypingEngine {
   private lastKeyTime: number | null = null
   private prevKey: { pos: number; correct: boolean } | null = null
   private word: WordState | null = null
+  private shownWord: ShownWordState | null = null
   private pendingStats = new Map<string, KeyStatDelta>()
 
   /** Wrong key typed on a blocked position (last char of a verse), shown until the next key. */
@@ -158,14 +176,14 @@ export class TypingEngine {
         const form = typedForm(ch)
         layout.tokens.push({ display: ch, start: this.positions.length, length: form.length })
         for (const c of form) {
-          this.positions.push({ expected: c, verse: index, separator: false, word: -1 })
+          this.positions.push({ expected: c, verse: index, separator: false, word: -1, shown: -1 })
         }
       }
       layout.end = this.positions.length
       this.findWords(layout)
       if (index < verses.length - 1) {
         layout.separator = this.positions.length
-        this.positions.push({ expected: ' ', verse: index, separator: true, word: -1 })
+        this.positions.push({ expected: ' ', verse: index, separator: true, word: -1, shown: -1 })
       }
       layout.end = this.positions.length
       return layout
@@ -187,6 +205,12 @@ export class TypingEngine {
       const letter = p < layout.end && isLetter(this.positions[p].expected)
       if (letter && runStart < 0) runStart = p
       if (!letter && runStart >= 0) {
+        if (p - runStart >= 4) {
+          const id = this.shownWords.length
+          for (let q = runStart; q < p; q++) this.positions[q].shown = id
+          this.shownWords.push({ start: runStart, end: p })
+          this.shownSpeeds.push(null)
+        }
         if (p - runStart >= 5) {
           const id = this.words.length
           let key = ''
@@ -259,6 +283,16 @@ export class TypingEngine {
     return this.verseResult(index)
   }
 
+  /** The word of 4+ letters position `p` is in, or -1. */
+  shownWordAt(p: number): number {
+    return this.positions[p]?.shown ?? -1
+  }
+
+  /** How fast a word of 4+ letters was typed in this session, or null if it is not typed yet (or was not timed). */
+  wordSpeed(id: number): WordSpeed | null {
+    return this.shownSpeeds[id] ?? null
+  }
+
   expectedAt(p: number): string {
     return this.positions[p].expected
   }
@@ -321,6 +355,7 @@ export class TypingEngine {
 
     this.recordKeyStats(p, correct, timed ? dt : null)
     this.trackWord(p, correct, time, prevTime, timed)
+    this.trackShownWord(p, correct, time, prevTime, timed)
 
     // The last character of a verse and the separator after it.
     const last = p === verse.end - 1 || p === verse.separator - 1
@@ -341,6 +376,7 @@ export class TypingEngine {
       completedVerse = this.verseResult(pos.verse)
       this.lockFloor = this.cursorPos
       this.word = null
+      this.shownWord = null
     }
     return { accepted: true, correct, blocked: false, completedVerse, finished: this.finished }
   }
@@ -399,8 +435,9 @@ export class TypingEngine {
       if (dt >= 0 && dt <= this.idleMs) {
         this.activeMs += dt
         this.counters[verse].activeMs += dt
-      } else if (this.word) {
-        this.word.timed = false
+      } else {
+        if (this.word) this.word.timed = false
+        if (this.shownWord) this.shownWord.timed = false
       }
     }
     this.lastKeyTime = time
@@ -414,6 +451,7 @@ export class TypingEngine {
     this.cursorPos = p
     this.prevKey = null
     if (this.word && p < this.words[this.word.word].start) this.word = null
+    if (this.shownWord && p < this.shownWords[this.shownWord.word].start) this.shownWord = null
   }
 
   private verseResult(index: number): VerseResult {
@@ -467,7 +505,11 @@ export class TypingEngine {
     const expected = this.positions[p].expected
     const finger = fingerFor(expected)
     if (finger) this.bump('finger', finger, correct, dt)
-    if (!isLetter(expected)) return
+    if (!isLetter(expected)) {
+      // Kept so the Stats screen can work out fingers for other keyboard layouts.
+      if (expected !== ' ') this.bump('key', expected, correct, dt)
+      return
+    }
     this.bump('letter', expected.toLowerCase(), correct, dt)
     const prev = this.prevKey
     if (prev && prev.pos === p - 1 && prev.correct && isLetter(this.positions[p - 1].expected)) {
@@ -508,6 +550,48 @@ export class TypingEngine {
     }
     if (w.hadError) s.errors++
     this.word = null
+  }
+
+  /** Like trackWord, for the speed shown above words of 4+ letters. */
+  private trackShownWord(
+    p: number,
+    correct: boolean,
+    time: number,
+    prevTime: number | null,
+    timed: boolean,
+  ) {
+    const id = this.positions[p].shown
+    if (id < 0) return
+    const span = this.shownWords[id]
+    if (!this.shownWord || this.shownWord.word !== id) {
+      if (p !== span.start) return
+      // The first key typed has no time before it; the word is then timed from that key.
+      const first = prevTime === null
+      this.shownWord = {
+        word: id,
+        startTime: prevTime,
+        firstTime: time,
+        timed: first || timed,
+        hadError: false,
+      }
+    } else if (!timed) {
+      this.shownWord.timed = false
+    }
+    if (!correct) this.shownWord.hadError = true
+    if (!correct || p !== span.end - 1) return
+    for (let q = span.start; q < span.end - 1; q++) {
+      const t = this.typed[q]
+      if (t === null || !this.isCorrect(q, t)) return
+    }
+    const w = this.shownWord
+    this.shownWord = null
+    // With no key before the word (the first word typed), time it from its
+    // first key, over the letters after it.
+    const fromStart = w.startTime === null
+    const ms = time - (fromStart ? w.firstTime : (w.startTime as number))
+    const chars = span.end - span.start - (fromStart ? 1 : 0)
+    if (!w.timed || ms <= 0) return
+    this.shownSpeeds[id] = { wpm: wpm(chars, ms), hadError: w.hadError }
   }
 
   private getWordStat(key: string): KeyStatDelta {

@@ -1,7 +1,13 @@
 // Record types for everything the app stores (docs/PLAN.md, "Data model").
 // Every record carries `updatedAt` (ms since epoch) so a future sync can merge.
 
-import type { KeyStatDelta, KeyStatKind, KeyStatTotals, VerseResult } from '../typing'
+import type {
+  KeyboardLayout,
+  KeyStatDelta,
+  KeyStatKind,
+  KeyStatTotals,
+  VerseResult,
+} from '../typing'
 
 /** A place in a course: book + chapter + verse (verse = paragraph for Lectures on Faith). */
 export interface Position {
@@ -91,7 +97,7 @@ export interface VerseStat extends TypingTotals {
   updatedAt: number
 }
 
-/** Running totals for one letter, bigram, word (5+ letters) or finger. */
+/** Running totals for one letter, bigram, word (5+ letters), finger or other key. */
 export interface KeyStat extends KeyStatTotals {
   kind: KeyStatKind
   key: string
@@ -117,6 +123,10 @@ export interface Settings {
   typingStart: TypingStart
   theme: Theme
   textSize: TextSize
+  /** Show how fast each word of 4+ letters was typed, above it. */
+  showWordWpm: boolean
+  /** Keyboard layout the finger estimate on the Stats screen assumes. */
+  keyboardLayout: KeyboardLayout
 }
 
 export const DEFAULT_SETTINGS: Settings = {
@@ -124,6 +134,8 @@ export const DEFAULT_SETTINGS: Settings = {
   typingStart: 'top',
   theme: 'system',
   textSize: 'medium',
+  showWordWpm: false,
+  keyboardLayout: 'qwerty',
 }
 
 export interface SettingRecord {

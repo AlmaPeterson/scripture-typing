@@ -1,7 +1,19 @@
 // Aggregation for the Stats screen. Pure functions over stored records.
 
 import type { DailyTotals, KeyStat, TypingTotals, VerseStat } from '../storage'
-import { accuracy, keyStatWpm, wpm, type KeyStatKind } from '../typing'
+import {
+  FINGERS,
+  accuracy,
+  addTotals,
+  emptyTotals,
+  fingerFor,
+  keyStatWpm,
+  wpm,
+  type Finger,
+  type KeyboardLayout,
+  type KeyStatKind,
+  type KeyStatTotals,
+} from '../typing'
 
 export interface Aggregate extends TypingTotals {
   key: string
@@ -51,6 +63,11 @@ export interface RankedKey {
   /** Share of attempts typed wrong (0..1). */
   errorRate: number
   samples: number
+  /** Correct times typed (timed or not). */
+  count: number
+  errors: number
+  /** Average time per timed sample, in ms (a whole word for words). */
+  avgMs: number
 }
 
 /** Speed of each key stat of a kind, with at least `minSamples` timed samples. */
@@ -62,8 +79,27 @@ export function rankKeys(stats: KeyStat[], kind: KeyStatKind, minSamples: number
       wpm: keyStatWpm(kind, s.key, s),
       errorRate: s.errors / Math.max(1, s.count + s.errors),
       samples: s.timedCount,
+      count: s.count,
+      errors: s.errors,
+      avgMs: s.totalMs / s.timedCount,
     }))
     .sort((a, b) => a.wpm - b.wpm)
+}
+
+/**
+ * Per-finger totals for a keyboard layout, worked out from the letter and
+ * other-key stats. Space is the thumb on every layout, so the thumb comes from
+ * the stored finger stats (other keys were only kept separately from Oct 2026).
+ */
+export function fingerTotals(stats: KeyStat[], layout: KeyboardLayout): Map<Finger, KeyStatTotals> {
+  const out = new Map<Finger, KeyStatTotals>(FINGERS.map((f) => [f, emptyTotals()]))
+  for (const s of stats) {
+    let finger: Finger | undefined
+    if (s.kind === 'letter' || s.kind === 'key') finger = fingerFor(s.key, layout)
+    else if (s.kind === 'finger' && s.key === 'thumb') finger = 'thumb'
+    if (finger) out.set(finger, addTotals(out.get(finger)!, s))
+  }
+  return out
 }
 
 /** Slowest and fastest `n`, without overlap when there are few items. */

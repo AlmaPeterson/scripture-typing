@@ -193,6 +193,17 @@ export function Settings() {
             </label>
           ))}
         </fieldset>
+        <label className="choice">
+          <input
+            type="checkbox"
+            checked={settings.showWordWpm}
+            onChange={(e) => updateSettings({ showWordWpm: e.target.checked })}
+          />
+          Show word speed while typing{' '}
+          <span className="muted">
+            – the WPM of each word of 4 or more letters appears above it once it is typed.
+          </span>
+        </label>
       </section>
 
       <section aria-labelledby="yearly">
