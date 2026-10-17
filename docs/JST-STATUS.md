@@ -75,7 +75,7 @@ against the scans.
 | NT | 2 John | 1 | 13 | ready | 0 | 0 |
 | NT | 3 John | 1 | 14 | ready | 0 | 0 |
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
-| NT | Revelation | 23 | 381 | draft | 12 | 5 |
+| NT | Revelation | 22 | 404 | draft | 2 | 6 |
 
 **62 of 65 books ready.**
 
@@ -108,19 +108,7 @@ against the scans.
 
 ### Revelation
 
-- scans disagree on chapter division near chapter 5
-- scans disagree on chapter division near chapter 9
-- scans disagree on chapter division near chapter 14
-- scans disagree on chapter division near chapter 16
-- scans disagree on chapter division near chapter 23
-- check 9:1 starts with text not in the KJV: 'After this I looked, and behold, a door was opened into heaven: and the first vo'
-- check 22:1 starts with text not in the KJV: 'And I saw an angel come down out of heaven, having the key of the bottomless pit'
-- check 23:1 starts with text not in the KJV: 'And I saw a new heaven and a new earth; for the first heaven Bible. English.'
-- check the verse division of chapter(s) 1, 8, 9, 10, 11, 13, 14, 19, 20, 21, 22, 23
-- verse fragments (part of a neighbouring verse?) at 15:5
-- verse numbering skips at 10:6 (a verse number was lost)
-- unexpected characters in 20:21
-- 12 chapter(s) where the two scans do not agree on the verse division
-- probably merged verses: 8:2, 19:10
-- unverified words: `2:9 Sdij`, `9:3 sardinestone;`, `16:8 whcfc`, `21:10 tha`, `23:1 English.`
+- check the verse division of chapter(s) 1, 11
+- 2 chapter(s) where the two scans do not agree on the verse division
+- unverified words: `2:9 Sdij`, `9:15 Andlhe`, `13:8 whcfc`, `14:3 iiid`, `15:1 ven,`, `17:11 irt`
 

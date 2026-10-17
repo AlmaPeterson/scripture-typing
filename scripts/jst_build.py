@@ -85,7 +85,15 @@ def build(lds: dict, raw: Path, opening_caps, tidy, book_file, slug) -> dict[str
     for k, (vid, kjv_book) in enumerate(bible):
         a, b = results["toronto"][k], results["byu"][k]
         kjv_counts = {c["number"]: len(c["verses"]) for c in kjv_book["chapters"]}
-        chapters, notes = merge(a, b, fixer, kjv_counts)
+        book_ops = corrections.get(kjv_book["id"], [])
+        if book_ops and book_ops[0][0] == "use_scan":
+            # ["use_scan", "toronto"|"byu"]: the other scan is damaged here
+            # (missing pages); build the book from this scan alone.
+            only = results[book_ops[0][1]][k] or []
+            chapters, notes = [(c, kjv_consistent(c, kjv_counts)) for c in only], []
+            corrections = {**corrections, kjv_book["id"]: book_ops[1:]}
+        else:
+            chapters, notes = merge(a, b, fixer, kjv_counts)
         # Automatic result, as editable chapters.
         work: list[dict] = []
         for n, (ch, confirmed) in enumerate(chapters, 1):
