@@ -148,6 +148,9 @@ describe('App', () => {
       'In the beginning.',
     )
     expect(document.querySelector('[data-verse="1"] .ch')).toBeNull()
+    // It shows the WPM it was typed at.
+    expect(screen.getByTestId('verse-wpm-1').textContent).toMatch(/^\d+ wpm$/)
+    expect(screen.queryByTestId('verse-wpm-2')).not.toBeInTheDocument()
     await waitFor(async () =>
       expect((await storage.getChapterProgress('mini', 'alpha', 1))?.completedVerses).toEqual([1]),
     )

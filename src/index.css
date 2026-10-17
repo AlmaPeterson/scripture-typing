@@ -673,6 +673,15 @@ main {
 .verse-done .verse-text {
   color: var(--muted);
 }
+.verse-wpm {
+  margin-left: 0.6em;
+  font-family: var(--font-ui);
+  font-size: 0.6em;
+  font-weight: 600;
+  color: var(--faint);
+  white-space: nowrap;
+  user-select: none;
+}
 .verse-current .verse-num {
   color: var(--accent);
 }

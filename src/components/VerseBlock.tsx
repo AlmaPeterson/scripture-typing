@@ -1,6 +1,7 @@
 import { memo, useState, type ReactNode } from 'react'
 import type { Note } from '../storage'
 import type { TypingEngine, VerseLayout } from '../typing'
+import { formatDuration, formatPercent, formatWpm } from './format'
 
 export type VerseMode = 'skipped' | 'done' | 'current' | 'pending'
 
@@ -39,6 +40,7 @@ function VerseBlockImpl({
         <span className="verse-text">
           {/* Finished verses go back to plain text, without their mistakes. */}
           {mode === 'current' ? renderTyped(layout, engine) : layout.text}
+          {mode === 'done' && <VerseWpm layout={layout} engine={engine} />}
         </span>
         <button
           type="button"
@@ -124,6 +126,21 @@ function renderTyped(layout: VerseLayout, engine: TypingEngine): ReactNode[] {
     }
   }
   return out
+}
+
+/** The WPM a finished verse was typed at, with its accuracy and time on hover. */
+function VerseWpm({ layout, engine }: { layout: VerseLayout; engine: TypingEngine }) {
+  const r = engine.resultFor(layout.index)
+  if (!r) return null
+  return (
+    <span
+      className="verse-wpm"
+      data-testid={`verse-wpm-${layout.number}`}
+      title={`${formatPercent(r.accuracy, 1)} accuracy · ${formatDuration(r.activeMs)}`}
+    >
+      {formatWpm(r.wpm)} wpm
+    </span>
+  )
 }
 
 function NoteIcon() {

@@ -227,6 +227,8 @@ describe('TypingEngine typing', () => {
     expect(v2.accuracy).toBeCloseTo(1 / 2)
     expect(e.verseDone(0)).toBe(true)
     expect(e.verseDone(1)).toBe(true)
+    expect(e.resultFor(0)).toEqual(v1)
+    expect(e.resultFor(1)).toEqual(v2)
   })
 })
 

@@ -252,6 +252,13 @@ export class TypingEngine {
     return this.counters[this.currentVerse]?.activeMs ?? 0
   }
 
+  /** Results of a verse completed in this session, or null (not done yet, or skipped). */
+  resultFor(index: number): VerseResult | null {
+    const v = this.verses[index]
+    if (!v || v.skipped || !this.verseDone(index)) return null
+    return this.verseResult(index)
+  }
+
   expectedAt(p: number): string {
     return this.positions[p].expected
   }
