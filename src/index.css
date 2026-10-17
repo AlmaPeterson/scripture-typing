@@ -613,8 +613,15 @@ main {
   font-family: var(--font-text);
   font-size: var(--text-size);
   line-height: 1.75;
-  padding-bottom: 70vh;
+  /* Room above the first line and below the last so the line being typed can
+     always sit in the middle of the window (see useCentredLine). */
+  padding-top: 50vh;
+  padding-bottom: 50vh;
   cursor: text;
+}
+/* Once the chapter is finished the summary is at the top; no need for the gap. */
+.summary ~ .scripture {
+  padding-top: 0.5rem;
 }
 
 .paused {

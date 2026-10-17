@@ -5,12 +5,20 @@ import { findCourse } from '../library/texts'
 import { BackupError, localDate, type ScrollStyle, type TextSize, type Theme } from '../storage'
 
 const SCROLL_STYLES: { value: ScrollStyle; label: string; help: string }[] = [
-  { value: 'smooth', label: 'Smooth', help: 'Glide up one line at a time.' },
-  { value: 'instant', label: 'Line by line', help: 'Jump up one line at a time.' },
+  {
+    value: 'smooth',
+    label: 'Smooth',
+    help: 'The line you are typing stays in the middle; the text glides up a line at a time.',
+  },
+  {
+    value: 'instant',
+    label: 'Line by line',
+    help: 'The line you are typing stays in the middle; the text jumps up a line at a time.',
+  },
   {
     value: 'block',
     label: 'Block',
-    help: 'Jump a block of lines at a time when you near the bottom.',
+    help: 'The line you are typing moves down a few lines, then the text jumps up a block to bring it back above the middle.',
   },
 ]
 

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { useApp, useLoad } from '../app/context'
 import { navigate, paths } from '../app/router'
 import { formatDuration, formatPercent, formatWpm } from '../components/format'
@@ -15,6 +15,7 @@ import {
 } from '../library/texts'
 import type { Note, ScrollStyle } from '../storage'
 import { TypingEngine, type VerseResult } from '../typing'
+import { useCentredLine } from './useCentredLine'
 
 /** Enter on the summary is ignored this long after the chapter ends, so a late Enter meant for a verse does not skip ahead. */
 const NEXT_ENTER_DELAY_MS = 600
@@ -143,7 +144,6 @@ function TypingSession({
   const barRef = useRef<HTMLDivElement>(null)
   const nextRef = useRef<HTMLAnchorElement>(null)
   const saving = useRef<Promise<void>>(Promise.resolve())
-  const lastLineTop = useRef<number | null>(null)
   const finishedAt = useRef(0)
 
   const lastVerseNumber = verses.at(-1)?.number ?? 0
@@ -202,45 +202,8 @@ function TypingSession({
     setTick((n) => n + 1)
   }
 
-  // Keep the current line near the top as lines are finished.
-  useLayoutEffect(() => {
-    if (finished) return
-    const caret = textRef.current?.querySelector<HTMLElement>('[data-caret]')
-    if (!caret) return
-    const top = caret.offsetTop
-    if (top === lastLineTop.current) return
-    const first = lastLineTop.current === null
-    lastLineTop.current = top
-    const rect = caret.getBoundingClientRect()
-    const barBottom = barRef.current?.getBoundingClientRect().bottom ?? 0
-    const lineHeight =
-      parseFloat(getComputedStyle(textRef.current!).lineHeight) || rect.height || 30
-    // The current line sits one line below the stats bar, so the line just
-    // finished stays visible above it.
-    const anchor = barBottom + lineHeight + 16
-    let delta = rect.top - anchor
-    if (scrollStyle === 'block' && !first) {
-      const below = rect.bottom > window.innerHeight * 0.8
-      const above = rect.top < barBottom
-      if (!below && !above) return
-    }
-    if (Math.abs(delta) < 2) return
-    if (first && delta < 0 && window.scrollY === 0) delta = 0
-    window.scrollBy({
-      top: delta,
-      behavior: scrollStyle === 'smooth' && !first ? 'smooth' : 'auto',
-    })
-  }, [tick, finished, scrollStyle])
-
-  // Re-anchor after the window is resized (lines re-wrap).
-  useEffect(() => {
-    const onResize = () => {
-      lastLineTop.current = null
-      setTick((n) => n + 1)
-    }
-    window.addEventListener('resize', onResize)
-    return () => window.removeEventListener('resize', onResize)
-  }, [])
+  // Keep the current line in the middle of the screen as lines are finished.
+  useCentredLine({ textRef, barRef, tick, finished, scrollStyle })
 
   // Start typing straight away; Enter brings focus back after a pause. On the
   // summary, Enter goes to the next chapter (unless another button has focus).
