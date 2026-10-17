@@ -93,7 +93,9 @@ books opens a **Course** screen listing its books; a course with one book
 - The current line stays near the top; the text scrolls up as each line is
   finished. Scroll style is a setting (e.g. smooth line-by-line, or jump a
   block at a time).
-- Live WPM and accuracy.
+- Live WPM for the current verse / paragraph (restarting at each one), with
+  the whole chapter's WPM beside it, and accuracy for the chapter.
+- On the end-of-chapter summary, Enter goes to the next chapter.
 - Verse numbers are displayed but not typed.
 - I can add a note to any verse / paragraph.
 

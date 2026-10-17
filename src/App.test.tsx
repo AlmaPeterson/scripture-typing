@@ -1,6 +1,6 @@
 import { act, render, screen, waitFor, within } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
+import { afterEach, beforeEach, describe, expect, it, onTestFinished, vi } from 'vitest'
 import App from './App'
 import { resetTextCache, type Book, type LibraryIndex } from './library/texts'
 import { DexieStorage } from './storage/dexie'
@@ -200,6 +200,89 @@ describe('App', () => {
     const verse1 = await screen.findByText('In the beginning.')
     expect(verse1.closest('.verse')).toHaveClass('verse-skipped')
     expect(screen.getByText(/Resuming after verse/)).toBeInTheDocument()
+  })
+
+  it('shows the live verse WPM next to the chapter WPM, and Enter on the summary goes on', async () => {
+    const user = userEvent.setup()
+    // A clock that moves 100ms per key press.
+    let clock = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => clock)
+    const tickKey = () => (clock += 100)
+    window.addEventListener('keydown', tickKey, true)
+    onTestFinished(() => window.removeEventListener('keydown', tickKey, true))
+    await storage.addCourse('mini')
+    window.location.hash = '#/c/mini/alpha/1'
+    render(<App storage={storage} />)
+    const input = await screen.findByLabelText('Type Alpha 1')
+    await waitFor(() => expect(input).toHaveFocus())
+
+    expect(screen.getByTestId('live-wpm')).toHaveTextContent('–')
+    await user.keyboard('In the beginning')
+    expect(screen.getByTestId('live-wpm').textContent).toMatch(/^\d+$/)
+    expect(screen.getByTestId('chapter-wpm').textContent).toMatch(/^chapter \d+$/)
+    // The verse WPM starts again at the next verse; the chapter WPM carries on.
+    await user.keyboard('.')
+    expect(screen.getByTestId('live-wpm')).toHaveTextContent('–')
+    expect(screen.getByTestId('chapter-wpm')).not.toHaveTextContent('chapter 0')
+
+    // Enter between verses, then finish the chapter.
+    await user.keyboard('{Enter}God said-light.')
+    expect(await screen.findByText('Alpha 1 complete')).toBeInTheDocument()
+    expect(screen.getByText('Press Enter to continue.')).toBeInTheDocument()
+    // An Enter straight after the last key is ignored.
+    await user.keyboard('{Enter}')
+    expect(window.location.hash).toBe('#/c/mini/alpha/1')
+    expect(screen.getByText('Alpha 1 complete')).toBeInTheDocument()
+
+    // A moment later, Enter goes to the next chapter.
+    clock += 1000
+    await user.keyboard('{Enter}')
+    expect(await screen.findByLabelText('Type Alpha 2')).toBeInTheDocument()
+    expect(window.location.hash).toBe('#/c/mini/alpha/2')
+    await waitFor(async () =>
+      expect((await storage.getChapterProgress('mini', 'alpha', 1))?.completed).toBe(true),
+    )
+
+    // At the last chapter of a book, Enter goes on to the next book.
+    await waitFor(() => expect(screen.getByLabelText('Type Alpha 2')).toHaveFocus())
+    await user.keyboard('And it was so.')
+    expect(await screen.findByText('Alpha 2 complete')).toBeInTheDocument()
+    clock += 1000
+    await user.keyboard('{Enter}')
+    expect(await screen.findByLabelText('Type Beta 1')).toBeInTheDocument()
+
+    // At the end of the course, Enter goes back to Home.
+    await waitFor(() => expect(screen.getByLabelText('Type Beta 1')).toHaveFocus())
+    await user.keyboard('Beta one.')
+    expect(await screen.findByText('Beta 1 complete')).toBeInTheDocument()
+    expect(screen.getByText('Press Enter to go back to Home.')).toBeInTheDocument()
+    clock += 1000
+    await user.keyboard('{Enter}')
+    expect(await screen.findByRole('link', { name: 'Continue Mini Scripture' })).toBeInTheDocument()
+  })
+
+  it('leaves Enter to another focused button on the summary', async () => {
+    const user = userEvent.setup()
+    // A clock that moves 100ms per key press.
+    let clock = 0
+    vi.spyOn(performance, 'now').mockImplementation(() => clock)
+    const tickKey = () => (clock += 100)
+    window.addEventListener('keydown', tickKey, true)
+    onTestFinished(() => window.removeEventListener('keydown', tickKey, true))
+    await storage.addCourse('mini')
+    window.location.hash = '#/c/mini/alpha/2'
+    render(<App storage={storage} />)
+    const input = await screen.findByLabelText('Type Alpha 2')
+    await waitFor(() => expect(input).toHaveFocus())
+    await user.keyboard('And it was so.')
+    expect(await screen.findByText('Alpha 2 complete')).toBeInTheDocument()
+    clock += 1000
+    screen.getByRole('button', { name: 'Type it again' }).focus()
+    await user.keyboard('{Enter}')
+    // "Type it again" ran instead of going to the next chapter.
+    expect(await screen.findByLabelText('Type Alpha 2')).not.toHaveAttribute('readonly')
+    expect(screen.queryByText('Alpha 2 complete')).not.toBeInTheDocument()
+    expect(window.location.hash).toBe('#/c/mini/alpha/2?after=0')
   })
 
   it('skips the Course screen for one-book courses', async () => {

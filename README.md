@@ -22,8 +22,10 @@ as an app from Chrome or Edge on Windows and Linux.
 - **Typing**: just type. Verse numbers are skipped; press Space or Enter
   between verses. Curly quotes, dashes and ellipses are typed as `'` `"` `-` and
   `...`. Backspace fixes a mistake (it still counts against accuracy);
-  Ctrl+Backspace deletes a word; Esc pauses; Enter resumes. Hover a verse (or
-  Tab to its note button) to add a note.
+  Ctrl+Backspace deletes a word; Esc pauses; Enter resumes. The big WPM is
+  for the verse you are typing; the small one under it is for the whole
+  chapter. When a chapter is finished, Enter goes on to the next one. Hover a
+  verse (or Tab to its note button) to add a note.
 - **Settings**: theme, text size, scroll style, the per-course January 1 reset,
   and Export / Import / Delete of all data (one JSON file).
 

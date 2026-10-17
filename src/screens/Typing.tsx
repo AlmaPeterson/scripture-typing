@@ -16,6 +16,9 @@ import {
 import type { Note, ScrollStyle } from '../storage'
 import { TypingEngine, type VerseResult } from '../typing'
 
+/** Enter on the summary is ignored this long after the chapter ends, so a late Enter meant for a verse does not skip ahead. */
+const NEXT_ENTER_DELAY_MS = 600
+
 interface Props {
   courseId: string
   bookId: string
@@ -141,6 +144,7 @@ function TypingSession({
   const nextRef = useRef<HTMLAnchorElement>(null)
   const saving = useRef<Promise<void>>(Promise.resolve())
   const lastLineTop = useRef<number | null>(null)
+  const finishedAt = useRef(0)
 
   const lastVerseNumber = verses.at(-1)?.number ?? 0
   const next = nextChapter(course, book.id, chapter)
@@ -188,7 +192,10 @@ function TypingSession({
       e.preventDefault()
       const r = engine.input(e.key, time)
       if (r.completedVerse) save(r.completedVerse, r.finished)
-      if (r.finished) setFinished(true)
+      if (r.finished) {
+        finishedAt.current = time
+        setFinished(true)
+      }
     } else {
       return
     }
@@ -235,16 +242,27 @@ function TypingSession({
     return () => window.removeEventListener('resize', onResize)
   }, [])
 
-  // Start typing straight away; Enter brings focus back after a pause.
+  // Start typing straight away; Enter brings focus back after a pause. On the
+  // summary, Enter goes to the next chapter (unless another button has focus).
   useEffect(() => {
     focusInput()
     const onDocKey = (e: KeyboardEvent) => {
       const active = document.activeElement
       const idle = !active || active === document.body || active === textRef.current
-      if (idle && e.key === 'Enter' && !finished) {
-        e.preventDefault()
-        focusInput()
+      if (e.key !== 'Enter') return
+      if (!finished) {
+        if (idle) {
+          e.preventDefault()
+          focusInput()
+        }
+        return
       }
+      const link = nextRef.current
+      if (!link || e.altKey || e.ctrlKey || e.metaKey || e.shiftKey) return
+      if (!idle && active !== link && active !== inputRef.current) return
+      e.preventDefault()
+      if (e.repeat || performance.now() - finishedAt.current < NEXT_ENTER_DELAY_MS) return
+      navigate(link.getAttribute('href') ?? paths.home())
     }
     document.addEventListener('keydown', onDocKey)
     return () => document.removeEventListener('keydown', onDocKey)
@@ -286,6 +304,7 @@ function TypingSession({
   const doneVerses = engine.verses.filter((v, i) => !v.skipped && engine.verseDone(i)).length
   const chapterLabel = `${book.title} ${course.books.length === 1 ? `${book.unitLabel} ` : ''}${chapter}`
   const single = course.books.length === 1
+  const unitWord = book.unitLabel === 'Lecture' ? 'Paragraph' : 'Verse'
 
   return (
     <div className="typing-page">
@@ -301,15 +320,20 @@ function TypingSession({
           </div>
           <dl className="live-stats" aria-label="Live stats">
             <div>
-              <dt>WPM</dt>
-              <dd data-testid="live-wpm">{formatWpm(engine.wpm)}</dd>
+              <dt>{unitWord} WPM</dt>
+              <dd data-testid="live-wpm">
+                {engine.verseActiveMs > 0 ? formatWpm(engine.verseWpm) : '–'}
+              </dd>
+              <dd className="live-sub" data-testid="chapter-wpm">
+                {book.unitLabel.toLowerCase()} {formatWpm(engine.wpm)}
+              </dd>
             </div>
             <div>
               <dt>Accuracy</dt>
               <dd data-testid="live-accuracy">{formatPercent(engine.accuracy, 1)}</dd>
             </div>
             <div>
-              <dt>{book.unitLabel === 'Lecture' ? 'Paragraph' : 'Verse'}</dt>
+              <dt>{unitWord}</dt>
               <dd>
                 {engine.verses[current]?.number ?? '–'}/{lastVerseNumber}
               </dd>
@@ -380,6 +404,9 @@ function TypingSession({
               All {book.unitLabel.toLowerCase()}s
             </a>
           </div>
+          <p className="muted summary-hint">
+            Press Enter to {next ? 'continue' : 'go back to Home'}.
+          </p>
         </section>
       )}
 

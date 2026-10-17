@@ -583,6 +583,13 @@ main {
   font-variant-numeric: tabular-nums;
   min-width: 3ch;
 }
+/* The whole-chapter WPM, under the live verse WPM. */
+.live-stats dd.live-sub {
+  font-size: 0.75rem;
+  font-weight: 400;
+  color: var(--muted);
+  white-space: nowrap;
+}
 
 .resume-note {
   font-size: 0.9rem;
@@ -806,6 +813,10 @@ main {
   display: flex;
   gap: 0.5rem;
   flex-wrap: wrap;
+}
+.summary-hint {
+  margin: 0.75rem 0 0;
+  font-size: 0.85rem;
 }
 
 /* ---- Settings ---- */
