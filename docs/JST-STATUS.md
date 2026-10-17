@@ -11,7 +11,7 @@ against the scans.
 
 | Volume | Book | Chapters | Verses | Status | Chapters to check | Unverified words |
 | --- | --- | ---: | ---: | --- | ---: | ---: |
-| OT | Genesis | 50 | 1730 | draft | 4 | 5 |
+| OT | Genesis | 50 | 1731 | ready | 0 | 0 |
 | OT | Exodus | 40 | 1206 | ready | 0 | 0 |
 | OT | Leviticus | 27 | 859 | ready | 0 | 0 |
 | OT | Numbers | 36 | 1288 | ready | 0 | 0 |
@@ -77,17 +77,7 @@ against the scans.
 | NT | Jude | 1 | 25 | ready | 0 | 0 |
 | NT | Revelation | 22 | 404 | ready | 0 | 0 |
 
-**64 of 65 books ready.**
+**65 of 65 books ready.**
 
 ## Details for draft books
-
-### Genesis
-
-- scans disagree on chapter division near chapter 11
-- scans disagree on chapter division near chapter 25
-- scans disagree on chapter division near chapter 36
-- check the verse division of chapter(s) 1, 2, 5, 48
-- unexpected characters in 7:33
-- 4 chapter(s) where the two scans do not agree on the verse division
-- unverified words: `5:17 ies.`, `7:33 testi2a`, `41:15 jrifn`, `41:30 rcveu`, `44:12 Ac`
 

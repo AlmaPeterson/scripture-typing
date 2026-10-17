@@ -661,8 +661,7 @@
           "title": "Genesis",
           "unitLabel": "Chapter",
           "chapters": 50,
-          "path": "texts/jst-old-testament/genesis.json",
-          "draft": true
+          "path": "texts/jst-old-testament/genesis.json"
         },
         {
           "id": "exodus",
