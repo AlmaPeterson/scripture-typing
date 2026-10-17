@@ -359,7 +359,17 @@ def apply_corrections(work: list[dict], ops: list, kjv_book: dict | None = None)
                 target = [J.norm(w) for w in phrase.split() if J.norm(w)]
                 hit = next((i for i in range(pos, len(normed) - len(target) + 1) if normed[i : i + len(target)] == target), None)
                 if hit is None:
-                    raise ValueError(f"resplit {op[1]}: verse start {phrase!r} not found")
+                    # The phrase was read from the scan; the text may differ in a
+                    # word (OCR or KJV spelling). Take the closest match ahead.
+                    want = "".join(target)[:16]
+                    scored = [
+                        (difflib.SequenceMatcher(None, want, "".join(normed[i : i + 6])[: len(want)]).ratio(), -i, i)
+                        for i in range(pos, len(normed))
+                    ]
+                    best = max(scored, default=(0, 0, None))
+                    if best[0] < 0.75:
+                        raise ValueError(f"resplit {op[1]}: verse start {phrase!r} not found")
+                    hit = best[2]
                 cuts.append(hit)
                 pos = hit + 1
             texts = [" ".join(words[a:b]) for a, b in zip(cuts, cuts[1:] + [len(words)])]
