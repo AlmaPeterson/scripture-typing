@@ -29,7 +29,9 @@ as an app from Chrome or Edge on Windows and Linux.
   verse (or Tab to its note button) to add a note.
 - **Stats**: hover a chart point or a bar for its details. Pick your
   keyboard layout (QWERTY, Dvorak, Colemak, Colemak-DH, Workman, QWERTZ,
-  AZERTY) above the finger estimate.
+  AZERTY) above the finger estimate. **Your best layout** moves the letters
+  around your keyboard so the letters and pairs most used in your Home
+  courses land on the keys and key-to-key moves you type fastest.
 - **Settings**: theme, text size, scroll style, word WPM, whether a chapter starts at
   the top of the screen or in the middle, the per-course January 1 reset,
   and Export / Import / Delete of all data (one JSON file).

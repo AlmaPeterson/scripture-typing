@@ -134,3 +134,12 @@ export function fingerFor(ch: string, layout: KeyboardLayout = 'qwerty'): Finger
   }
   return map.get(ch) ?? map.get(ch.toLowerCase())
 }
+
+/**
+ * The unshifted characters of a layout, by row: the number row, top, home and
+ * bottom rows. A space marks a key the layout does not have (the ISO key left
+ * of Z on US-style layouts).
+ */
+export function layoutRows(layout: KeyboardLayout): string[] {
+  return LAYOUT_ROWS[layout].map(([plain]) => plain)
+}

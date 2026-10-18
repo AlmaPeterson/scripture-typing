@@ -1182,3 +1182,98 @@ table.data td button.link-button {
   margin: 0.5rem 0;
   color: var(--muted);
 }
+
+/* ---- Your best layout (Stats) ---- */
+
+.tiles-small {
+  margin-bottom: 0.75rem;
+}
+.tiles-small .tile dd {
+  font-size: 1.2rem;
+}
+.best-layout h3 {
+  font-size: 0.95rem;
+  margin: 1rem 0 0.5rem;
+  color: var(--muted);
+}
+.keyboard {
+  display: grid;
+  gap: 0.35rem;
+  margin: 0.5rem 0;
+}
+.keyboard-row {
+  display: flex;
+  gap: 0.35rem;
+}
+/* Stagger the rows like a real keyboard. */
+.keyboard-row-1 {
+  padding-left: 1.1rem;
+}
+.keyboard-row-2 {
+  padding-left: 1.6rem;
+}
+.keycap {
+  position: relative;
+  flex: 0 0 auto;
+  display: grid;
+  place-items: center;
+  /* 13 keys and the row stagger fit across a phone screen. */
+  width: clamp(1.3rem, calc((100vw - 6rem) / 14.5), 2.6rem);
+  aspect-ratio: 1;
+  border-radius: 6px;
+  border: 1px solid var(--border);
+  font:
+    600 1rem ui-monospace,
+    'SFMono-Regular',
+    Menlo,
+    Consolas,
+    monospace;
+  color: var(--text);
+  background: color-mix(in srgb, var(--chart-1) var(--heat, 0%), var(--surface));
+}
+.keycap-dark {
+  color: #fff;
+}
+.keycap-fixed {
+  color: var(--faint);
+  background: var(--surface-2);
+  font-weight: 400;
+}
+.keycap-moved {
+  outline: 2px solid var(--chart-2);
+  outline-offset: -2px;
+}
+.keycap-was {
+  position: absolute;
+  top: 0.15rem;
+  right: 0.25rem;
+  font-size: 0.6rem;
+  font-weight: 400;
+  opacity: 0.8;
+}
+.keycap .bar-tip {
+  right: auto;
+  bottom: auto;
+  top: calc(100% + 0.3rem);
+  left: 50%;
+  transform: translateX(-50%);
+  font-weight: 400;
+  text-align: left;
+}
+.keycap .tip-details {
+  font-family: var(--font-ui);
+}
+.keycap .chart-tip-title,
+.keycap .chart-tip-value {
+  display: block;
+  font-family: var(--font-ui);
+}
+.keycap:hover .bar-tip,
+.keycap:focus-visible .bar-tip {
+  display: block;
+}
+@media (max-width: 30rem) {
+  .keycap-was {
+    display: none;
+  }
+}

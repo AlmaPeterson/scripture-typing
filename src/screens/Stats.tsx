@@ -4,6 +4,7 @@ import { paths } from '../app/router'
 import { BarChart, BarList, LineChart, type Detail } from '../components/charts'
 import { formatDate, formatDuration, formatPercent, formatWpm } from '../components/format'
 import { Loading } from '../components/ui'
+import { BestLayout } from './BestLayout'
 import {
   aggregate,
   dailyHistory,
@@ -260,6 +261,8 @@ export function Stats() {
         layout={settings.keyboardLayout}
         onLayout={(keyboardLayout) => void updateSettings({ keyboardLayout })}
       />
+
+      <BestLayout keyStats={keyStats} layout={settings.keyboardLayout} library={library} />
     </div>
   )
 }
