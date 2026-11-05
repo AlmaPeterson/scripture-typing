@@ -9,7 +9,7 @@ export function wpm(correctChars: number, activeMs: number): number {
   return correctChars / 5 / (activeMs / 60000)
 }
 
-/** Accuracy as a fraction 0..1: correct keystrokes / all character keystrokes. */
+/** Accuracy as a fraction 0..1: correct keystrokes / character keystrokes (fixed mistakes not counted). */
 export function accuracy(correctKeystrokes: number, keystrokes: number): number {
   if (keystrokes <= 0) return 1
   return correctKeystrokes / keystrokes

@@ -23,6 +23,7 @@ function result(verseNumber: number, over: Partial<VerseResult> = {}): VerseResu
     keystrokes: 52,
     correctKeystrokes: 50,
     errors: 2,
+    fixedErrors: 1,
     activeMs: 10000,
     wpm: 60,
     accuracy: 50 / 52,
@@ -99,6 +100,7 @@ describe('recordVerse', () => {
       correctChars: 100,
       keystrokes: 104,
       errors: 2,
+      fixedErrors: 2,
       activeMs: 20000,
       completedChapter: false,
     })

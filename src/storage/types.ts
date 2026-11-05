@@ -63,7 +63,10 @@ export interface TypingTotals {
   correctChars: number
   keystrokes: number
   correctKeystrokes: number
+  /** All mistakes made, fixed or not. */
   errors: number
+  /** Mistakes later fixed (included in `errors`). Missing in records from before Nov 2026. */
+  fixedErrors?: number
   activeMs: number
 }
 

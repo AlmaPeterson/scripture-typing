@@ -158,6 +158,7 @@ export class DexieStorage implements Storage {
       keystrokes: r.keystrokes,
       correctKeystrokes: r.correctKeystrokes,
       errors: r.errors,
+      fixedErrors: r.fixedErrors,
       activeMs: r.activeMs,
     }
     await db.transaction(
@@ -194,6 +195,7 @@ export class DexieStorage implements Storage {
           keystrokes: 0,
           correctKeystrokes: 0,
           errors: 0,
+          fixedErrors: 0,
           activeMs: 0,
           wpm: 0,
           accuracy: 1,
@@ -208,6 +210,7 @@ export class DexieStorage implements Storage {
         s.keystrokes += totals.keystrokes
         s.correctKeystrokes += totals.correctKeystrokes
         s.errors += totals.errors
+        s.fixedErrors = (s.fixedErrors ?? 0) + totals.fixedErrors
         s.activeMs += totals.activeMs
         s.wpm = wpm(s.correctChars, s.activeMs)
         s.accuracy = accuracy(s.correctKeystrokes, s.keystrokes)
@@ -260,6 +263,7 @@ export class DexieStorage implements Storage {
           keystrokes: 0,
           correctKeystrokes: 0,
           errors: 0,
+          fixedErrors: 0,
           activeMs: 0,
           verses: 0,
           chaptersCompleted: 0,
@@ -269,6 +273,7 @@ export class DexieStorage implements Storage {
         day.keystrokes += totals.keystrokes
         day.correctKeystrokes += totals.correctKeystrokes
         day.errors += totals.errors
+        day.fixedErrors = (day.fixedErrors ?? 0) + totals.fixedErrors
         day.activeMs += totals.activeMs
         day.verses++
         if (c.chapterCompleted) day.chaptersCompleted++

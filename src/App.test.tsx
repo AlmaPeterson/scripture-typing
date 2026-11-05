@@ -142,7 +142,7 @@ describe('App', () => {
     await waitFor(() => expect(input).toHaveFocus())
     // A mistake fixed with Backspace, then the rest of verse 1 and Enter to end it.
     await user.keyboard('In tje{Backspace}{Backspace}he beginning.{Enter}')
-    expect(screen.getByTestId('live-accuracy').textContent).not.toBe('100.0%')
+    expect(screen.getByTestId('live-accuracy').textContent).toBe('100.0%')
     // The finished verse goes back to plain text, without the mistake marked.
     expect(document.querySelector('[data-verse="1"] .verse-text')).toHaveTextContent(
       'In the beginning.',
@@ -173,11 +173,13 @@ describe('App', () => {
     // Verse 2: the em dash typed as "-", one wrong key left unfixed.
     await user.keyboard('God saix-light.')
     expect(await screen.findByText('Alpha 1 complete')).toBeInTheDocument()
+    expect(screen.getByText('Mistakes').nextSibling).toHaveTextContent('1')
+    expect(screen.getByText('Fixed mistakes').nextSibling).toHaveTextContent('1')
 
     const progress = await storage.getChapterProgress('mini', 'alpha', 1)
     expect(progress).toMatchObject({ completed: true, completedVerses: [1, 2] })
     const [session] = await storage.getSessions()
-    expect(session).toMatchObject({ verses: 2, completedChapter: true, errors: 2 })
+    expect(session).toMatchObject({ verses: 2, completedChapter: true, errors: 2, fixedErrors: 1 })
     expect((await storage.getKeyStats('word')).map((w) => w.key)).toContain('beginning')
     expect(await storage.getDaily()).toHaveLength(1)
 
@@ -358,6 +360,7 @@ describe('App', () => {
         keystrokes: 10,
         correctKeystrokes: 10,
         errors: 0,
+        fixedErrors: 0,
         activeMs: 1000,
         wpm: 120,
         accuracy: 1,

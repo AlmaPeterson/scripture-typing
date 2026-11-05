@@ -21,7 +21,7 @@ as an app from Chrome or Edge on Windows and Linux.
 - **Home** → **Continue** goes to the verse after the last one you completed.
 - **Typing**: just type. Verse numbers are skipped; press Space or Enter at
   the end of each verse. Curly quotes, dashes and ellipses are typed as `'` `"` `-` and
-  `...`. Backspace fixes a mistake (it still counts against accuracy);
+  `...`. Backspace fixes a mistake (a fixed mistake no longer counts against accuracy);
   Ctrl+Backspace deletes a word; Esc pauses; Enter resumes. The big WPM is
   for the verse you are typing; the small one under it is for the whole
   chapter. **Word WPM** (under the chapter title, or in Settings) shows how

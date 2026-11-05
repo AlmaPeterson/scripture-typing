@@ -42,7 +42,8 @@ function dayDetails(d: DayPoint): Detail[] {
     { label: 'Accuracy', value: formatPercent(d.accuracy, 1) },
     { label: 'Time', value: formatDuration(d.activeMs) },
     { label: 'Verses', value: String(d.verses) },
-    { label: 'Mistakes', value: String(d.errors) },
+    { label: 'Mistakes', value: String(d.errors - (d.fixedErrors ?? 0)) },
+    { label: 'Fixed mistakes', value: String(d.fixedErrors ?? 0) },
   ]
   if (d.chaptersCompleted > 0)
     details.push({ label: 'Chapters finished', value: String(d.chaptersCompleted) })

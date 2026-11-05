@@ -363,7 +363,11 @@ function TypingSession({
             </div>
             <div>
               <dt>Mistakes</dt>
-              <dd>{engine.errors}</dd>
+              <dd>{engine.errors - engine.fixedErrors}</dd>
+            </div>
+            <div>
+              <dt>Fixed mistakes</dt>
+              <dd>{engine.fixedErrors}</dd>
             </div>
           </dl>
           <div className="summary-actions">

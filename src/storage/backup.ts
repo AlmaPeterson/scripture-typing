@@ -16,6 +16,7 @@ const TOTALS: Record<string, FieldType> = {
   keystrokes: 'number',
   correctKeystrokes: 'number',
   errors: 'number',
+  fixedErrors: 'number?',
   activeMs: 'number',
 }
 

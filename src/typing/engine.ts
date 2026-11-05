@@ -7,10 +7,13 @@
 // Space or Enter, so a verse is complete once the space after it is typed.
 //
 // Mistakes: a wrong key is shown red and the cursor moves on; the user can
-// keep typing or press Backspace. Every wrong keystroke counts against
-// accuracy, even if fixed. The last character of a verse (and the separator
-// after it) must be typed correctly before the verse is complete, so a verse never ends on a typo
-// that can no longer be fixed. Completed verses are locked: Backspace cannot
+// keep typing or press Backspace. A wrong keystroke counts against accuracy
+// until it is fixed: deleting it takes it back out of the keystrokes, so a
+// fully fixed verse is at 100%. It still counts in `errors` (all mistakes
+// made, `fixedErrors` of them fixed) and in the key stats. The last character of a verse (and the separator
+// after it) must be typed correctly before the verse is complete, so a verse
+// never ends on a typo that can no longer be fixed; a wrong key there is
+// counted until it is cleared by Backspace or by the next key. Completed verses are locked: Backspace cannot
 // go back into them.
 //
 // Time is passed in by the caller (ms, e.g. performance.now()), so the engine
@@ -73,7 +76,10 @@ export interface VerseResult {
   correctChars: number
   keystrokes: number
   correctKeystrokes: number
+  /** All mistakes made, fixed or not. */
   errors: number
+  /** Mistakes later fixed (included in `errors`). */
+  fixedErrors: number
   activeMs: number
   wpm: number
   accuracy: number
@@ -100,6 +106,7 @@ interface VerseCounters {
   keystrokes: number
   correctKeystrokes: number
   errors: number
+  fixedErrors: number
   activeMs: number
 }
 
@@ -149,7 +156,10 @@ export class TypingEngine {
 
   keystrokes = 0
   correctKeystrokes = 0
+  /** All mistakes made, fixed or not. */
   errors = 0
+  /** Mistakes later fixed (included in `errors`). */
+  fixedErrors = 0
   activeMs = 0
   private correctCount = 0
 
@@ -195,6 +205,7 @@ export class TypingEngine {
       keystrokes: 0,
       correctKeystrokes: 0,
       errors: 0,
+      fixedErrors: 0,
       activeMs: 0,
     }))
   }
@@ -360,11 +371,12 @@ export class TypingEngine {
     // The last character of a verse and the separator after it.
     const last = p === verse.end - 1 || p === verse.separator - 1
     if (!correct && last) {
+      this.clearBlocked()
       this.blockedKey = ch
       this.prevKey = { pos: p, correct: false }
       return { accepted: true, correct: false, blocked: true, finished: false }
     }
-    this.blockedKey = null
+    this.clearBlocked()
 
     this.typed[p] = ch
     if (correct) this.correctCount++
@@ -383,18 +395,9 @@ export class TypingEngine {
 
   /** Delete the last typed character. Returns false if there is nothing to delete. */
   backspace(time: number): boolean {
-    if (this.finished || this.cursorPos <= this.lockFloor) {
-      if (this.blockedKey !== null) {
-        this.blockedKey = null
-        return true
-      }
-      return false
-    }
+    if (this.finished || this.cursorPos <= this.lockFloor) return this.clearBlocked()
     this.countTime(time, this.positions[this.cursorPos - 1].verse)
-    if (this.blockedKey !== null) {
-      this.blockedKey = null
-      return true
-    }
+    if (this.clearBlocked()) return true
     this.removeOne()
     return true
   }
@@ -403,7 +406,7 @@ export class TypingEngine {
   backspaceWord(time: number): boolean {
     if (this.finished || this.cursorPos <= this.lockFloor) return this.backspace(time)
     this.countTime(time, this.positions[this.cursorPos - 1].verse)
-    this.blockedKey = null
+    this.clearBlocked()
     // Skip spaces just typed, then the word itself.
     while (this.cursorPos > this.lockFloor && this.positions[this.cursorPos - 1].expected === ' ') {
       this.removeOne()
@@ -443,10 +446,30 @@ export class TypingEngine {
     this.lastKeyTime = time
   }
 
+  /** Take a fixed mistake back out of the keystrokes, so it no longer counts against accuracy. */
+  private uncountMistake(p: number) {
+    const c = this.counters[this.positions[p].verse]
+    this.keystrokes--
+    c.keystrokes--
+    this.fixedErrors++
+    c.fixedErrors++
+  }
+
+  /** Clear the blocked wrong key, if any, as fixed. Returns whether there was one. */
+  private clearBlocked(): boolean {
+    if (this.blockedKey === null) return false
+    this.blockedKey = null
+    this.uncountMistake(this.cursorPos)
+    return true
+  }
+
   private removeOne() {
     const p = this.cursorPos - 1
     const t = this.typed[p]
-    if (t !== null && this.isCorrect(p, t)) this.correctCount--
+    if (t !== null) {
+      if (this.isCorrect(p, t)) this.correctCount--
+      else this.uncountMistake(p)
+    }
     this.typed[p] = null
     this.cursorPos = p
     this.prevKey = null
@@ -465,6 +488,7 @@ export class TypingEngine {
       keystrokes: c.keystrokes,
       correctKeystrokes: c.correctKeystrokes,
       errors: c.errors,
+      fixedErrors: c.fixedErrors,
       activeMs: c.activeMs,
       wpm: wpm(correctChars, c.activeMs),
       accuracy: accuracy(c.correctKeystrokes, c.keystrokes),

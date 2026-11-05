@@ -122,7 +122,7 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
   / paragraph after the last one I completed, in whichever book that was.
   **Continue** on a book in the Course screen does the same within that book.
 - **Mistakes:** a wrong letter shows red. I can keep typing or use Backspace
-  to fix it. Every mistake counts against accuracy, even if fixed.
+  to fix it. A mistake counts against accuracy until it is fixed.
 - **Completion:** a chapter counts as completed when it is finished. There is
   no accuracy minimum.
 - **Verse numbers** are shown but skipped by the cursor.
@@ -163,8 +163,10 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
 - **WPM** = (correct characters typed / 5) / minutes, the standard
   "5 characters = 1 word" measure. Time counts only while typing (pauses longer
   than a few seconds are not counted, so leaving the app open does not hurt).
-- **Accuracy** = correct keystrokes / all character keystrokes. Backspace is not
-  counted as a keystroke, but the mistake it fixes still counts.
+- **Accuracy** = correct keystrokes / character keystrokes. Backspace is not
+  counted as a keystroke, and a mistake it fixes no longer counts, so a fully
+  fixed verse is at 100%. Mistakes left unfixed and fixed mistakes are counted
+  separately.
 - **Key timing** = time from the previous keystroke to this correct keystroke.
   Bigram timing uses consecutive correct keystrokes inside a word.
 

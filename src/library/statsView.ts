@@ -37,6 +37,7 @@ export function aggregate(rows: VerseStat[], keyOf: (r: VerseStat) => string): A
         keystrokes: 0,
         correctKeystrokes: 0,
         errors: 0,
+        fixedErrors: 0,
         activeMs: 0,
         wpm: 0,
         accuracy: 1,
@@ -48,6 +49,7 @@ export function aggregate(rows: VerseStat[], keyOf: (r: VerseStat) => string): A
     a.keystrokes += r.keystrokes
     a.correctKeystrokes += r.correctKeystrokes
     a.errors += r.errors
+    a.fixedErrors = (a.fixedErrors ?? 0) + (r.fixedErrors ?? 0)
     a.activeMs += r.activeMs
   }
   for (const a of map.values()) {

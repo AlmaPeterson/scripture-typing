@@ -141,19 +141,44 @@ describe('TypingEngine typing', () => {
     expect(e.errors).toBe(1)
   })
 
-  it('counts every mistake against accuracy, even when fixed with Backspace', () => {
+  it('counts a mistake against accuracy only until it is fixed', () => {
     const e = new TypingEngine([{ number: 1, text: 'abcd' }])
     let t = type(e, 'ax', 0)
+    expect(e.accuracy).toBeCloseTo(0.5)
     expect(e.backspace((t += 100))).toBe(true)
     expect(e.charState(1)).toBe('pending')
+    expect(e.accuracy).toBe(1)
     type(e, 'bcd', t)
     expect(e.finished).toBe(true)
     expect(e.charState(1)).toBe('corrected')
-    expect(e.keystrokes).toBe(5) // Backspace is not a keystroke
+    expect(e.keystrokes).toBe(4) // Backspace and the fixed mistake are not counted
     expect(e.correctKeystrokes).toBe(4)
-    expect(e.errors).toBe(1)
-    expect(e.accuracy).toBeCloseTo(0.8)
+    expect(e.errors).toBe(1) // the mistake was still made
+    expect(e.fixedErrors).toBe(1)
+    expect(e.accuracy).toBe(1)
     expect(e.correctChars).toBe(4)
+  })
+
+  it('keeps correct keys deleted on the way to a mistake', () => {
+    const e = new TypingEngine([{ number: 1, text: 'abcd' }])
+    let t = type(e, 'axc', 0)
+    e.backspaceWord((t += 100))
+    type(e, 'abcd', t)
+    expect(e.keystrokes).toBe(6)
+    expect(e.correctKeystrokes).toBe(6)
+    expect(e.accuracy).toBe(1)
+  })
+
+  it('counts a wrong key on the last character only until it is cleared', () => {
+    const e = new TypingEngine([{ number: 1, text: 'ab' }])
+    const t = type(e, 'axz', 0)
+    expect(e.keystrokes).toBe(2) // only the latest blocked key counts
+    expect(e.accuracy).toBeCloseTo(0.5)
+    type(e, 'b', t + 100)
+    expect(e.accuracy).toBe(1)
+    expect(e.errors).toBe(2)
+    expect(e.fixedErrors).toBe(2)
+    expect(e.resultFor(0)).toMatchObject({ accuracy: 1, errors: 2, fixedErrors: 2 })
   })
 
   it('does not let a verse end on a wrong character', () => {
@@ -223,7 +248,13 @@ describe('TypingEngine typing', () => {
     const [v1, v2] = completed(results)
     expect(v1).toMatchObject({ verseNumber: 1, correctChars: 3, keystrokes: 3, errors: 0 })
     expect(v1.accuracy).toBe(1)
-    expect(v2).toMatchObject({ verseNumber: 2, correctChars: 1, keystrokes: 2, errors: 1 })
+    expect(v2).toMatchObject({
+      verseNumber: 2,
+      correctChars: 1,
+      keystrokes: 2,
+      errors: 1,
+      fixedErrors: 0,
+    })
     expect(v2.accuracy).toBeCloseTo(1 / 2)
     expect(e.verseDone(0)).toBe(true)
     expect(e.verseDone(1)).toBe(true)
