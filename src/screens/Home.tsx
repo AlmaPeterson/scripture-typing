@@ -127,6 +127,7 @@ function HomeCard({ item, onRemove }: { item: HomeCourse; onRemove: () => void }
 /** Verses a day to type the course in a year, and where to be today to keep up. */
 function YearPlan({ course, progress }: { course: CourseInfo; progress: ChapterProgress[] }) {
   const pace = yearPace(course, progress, new Date())
+  if (!pace) return null
   const unit = course.books.every((b) => b.unitLabel === 'Lecture') ? 'paragraph' : 'verse'
   const count = (n: number) => `${n.toLocaleString()} ${unit}${n === 1 ? '' : 's'}`
   const at = pace.targetPosition

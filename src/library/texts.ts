@@ -6,8 +6,11 @@ export interface BookInfo {
   unitLabel: string
   /** Number of chapters / sections / lectures. */
   chapters: number
-  /** Number of verses (paragraphs for lectures) in each chapter. */
-  verses: number[]
+  /**
+   * Number of verses (paragraphs for lectures) in each chapter. Missing from an
+   * index.json cached from before Nov 2026.
+   */
+  verses?: number[]
   path: string
   draft?: boolean
 }

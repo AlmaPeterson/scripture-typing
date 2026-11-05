@@ -14,7 +14,7 @@ const course: CourseInfo = {
 }
 
 function row(bookId: string, chapter: number, verses: number, completed = false): ChapterProgress {
-  const count = course.books.find((b) => b.id === bookId)!.verses[chapter - 1]
+  const count = course.books.find((b) => b.id === bookId)!.verses![chapter - 1]
   return {
     courseId: 'c',
     bookId,
@@ -58,6 +58,11 @@ describe('yearPace', () => {
       targetPosition: { bookId: 'a', chapter: 1, verse: 41 },
       ahead: -11,
     })
+  })
+
+  it('gives no pace when the library index has no verse counts', () => {
+    const old = { ...course, books: course.books.map((b) => ({ ...b, verses: undefined })) }
+    expect(yearPace(old, [], new Date(2026, 1, 10))).toBeNull()
   })
 
   it('rounds up and uses 366 days in a leap year', () => {

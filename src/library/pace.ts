@@ -32,7 +32,7 @@ export function versesDone(course: CourseInfo, rows: ChapterProgress[]): number 
     for (let ch = 1; ch <= b.chapters; ch++) {
       const p = byKey.get(progressKey(b.id, ch))
       if (!p) continue
-      const count = b.verses[ch - 1] ?? p.verseCount
+      const count = b.verses?.[ch - 1] ?? p.verseCount
       n += p.completed ? count : Math.min(count, p.completedVerses.length)
     }
   }
@@ -45,7 +45,7 @@ export function nthVerse(course: CourseInfo, n: number): Position | null {
   let left = n
   for (const b of course.books) {
     for (let ch = 1; ch <= b.chapters; ch++) {
-      const count = b.verses[ch - 1] ?? 0
+      const count = b.verses?.[ch - 1] ?? 0
       if (left <= count) return { bookId: b.id, chapter: ch, verse: left }
       left -= count
     }
@@ -53,8 +53,17 @@ export function nthVerse(course: CourseInfo, n: number): Position | null {
   return null
 }
 
-export function yearPace(course: CourseInfo, rows: ChapterProgress[], today: Date): YearPace {
-  const total = course.books.reduce((n, b) => n + b.verses.reduce((m, v) => m + v, 0), 0)
+/** The pace for this year, or null if the library index has no verse counts. */
+export function yearPace(
+  course: CourseInfo,
+  rows: ChapterProgress[],
+  today: Date,
+): YearPace | null {
+  let total = 0
+  for (const b of course.books) {
+    if (!b.verses) return null
+    for (const v of b.verses) total += v
+  }
   const done = Math.min(total, versesDone(course, rows))
   const year = today.getFullYear()
   const daysInYear = (Date.UTC(year + 1, 0, 1) - Date.UTC(year, 0, 1)) / 86400000
