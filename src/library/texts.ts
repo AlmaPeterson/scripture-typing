@@ -6,6 +6,8 @@ export interface BookInfo {
   unitLabel: string
   /** Number of chapters / sections / lectures. */
   chapters: number
+  /** Number of verses (paragraphs for lectures) in each chapter. */
+  verses: number[]
   path: string
   draft?: boolean
 }

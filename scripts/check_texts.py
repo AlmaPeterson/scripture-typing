@@ -102,6 +102,8 @@ def main() -> int:
             counts.append(f"{book['title']} {n_ch}")
             if entry["chapters"] != n_ch:
                 errors.append(f"{where}: index says {entry['chapters']} chapters, file has {n_ch}")
+            if entry.get("verses") != [len(ch["verses"]) for ch in book["chapters"]]:
+                errors.append(f"{where}: index verse counts do not match the file")
             expected = None
             if vid in ("old-testament", "new-testament"):
                 expected = KJV_CHAPTERS[bi + (39 if vid == "new-testament" else 0)]

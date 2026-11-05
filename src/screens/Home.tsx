@@ -3,6 +3,7 @@ import { useApp, useLoad } from '../app/context'
 import { paths } from '../app/router'
 import { formatPercent } from '../components/format'
 import { Loading, ProgressBar } from '../components/ui'
+import { yearPace } from '../library/pace'
 import { continueTarget, courseProgress } from '../library/progress'
 import { findCourse, isCourseCached, prefetchCourse, type CourseInfo } from '../library/texts'
 import type { ChapterProgress, ShelfEntry } from '../storage'
@@ -94,6 +95,7 @@ function HomeCard({ item, onRemove }: { item: HomeCourse; onRemove: () => void }
           {done && ' · Finished'}
           <OfflineStatus course={course} />
         </p>
+        <YearPlan course={course} progress={progress} />
       </div>
       <div className="card-actions">
         {target && targetBook && (
@@ -119,6 +121,49 @@ function HomeCard({ item, onRemove }: { item: HomeCourse; onRemove: () => void }
         </button>
       </div>
     </li>
+  )
+}
+
+/** Verses a day to type the course in a year, and where to be today to keep up. */
+function YearPlan({ course, progress }: { course: CourseInfo; progress: ChapterProgress[] }) {
+  const pace = yearPace(course, progress, new Date())
+  const unit = course.books.every((b) => b.unitLabel === 'Lecture') ? 'paragraph' : 'verse'
+  const count = (n: number) => `${n.toLocaleString()} ${unit}${n === 1 ? '' : 's'}`
+  const at = pace.targetPosition
+  const atBook = at && course.books.find((b) => b.id === at.bookId)
+  const atLabel =
+    at &&
+    atBook &&
+    `${course.books.length > 1 ? atBook.title : atBook.unitLabel} ${at.chapter}:${at.verse}`
+  const finished = pace.done >= pace.total
+
+  return (
+    <dl className="pace" aria-label={`${course.title} yearly pace`}>
+      <div>
+        <dt>In a year</dt>
+        <dd>{count(pace.perDayYear)} a day</dd>
+      </div>
+      <div>
+        <dt>By Dec 31</dt>
+        <dd>{finished ? 'Finished' : `${count(pace.perDayRest)} a day`}</dd>
+      </div>
+      {atLabel && (
+        <div>
+          <dt>Caught up today</dt>
+          <dd>
+            {atLabel}
+            <span className={pace.ahead < 0 ? 'pace-behind' : 'pace-ahead'}>
+              {' · '}
+              {pace.ahead === 0
+                ? 'on track'
+                : pace.ahead < 0
+                  ? `${count(-pace.ahead)} behind`
+                  : `${count(pace.ahead)} ahead`}
+            </span>
+          </dd>
+        </div>
+      )}
+    </dl>
   )
 }
 

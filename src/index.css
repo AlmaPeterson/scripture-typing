@@ -373,6 +373,29 @@ main {
   color: var(--muted);
   font-size: 0.9rem;
 }
+.pace {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.5rem;
+  margin: 0.6rem 0 0;
+  font-size: 0.9rem;
+}
+.pace dt {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--muted);
+}
+.pace dd {
+  margin: 0;
+  font-variant-numeric: tabular-nums;
+}
+.pace-behind {
+  color: var(--danger);
+}
+.pace-ahead {
+  color: var(--good);
+}
 .card-actions {
   display: flex;
   align-items: center;

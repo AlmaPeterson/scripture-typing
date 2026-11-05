@@ -66,6 +66,11 @@ books opens a **Course** screen listing its books; a course with one book
   button.
 - A **+** button opens the Library to add more courses.
 - Completed courses stay on Home until I delete them.
+- **Yearly pace** for each course: verses a day (rounded up) to type the
+  course in a year, verses a day to finish what is left by December 31, and
+  the verse to have reached by the end of today to be caught up this year,
+  with how many verses ahead or behind I am. Verse counts per chapter are in
+  `texts/index.json`.
 
 ### Library
 

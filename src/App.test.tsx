@@ -16,6 +16,7 @@ const index: LibraryIndex = {
           title: 'Alpha',
           unitLabel: 'Chapter',
           chapters: 2,
+          verses: [2, 1],
           path: 'texts/mini/alpha.json',
         },
         {
@@ -23,6 +24,7 @@ const index: LibraryIndex = {
           title: 'Beta',
           unitLabel: 'Chapter',
           chapters: 1,
+          verses: [1],
           path: 'texts/mini/beta.json',
           draft: true,
         },
@@ -37,6 +39,7 @@ const index: LibraryIndex = {
           title: 'One Book',
           unitLabel: 'Section',
           chapters: 1,
+          verses: [1],
           path: 'texts/one/one.json',
         },
       ],
@@ -126,6 +129,10 @@ describe('App', () => {
     await go('#/')
     const start = await screen.findByRole('link', { name: 'Continue Mini Scripture' })
     expect(start).toHaveTextContent('Start')
+    // The yearly pace: 4 verses in all, so one a day types it in a year.
+    const pace = screen.getByLabelText('Mini Scripture yearly pace')
+    expect(within(pace).getByText('In a year').nextSibling).toHaveTextContent('1 verse a day')
+    expect(within(pace).getByText('Caught up today')).toBeInTheDocument()
 
     // Course screen lists books with progress and a draft label.
     await go('#/c/mini')

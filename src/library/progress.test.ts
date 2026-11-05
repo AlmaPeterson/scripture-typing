@@ -7,8 +7,15 @@ const course: CourseInfo = {
   id: 'pearl-of-great-price',
   title: 'Pearl of Great Price',
   books: [
-    { id: 'moses', title: 'Moses', unitLabel: 'Chapter', chapters: 2, path: 'x' },
-    { id: 'abraham', title: 'Abraham', unitLabel: 'Chapter', chapters: 2, path: 'y' },
+    { id: 'moses', title: 'Moses', unitLabel: 'Chapter', chapters: 2, verses: [4, 4], path: 'x' },
+    {
+      id: 'abraham',
+      title: 'Abraham',
+      unitLabel: 'Chapter',
+      chapters: 2,
+      verses: [3, 5],
+      path: 'y',
+    },
   ],
 }
 

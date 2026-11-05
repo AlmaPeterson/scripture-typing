@@ -241,6 +241,7 @@ def write(volumes: dict[str, list[dict]]) -> None:
                 "title": book["title"],
                 "unitLabel": book["unitLabel"],
                 "chapters": len(book["chapters"]),
+                "verses": [len(ch["verses"]) for ch in book["chapters"]],
                 "path": f"texts/{vid}/{book['id']}.json",
             }
             if book.get("draft"):

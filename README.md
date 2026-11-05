@@ -19,6 +19,9 @@ as an app from Chrome or Edge on Windows and Linux.
 - **Library** → add a course to Home. Its books are downloaded so it works
   offline.
 - **Home** → **Continue** goes to the verse after the last one you completed.
+  Each course also shows how many verses a day type it in a year, how many a
+  day finish what is left by December 31, and the verse to have reached today
+  to be caught up this year (with how far ahead or behind you are).
 - **Typing**: just type. Verse numbers are skipped; press Space or Enter at
   the end of each verse. Curly quotes, dashes and ellipses are typed as `'` `"` `-` and
   `...`. Backspace fixes a mistake (a fixed mistake no longer counts against accuracy);
