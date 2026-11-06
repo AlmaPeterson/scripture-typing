@@ -404,6 +404,8 @@ describe('App', () => {
     await go('#/stats')
     expect(await screen.findByRole('heading', { name: 'History' })).toBeInTheDocument()
     expect(screen.getByRole('img', { name: 'Words per minute per day' })).toBeInTheDocument()
+    expect(screen.getByRole('img', { name: 'Accuracy per day' })).toBeInTheDocument()
+    expect(screen.getByText('Real accuracy (counts fixed mistakes)')).toBeInTheDocument()
     expect(screen.getByRole('heading', { name: 'Fingers (estimate)' })).toBeInTheDocument()
     expect(screen.getByText(/This is an estimate/)).toBeInTheDocument()
     expect(screen.getAllByText('beginning')[0]).toHaveClass('key-label')

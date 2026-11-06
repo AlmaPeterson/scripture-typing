@@ -172,6 +172,9 @@ History over time and detailed breakdowns (see [Stats](#stats-to-record)).
   counted as a keystroke, and a mistake it fixes no longer counts, so a fully
   fixed verse is at 100%. Mistakes left unfixed and fixed mistakes are counted
   separately.
+- **Real accuracy** = correct keystrokes / (character keystrokes + fixed
+  mistakes), so every mistake counts, fixed or not. The accuracy chart shows it
+  beside accuracy.
 - **Key timing** = time from the previous keystroke to this correct keystroke.
   Bigram timing uses consecutive correct keystrokes inside a word.
 

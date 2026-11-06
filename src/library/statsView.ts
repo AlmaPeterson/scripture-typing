@@ -113,7 +113,10 @@ export function slowestFastest(ranked: RankedKey[], n: number) {
 
 export interface DayPoint extends DailyTotals {
   wpm: number
+  /** Fixed mistakes not counted. */
   accuracy: number
+  /** Every mistake counted, fixed or not. */
+  realAccuracy: number
 }
 
 /** Daily totals within the last `days` days (all if null), oldest first, days with typing only. */
@@ -130,6 +133,8 @@ export function dailyHistory(daily: DailyTotals[], days: number | null, today: D
       ...d,
       wpm: wpm(d.correctChars, d.activeMs),
       accuracy: accuracy(d.correctKeystrokes, d.keystrokes),
+      // Fixing a mistake takes it out of `keystrokes`, so put those back.
+      realAccuracy: accuracy(d.correctKeystrokes, d.keystrokes + (d.fixedErrors ?? 0)),
     }))
 }
 

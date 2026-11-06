@@ -95,6 +95,28 @@ describe('dailyHistory', () => {
     expect(all).toHaveLength(3)
     expect(all[0].wpm).toBe(100)
   })
+
+  it('counts fixed mistakes in real accuracy but not in accuracy', () => {
+    const totals = {
+      date: '2026-11-01',
+      correctChars: 90,
+      keystrokes: 95,
+      correctKeystrokes: 90,
+      errors: 10,
+      activeMs: 60000,
+      verses: 1,
+      chaptersCompleted: 0,
+      updatedAt: 0,
+    }
+    const today = new Date(2026, 10, 6)
+    const [fixed] = dailyHistory([{ ...totals, fixedErrors: 5 }], null, today)
+    expect(fixed.accuracy).toBeCloseTo(90 / 95)
+    expect(fixed.realAccuracy).toBeCloseTo(90 / 100)
+
+    // Older records have no fixed count: their keystrokes already hold every mistake.
+    const [older] = dailyHistory([totals], null, today)
+    expect(older.realAccuracy).toBeCloseTo(older.accuracy)
+  })
 })
 
 describe('fingerTotals', () => {
