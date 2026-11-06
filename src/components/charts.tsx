@@ -1,5 +1,6 @@
-// Lightweight SVG charts (no chart library). One series per chart, never two
-// y-axes. Hovering a point shows its details; callers also offer a table view.
+// Lightweight SVG charts (no chart library). A line chart can have a second line
+// on the same scale, never two y-axes. Hovering a point shows its details;
+// callers also offer a table view.
 
 import { useState, type MouseEvent, type ReactNode } from 'react'
 
@@ -87,6 +88,10 @@ interface LineChartProps {
   points: Point[]
   title: string
   format: (v: number) => string
+  /** Name of the main line, for the legend when there is a second line. */
+  name?: string
+  /** A second line on the same scale, with one value per point. */
+  second?: { name: string; values: number[] }
   /** Lowest y value shown (default: 0). */
   min?: number
   max?: number
@@ -103,18 +108,30 @@ function niceMax(v: number): number {
   return 10 * p
 }
 
-export function LineChart({ points, title, format, min = 0, max, height = 180 }: LineChartProps) {
+export function LineChart({
+  points,
+  title,
+  format,
+  name,
+  second,
+  min = 0,
+  max,
+  height = 180,
+}: LineChartProps) {
   const [hover, setHover] = useState<number | null>(null)
   if (points.length === 0) return <p className="muted">No data yet.</p>
-  const top = max ?? niceMax(Math.max(...points.map((p) => p.value)))
-  const lo = Math.min(min, ...points.map((p) => p.value))
+  const values = [...points.map((p) => p.value), ...(second?.values ?? [])]
+  const top = max ?? niceMax(Math.max(...values))
+  const lo = Math.min(min, ...values)
   const innerW = W - PAD.left - PAD.right
   const innerH = height - PAD.top - PAD.bottom
   const x = (i: number) =>
     PAD.left + (points.length === 1 ? innerW / 2 : (i / (points.length - 1)) * innerW)
   const y = (v: number) => PAD.top + innerH - ((v - lo) / (top - lo || 1)) * innerH
   const ticks = [0, 0.5, 1].map((f) => lo + f * (top - lo))
-  const d = points.map((p, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(p.value).toFixed(1)}`)
+  const linePath = (vs: number[]) =>
+    vs.map((v, i) => `${i ? 'L' : 'M'}${x(i).toFixed(1)},${y(v).toFixed(1)}`).join(' ')
+  const dotSize = (i: number) => (i === hover ? 5 : points.length > 40 ? 2 : 3.5)
   const labelEvery = Math.max(1, Math.ceil(points.length / 6))
   const { onMouseMove, onMouseLeave } = hoverHandlers(
     points.length,
@@ -124,7 +141,7 @@ export function LineChart({ points, title, format, min = 0, max, height = 180 }:
   )
   const hp = hover === null ? null : points[hover]
 
-  return (
+  const chart = (
     <ChartFrame
       tip={
         hp &&
@@ -166,15 +183,20 @@ export function LineChart({ points, title, format, min = 0, max, height = 180 }:
             y2={PAD.top + innerH}
           />
         )}
-        <path className="line-1" d={d.join(' ')} strokeLinejoin="round" strokeLinecap="round" />
+        <path
+          className="line-1"
+          d={linePath(points.map((p) => p.value))}
+          strokeLinejoin="round"
+          strokeLinecap="round"
+        />
+        {/* Dashed and on top, so both colours show where the lines overlap. */}
+        {second && <path className="line-2" d={linePath(second.values)} strokeLinejoin="round" />}
         {points.map((p, i) => (
           <g key={i}>
-            <circle
-              className="dot-1"
-              cx={x(i)}
-              cy={y(p.value)}
-              r={i === hover ? 5 : points.length > 40 ? 2 : 3.5}
-            />
+            {second && (
+              <circle className="dot-2" cx={x(i)} cy={y(second.values[i])} r={dotSize(i)} />
+            )}
+            <circle className="dot-1" cx={x(i)} cy={y(p.value)} r={dotSize(i)} />
             {(i % labelEvery === 0 || i === points.length - 1) && (
               <text x={x(i)} y={height - 6} textAnchor="middle">
                 {p.label}
@@ -184,6 +206,22 @@ export function LineChart({ points, title, format, min = 0, max, height = 180 }:
         ))}
       </svg>
     </ChartFrame>
+  )
+  if (!second) return chart
+  return (
+    <>
+      <ul className="chart-legend">
+        <li>
+          <span className="legend-line" aria-hidden="true" />
+          {name}
+        </li>
+        <li>
+          <span className="legend-line legend-line-2" aria-hidden="true" />
+          {second.name}
+        </li>
+      </ul>
+      {chart}
+    </>
   )
 }
 

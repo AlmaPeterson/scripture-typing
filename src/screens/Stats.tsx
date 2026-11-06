@@ -40,6 +40,7 @@ function dayDetails(d: DayPoint): Detail[] {
   const details = [
     { label: 'Speed', value: `${formatWpm(d.wpm)} WPM` },
     { label: 'Accuracy', value: formatPercent(d.accuracy, 1) },
+    { label: 'Real accuracy', value: formatPercent(d.realAccuracy, 1) },
     { label: 'Time', value: formatDuration(d.activeMs) },
     { label: 'Verses', value: String(d.verses) },
     { label: 'Mistakes', value: String(d.errors - (d.fixedErrors ?? 0)) },
@@ -160,6 +161,11 @@ export function Stats() {
             <h3 className="chart-title">Accuracy per day</h3>
             <LineChart
               title="Accuracy per day"
+              name="Accuracy"
+              second={{
+                name: 'Real accuracy (counts fixed mistakes)',
+                values: history.map((d) => d.realAccuracy * 100),
+              }}
               points={history.map((d) => ({
                 label: shortDate(d.date),
                 value: d.accuracy * 100,
@@ -167,7 +173,7 @@ export function Stats() {
               }))}
               min={Math.max(
                 0,
-                Math.floor(Math.min(...history.map((d) => d.accuracy * 100)) / 5) * 5 - 5,
+                Math.floor(Math.min(...history.map((d) => d.realAccuracy * 100)) / 5) * 5 - 5,
               )}
               max={100}
               format={(v) => `${v.toFixed(0)}%`}
@@ -191,6 +197,7 @@ export function Stats() {
                       <th scope="col">Day</th>
                       <th scope="col">WPM</th>
                       <th scope="col">Accuracy</th>
+                      <th scope="col">Real accuracy</th>
                       <th scope="col">Time</th>
                       <th scope="col">Verses</th>
                     </tr>
@@ -201,6 +208,7 @@ export function Stats() {
                         <td>{shortDate(d.date)}</td>
                         <td>{formatWpm(d.wpm)}</td>
                         <td>{formatPercent(d.accuracy, 1)}</td>
+                        <td>{formatPercent(d.realAccuracy, 1)}</td>
                         <td>{formatDuration(d.activeMs)}</td>
                         <td>{d.verses}</td>
                       </tr>

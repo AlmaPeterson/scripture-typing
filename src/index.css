@@ -1130,6 +1130,28 @@ legend {
   font-weight: 600;
   color: var(--muted);
 }
+.chart-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1rem;
+  margin: 0 0 0.25rem;
+  padding: 0;
+  list-style: none;
+  font-size: 0.8rem;
+  color: var(--muted);
+}
+.chart-legend li {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+.legend-line {
+  width: 1.5rem;
+  border-top: 2px solid var(--chart-1);
+}
+.legend-line-2 {
+  border-top: 2px dashed var(--chart-2);
+}
 
 .table-wrap {
   overflow-x: auto;
